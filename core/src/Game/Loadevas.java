@@ -18,6 +18,7 @@ public class Loadevas
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream("save" + id + ".sav"));
 			out.writeObject(gd);
+			out.flush();
 			out.close();
 		}catch(Exception e)
 		{
@@ -62,5 +63,10 @@ public class Loadevas
 	{
 		File f = new File("save" + id + ".sav");
 		return f.exists();
+	}
+	
+	public static void init()
+	{
+		gd = new GameData();
 	}
 }

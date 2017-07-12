@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
 
 public class ScreenManager
 {
-	MyScreen screen;
+	ModScreen screen;
 	Core core;
 	
 	public ScreenManager(Core core)
@@ -35,7 +35,7 @@ public class ScreenManager
 		if (screen != null) screen.resize(width, height);
 	}
 	
-	public void setScreen(MyScreen screen)
+	public void setScreen(ModScreen screen)
 	{
 		if(this.screen != null) 
 		{
@@ -62,5 +62,5 @@ public class ScreenManager
 		screen.render(Gdx.graphics.getDeltaTime());
 	}
 	
-	public MyScreen getScreen(){return screen;}
+	public ModScreen getScreen(){return screen;}
 }

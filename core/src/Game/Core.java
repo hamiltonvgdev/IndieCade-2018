@@ -2,6 +2,7 @@ package Game;
 
 
 import Renders.SpriteSheetAnimation;
+import Renders.SpriterAnimationEngine;
 import Screen.MenuScreen;
 import Screen.ScreenManager;
 import Util.MenuButton;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.blueacorn.spriter.LibGdxDrawer;
 
 public class Core extends Game
 {		
@@ -20,26 +22,33 @@ public class Core extends Game
 	
 	ScreenManager sm;
 	
+	//Test
+	LibGdxDrawer draw;
+	com.brashmonkey.spriter.Player play;
+	SpriterAnimationEngine renderer;
+	
 	@Override
 	public void create () 
-	{
+	{	
 		batch = new SpriteBatch();
 		
 		sm = new ScreenManager(this);
 		sm.setScreen(new MenuScreen(this));
+		
+		Loadevas.init();
+		renderer = new SpriterAnimationEngine(this);
+		play = renderer.getPlayer("derp", "test/derp.scml");
+		draw = renderer.getDrawer("derp", "test/derp.scml");
 	}
 	
 	@Override
 	public void render () 
 	{
 		super.render();
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		
 		sm.render();
 		
-		batch.end();
+		play.update();
+		draw.draw(play);
 	}
 	
 	
@@ -58,7 +67,6 @@ public class Core extends Game
 	public void resume()
 	{
 		super.resume();
-		super.pause();
 		
 		sm.resume();
 	}
