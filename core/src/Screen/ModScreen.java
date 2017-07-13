@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class ModScreen implements Screen
 {
-	Core core;
+	public Core core;
 	
 	public ModScreen(Core core)
 	{

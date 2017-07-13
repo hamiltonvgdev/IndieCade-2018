@@ -18,9 +18,9 @@ public class Level
 	ArrayList<Thing> toShow;
 	ArrayList<Thing> toDie;
 	
-	TiledMap map;
-	TmxMapLoader tmx;
-	TiledMapRenderer tmr;
+	//TiledMap map;
+	//TmxMapLoader tmx;
+	//TiledMapRenderer tmr;
 	
 	public Level(GameScreen gs)
 	{
@@ -29,10 +29,10 @@ public class Level
 		Things = new ArrayList<Thing>();
 		toShow = new ArrayList<Thing>();
 		toDie = new ArrayList<Thing>();
-		tmx = new TmxMapLoader();
-		
-		map = tmx.load("C:/Users/jahu2/Hummus Files/Tiled Map Editor/examples/desert.tmx");
-		tmr = new OrthogonalTiledMapRenderer(map);
+//		tmx = new TmxMapLoader();
+//		
+//		map = tmx.load("C:/Users/jahu2/Hummus Files/Tiled Map Editor/examples/desert.tmx");
+//		tmr = new OrthogonalTiledMapRenderer(map);
 	}
 	
 	public void loadMap(int id)
@@ -43,8 +43,8 @@ public class Level
 		toDie.clear();
 		
 		//Loads New Maps
-		map = tmx.load("Maps/" + id + ".tmx");
-		tmr = new OrthogonalTiledMapRenderer(map);
+//		map = tmx.load("Maps/" + id + ".tmx");
+//		tmr = new OrthogonalTiledMapRenderer(map);
 		
 		//Assign IDs to all Entities
 		for(int i = 0; i < Things.size(); i ++)
@@ -74,8 +74,8 @@ public class Level
 	
 	public void render(SpriteBatch batch)
 	{
-		tmr.setView(gs.getGenCam());
-		tmr.render();
+//		tmr.setView(gs.getGenCam());
+//		tmr.render();
 		
 		for(Thing t: toShow)
 		{
