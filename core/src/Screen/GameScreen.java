@@ -7,7 +7,11 @@ import Game.Core;
 import Game.GameData;
 import Player.Player;
 import Renders.SpriterAnimationEngine;
+import Util.ScreenshotFactory;
+import Util.TweenEngine;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -31,7 +35,6 @@ public class GameScreen extends ModScreen
 	public GameScreen(Core core, GameData gd)
 	{
 		super(core);
-		
 		this.gd = gd;
 		
 		GenCam = new OrthographicCamera(Config.GAME_WIDTH / 2, Config.GAME_HEIGHT / 2);
@@ -60,6 +63,10 @@ public class GameScreen extends ModScreen
 		GenCam.translate(1, 1);
 		GenCam.update();
 		
+		if(Gdx.input.isButtonPressed(Keys.A)){
+			ScreenshotFactory.saveScreenshot();
+			core.setScreen(new TweenEngine(core));
+		}
 	}
 
 	@Override

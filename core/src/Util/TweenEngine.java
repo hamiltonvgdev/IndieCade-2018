@@ -9,14 +9,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import Screen.MyScreen;
+import Game.Core;
+import Screen.ModScreen;
 import Testing.TestingState;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
-public class TweenEngine extends MyScreen{
+public class TweenEngine extends ModScreen{
+	public TweenEngine(Core core) {
+		super(core);
+	}
 	private SpriteBatch batch;
 	private Sprite splash;
 	private TweenManager tweenmanager;
@@ -32,9 +36,9 @@ public class TweenEngine extends MyScreen{
 		splash = new Sprite(splashTexture);
 		splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Tween.set(splash,SpriteAccessor.ALPHA).target(0).start(tweenmanager);
-		Tween.to(splash,SpriteAccessor.ALPHA,2).target(1).repeatYoyo(1, 0.5f).setCallback(new TweenCallback(){
+		Tween.to(splash,SpriteAccessor.ALPHA,2).target(1).repeatYoyo(1, 1f).setCallback(new TweenCallback(){
 			public void onEvent(int type,BaseTween<?> source ){
-				((Game) Gdx.app.getApplicationListener()).setScreen(new TestingState());
+				core.setScreen(new TestingState(core));
 			}
 		}).start(tweenmanager);
 		
