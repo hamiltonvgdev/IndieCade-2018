@@ -1,13 +1,14 @@
 package Screen;
 
+import javax.swing.JOptionPane;
+
 import Util.MenuButton;
 import Game.Config;
 import Game.Core;
 import Game.Loadevas;
 
-public class SaveScreen extends MyScreen
+public class SaveScreen extends ModScreen
 {
-	Core core;
 	boolean save1;
 	boolean save2;
 	boolean save3;
@@ -20,11 +21,9 @@ public class SaveScreen extends MyScreen
 	MenuButton DelSave2;
 	MenuButton DelSave3;
 	
-	
-	
 	public SaveScreen(Core core)
 	{
-		this.core = core;
+		super(core);
 		
 		Save1 = new MenuButton(Config.GAME_WIDTH / 6, 
 				Config.GAME_HEIGHT / 5 * 2, 1.5F);
@@ -37,6 +36,8 @@ public class SaveScreen extends MyScreen
 	@Override
 	public void show() 
 	{
+		super.show();
+		
 		save1 = Loadevas.saveFileExists(1);
 		save2 = Loadevas.saveFileExists(2);
 		save3 = Loadevas.saveFileExists(3);
@@ -126,24 +127,28 @@ public class SaveScreen extends MyScreen
 			}else
 			{
 				Loadevas.gd.init();
+				Loadevas.gd.name = JOptionPane.
+						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(1);
 			}
 			
-			core.getSM().setScreen(new GameScreen(core, Loadevas.gd));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
 		
 		if(Save2.confirmed)
 		{
-			if(save1)
+			if(save2)
 			{
 				Loadevas.load(2);
 			}else
 			{
 				Loadevas.gd.init();
+				Loadevas.gd.name = JOptionPane.
+						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(2);
 			}
 			
-			core.getSM().setScreen(new GameScreen(core, Loadevas.gd));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
 		
 		if(Save3.confirmed)
@@ -154,16 +159,20 @@ public class SaveScreen extends MyScreen
 			}else
 			{
 				Loadevas.gd.init();
+				Loadevas.gd.name = JOptionPane.
+						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(3);
 			}
 			
-			core.getSM().setScreen(new GameScreen(core, Loadevas.gd));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
+		
 	}
 	
 	@Override
 	public void render(float delta) 
 	{
+		super.render(delta);
 		Save1.render(core.batch);
 		Save2.render(core.batch);
 		Save3.render(core.batch);
@@ -185,32 +194,10 @@ public class SaveScreen extends MyScreen
 	}
 
 	@Override
-	public void resize(int width, int height) 
-	{
-		
-	}
-
-	@Override
-	public void pause() 
-	{
-		
-	}
-
-	@Override
-	public void resume() 
-	{
-		
-	}
-
-	@Override
-	public void hide() 
-	{
-		
-	}
-
-	@Override
 	public void dispose() 
 	{
+		super.dispose();
+		
 		Save1.dispose();
 		Save2.dispose();
 		Save3.dispose();
