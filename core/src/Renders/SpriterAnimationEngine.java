@@ -34,14 +34,14 @@ public class SpriterAnimationEngine
 	
 	public void load(String name, String ref)
 	{
-		FileHandle file = Gdx.files.internal(ref); 
-		Data data =  new SCMLReader(file.read()).getData();
+		FileHandle handle = Gdx.files.internal(ref);
+		Data data = new SCMLReader(handle.read()).getData();
+		
+		LibGdxLoader loader = new LibGdxLoader(data);
+		loader.load(handle.file());
 		
 		Player player = new Player(data.getEntity(0));
 		player.scale(1.0F / Config.PPM);
-		
-		LibGdxLoader loader = new LibGdxLoader(data);
-		loader.load(file.file());
 		
 		LibGdxDrawer drawer = new LibGdxDrawer(loader, core.batch, renderer);
 		

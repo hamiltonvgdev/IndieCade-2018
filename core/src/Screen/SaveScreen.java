@@ -21,8 +21,6 @@ public class SaveScreen extends ModScreen
 	MenuButton DelSave2;
 	MenuButton DelSave3;
 	
-	
-	
 	public SaveScreen(Core core)
 	{
 		super(core);
@@ -81,7 +79,6 @@ public class SaveScreen extends ModScreen
 	@Override
 	public void update(float delta) 
 	{
-		super.render(delta);
 		Save1.update(delta);
 		Save2.update(delta);
 		Save3.update(delta);
@@ -135,7 +132,7 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(1);
 			}
 			
-			core.getSM().setScreen(new GameScreen(core, Loadevas.gd));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
 		
 		if(Save2.confirmed)
@@ -151,7 +148,7 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(2);
 			}
 			
-			core.getSM().setScreen(new GameScreen(core, Loadevas.gd));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
 		
 		if(Save3.confirmed)
@@ -167,13 +164,15 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(3);
 			}
 			
-			core.getSM().setScreen(new GameScreen(core, Loadevas.gd));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
+		
 	}
 	
 	@Override
 	public void render(float delta) 
 	{
+		super.render(delta);
 		Save1.render(core.batch);
 		Save2.render(core.batch);
 		Save3.render(core.batch);

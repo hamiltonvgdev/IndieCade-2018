@@ -5,6 +5,7 @@ import Game.Core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class ModScreen implements Screen
 {
@@ -17,48 +18,39 @@ public abstract class ModScreen implements Screen
 	
 	public void create()
 	{
-		core.batch.begin();
+		show();
 	}
 	
 	public abstract void update(float delta);
 	
 	public void render(float delta)
 	{
+		update(delta);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 	
 	public void show()
 	{
+		core.batch = new SpriteBatch();
 		core.batch.begin();
 	}
 	
 	public void hide()
 	{
 		core.batch.end();
+		dispose();
 	}
 	
-	public void dispose()
-	{
-		core.batch.end();
-	}
+	public void dispose(){}
 	
 
 	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void resize(int width, int height) {}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void pause() {}
 
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void resume() {}
 }

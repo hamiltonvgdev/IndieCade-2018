@@ -51,6 +51,8 @@ public class MenuButton extends Button
 			sprite.changeState(0);
 		}
 		
+		font.draw(batch, phrase, x + width / 2, y + height / 2 + font.getAscent() / 2, 
+				0, Align.center, false);
 		sprite.render(x, y, width, height, 1, 1, width / 2, height / 2, -90, batch);
 		font.draw(batch, phrase, x + width / 2, y + height / 2 + font.getAscent() / 2, 
 				0, Align.center, false);
