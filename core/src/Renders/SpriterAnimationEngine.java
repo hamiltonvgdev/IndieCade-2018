@@ -41,7 +41,7 @@ public class SpriterAnimationEngine
 		loader.load(handle.file());
 		
 		Player player = new Player(data.getEntity(0));
-		player.scale(1.0F / Config.PPM);
+		player.scale(5.0F / Config.PPM);
 		
 		LibGdxDrawer drawer = new LibGdxDrawer(loader, core.batch, renderer);
 		

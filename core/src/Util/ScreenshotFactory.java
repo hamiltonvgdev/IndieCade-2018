@@ -18,7 +18,6 @@ public class ScreenshotFactory {
             fh = new FileHandle(Gdx.files.getLocalStoragePath()+"bin/" +"screenshot" + ".png");
             Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
             PixmapIO.writePNG(fh, pixmap);
-            System.out.println(fh.toString());
             pixmap.dispose();
         }catch (Exception e){           
         }

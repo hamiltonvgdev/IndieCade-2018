@@ -32,14 +32,11 @@ public abstract class ModScreen implements Screen
 	
 	public void show()
 	{
-		core.batch = new SpriteBatch();
-		core.batch.begin();
+		
 	}
 	
 	public void hide()
 	{
-		core.batch.end();
-		dispose();
 	}
 	
 	public void dispose(){}

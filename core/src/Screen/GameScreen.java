@@ -8,7 +8,6 @@ import Game.GameData;
 import Player.Player;
 import Renders.SpriterAnimationEngine;
 import Util.ScreenshotFactory;
-import Util.TweenEngine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -63,10 +62,6 @@ public class GameScreen extends ModScreen
 		GenCam.translate(1, 1);
 		GenCam.update();
 		
-		if(Gdx.input.isButtonPressed(Keys.A)){
-			ScreenshotFactory.saveScreenshot();
-			core.setScreen(new TweenEngine(core));
-		}
 	}
 
 	@Override

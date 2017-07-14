@@ -51,11 +51,12 @@ public class Test extends ModScreen
 	public void resize(int width, int height) {
 		super.resize(width, height);
 		
-		cam.setToOrtho(false, Config.GAME_WIDTH, Config.GAME_HEIGHT);
+		cam.setToOrtho(false, Config.GAME_WIDTH / Config.PPM, 
+				Config.GAME_HEIGHT / Config.PPM);
 		cam.position.set(0, 0, 0f);
 		cam.update();
 		renderer.setProjectionMatrix(cam.combined);
-		//batch.setProjectionMatrix(cam.combined);
+		core.batch.setProjectionMatrix(cam.combined);
 	}
 
 	@Override

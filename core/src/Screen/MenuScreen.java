@@ -29,7 +29,7 @@ public class MenuScreen extends ModScreen
 		
 		if(play.confirmed)
 		{
-			core.setScreen(new SaveScreen(core));
+			core.setScreen(new TransitionScreen(core, new SaveScreen(core)));
 		}
 		
 		if(exit.confirmed)
