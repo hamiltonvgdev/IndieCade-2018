@@ -23,18 +23,24 @@ public class Core extends Game
 	{	
 		batch = new SpriteBatch();
 		setScreen(new MenuScreen(this));
-		//setScreen(new Test(this));
+		setScreen(new Test(this));
 		
 		Loadevas.init();
 		renderer = new SpriterAnimationEngine(this);
+		play = renderer.getPlayer("derp", "test/derp.scml");
+		draw = renderer.getDrawer("derp", "test/derp.scml");
 	}
 	
 	@Override
 	public void render () 
 	{
+		batch.begin();
+		
 		super.render();
-		//play.update();
-		//draw.draw(play);
+		play.update();
+		draw.draw(play);
+		
+		batch.end();
 	}
 	
 	
