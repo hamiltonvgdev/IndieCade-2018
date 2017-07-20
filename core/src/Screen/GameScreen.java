@@ -12,6 +12,7 @@ import Util.ScreenshotFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -30,6 +31,7 @@ public class GameScreen extends ModScreen
 	Level level;
 	SpriterAnimationEngine renderer;
 	
+	//Test
 	
 	public GameScreen(Core core, GameData gd)
 	{
@@ -44,10 +46,10 @@ public class GameScreen extends ModScreen
 		b2dr = new Box2DDebugRenderer();
 
 		level = new Level(this);
-		renderer = new SpriterAnimationEngine(core);
+		renderer = new SpriterAnimationEngine(Camera.combined);
 		player =  new Player(this).setID(0);
 		level.addThing(player);
-
+		
 		world.setContactListener(new CollisionHandler(level));
 	}
 	
@@ -58,19 +60,16 @@ public class GameScreen extends ModScreen
 		
 		level.update(delta);
 		player.update(delta);
-		
-		GenCam.translate(1, 1);
 		GenCam.update();
-		
+		Camera.update();
 	}
 
 	@Override
 	public void render(float delta) 
 	{
 		super.render(delta);
-		//core.batch.setProjectionMatrix(Camera.combined);
+		level.render(core.batch);
 		b2dr.render(world, Camera.combined);
-		//level.render(core.batch);
 		player.render(core.batch);
 	}
 	

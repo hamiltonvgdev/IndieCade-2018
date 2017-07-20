@@ -132,7 +132,8 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(1);
 			}
 
-			core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
+			//core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
 		
 		if(Save2.confirmed)
@@ -148,7 +149,8 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(2);
 			}
 			
-			core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
+			//core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
 		
 		if(Save3.confirmed)
@@ -164,7 +166,8 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(3);
 			}
 
-			core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
+			//core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
+			core.setScreen(new GameScreen(core, Loadevas.gd));
 		}
 		
 	}
