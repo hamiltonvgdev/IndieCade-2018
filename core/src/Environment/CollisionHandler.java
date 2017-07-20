@@ -14,11 +14,14 @@ public class CollisionHandler implements ContactListener
 	Thing t1;
 	Thing t2;
 	
+	ArrayList<Thing> things;
+	
 	public CollisionHandler(Level level)
 	{
 		this.level = level;
 		t1 = new Thing(level.gs);
 		t2 = new Thing(level.gs);
+		things = new ArrayList<Thing>();
 	}
 	
 	@Override
@@ -29,12 +32,12 @@ public class CollisionHandler implements ContactListener
 		t2 = level.getThings().get(Integer.parseInt(
 				c.getFixtureB().getUserData().toString().split("-")[1]));
 		
-		ArrayList<Thing> things = new ArrayList<Thing>();
+		things = new ArrayList<Thing>();
 		things.add(t1);
 		things.add(t2);
 		Collections.sort(things);
 		
-		things.get(0).collidedWith(things.get(1));
+		things.get(0).collideWith(things.get(1));
 	}
 
 	@Override
@@ -46,8 +49,7 @@ public class CollisionHandler implements ContactListener
 	@Override
 	public void endContact(Contact c)
 	{
-		
-		
+		things.get(0).unCollideWith(things.get(1));
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class Config
 	public static final float MENU_BUTTON_HEIGHT = 150;
 	
 	//Box 2d Variables
-	public static final float PPM = 64;
+	public static final float PPM = 32;
 	public static final short BIT_TILE = 2;
 	public static final short BIT_PLAYER = 4;
 	public static final short BIT_ENEMY = 6;

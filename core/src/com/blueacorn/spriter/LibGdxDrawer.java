@@ -47,6 +47,8 @@ public class LibGdxDrawer extends Drawer<Sprite>{
 	@Override
 	public void draw(Object object) 
 	{
+		batch.begin();
+		
 		Sprite sprite = loader.get(object.ref);
 		float newPivotX = (sprite.getWidth() * object.pivot.x);
 		float newX = object.position.x - newPivotX;
@@ -63,5 +65,6 @@ public class LibGdxDrawer extends Drawer<Sprite>{
 		sprite.setScale(object.scale.x, object.scale.y);
 		sprite.draw(batch);
 		
+		batch.end();
 	}
 }

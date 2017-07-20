@@ -3,11 +3,12 @@ package Renders;
 import java.util.HashMap;
 
 import Game.Config;
-import Game.Core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Matrix4;
 import com.blueacorn.spriter.LibGdxDrawer;
 import com.blueacorn.spriter.LibGdxLoader;
 import com.brashmonkey.spriter.Data;
@@ -21,11 +22,12 @@ public class SpriterAnimationEngine
 	HashMap<String, Player> Players;
 	HashMap<String, LibGdxDrawer> Drawers;
 	
-	Core core;
+	SpriteBatch batch;
 	
-	public SpriterAnimationEngine(Core core)
+	public SpriterAnimationEngine(Matrix4 proj)
 	{
-		this.core = core;
+		this.batch = new SpriteBatch();
+		batch.setProjectionMatrix(proj);
 		renderer = new ShapeRenderer();
 		
 		Players = new HashMap<String, Player>();
@@ -41,9 +43,9 @@ public class SpriterAnimationEngine
 		loader.load(handle.file());
 		
 		Player player = new Player(data.getEntity(0));
-		player.scale(5.0F / Config.PPM);
+		player.scale(1.0F / Config.PPM);
 		
-		LibGdxDrawer drawer = new LibGdxDrawer(loader, core.batch, renderer);
+		LibGdxDrawer drawer = new LibGdxDrawer(loader, batch, renderer);
 		
 		Players.put(name, player);
 		Drawers.put(name, drawer);

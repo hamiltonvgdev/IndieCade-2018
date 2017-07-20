@@ -2,8 +2,8 @@ package Game;
 
 
 import Renders.SpriterAnimationEngine;
+import Screen.GameScreen;
 import Screen.MenuScreen;
-import Screen.Test;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,22 +13,15 @@ public class Core extends Game
 {		
 	public SpriteBatch batch;
 	
-	//Test
-	LibGdxDrawer draw;
-	com.brashmonkey.spriter.Player play;
-	SpriterAnimationEngine renderer;
-	
 	@Override
 	public void create () 
 	{	
 		batch = new SpriteBatch();
-		setScreen(new MenuScreen(this));
-		setScreen(new Test(this));
+		//setScreen(new MenuScreen(this));
+		//setScreen(new Test(this));
+		setScreen(new GameScreen(this, new GameData()));
 		
 		Loadevas.init();
-		renderer = new SpriterAnimationEngine(this);
-		play = renderer.getPlayer("derp", "test/derp.scml");
-		draw = renderer.getDrawer("derp", "test/derp.scml");
 	}
 	
 	@Override
@@ -37,8 +30,6 @@ public class Core extends Game
 		batch.begin();
 		
 		super.render();
-		play.update();
-		draw.draw(play);
 		
 		batch.end();
 	}

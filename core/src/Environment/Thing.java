@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Thing implements Comparable<Thing>
 {
 	
-	GameScreen gs;
+	protected GameScreen gs;
 	
 	AI ai;
 	protected String id;
@@ -19,6 +19,7 @@ public class Thing implements Comparable<Thing>
 	
 	public Thing(GameScreen gs)
 	{
+		this.gs = gs;
 		health = 0;
 	}
 	
@@ -52,7 +53,12 @@ public class Thing implements Comparable<Thing>
 		gs.getLevel().toDie.add(this);
 	}
 	
-	public void collidedWith(Thing thing)
+	public void collideWith(Thing thing)
+	{
+		
+	}
+
+	public void unCollideWith(Thing thing) 
 	{
 		
 	}
@@ -64,8 +70,15 @@ public class Thing implements Comparable<Thing>
 				 Integer.parseInt(t.id.split("-")[0]));
 	}
 	
+	public Thing clone()
+	{
+		return new Thing(gs).setAI(ai).
+				setID(Integer.parseInt(id.split("-")[1]));
+	}
 
 	//Return Methods
 	public float getX(){return x;}
 	public float getY() {return y;}
+	public String getID() {return id;}
+	public GameScreen getGS() {return gs;}
 }
