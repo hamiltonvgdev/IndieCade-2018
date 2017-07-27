@@ -35,17 +35,13 @@ public class Player extends Thing
 	}
 	
 	public void update(float delta)
-	{
-		getGS().getGenCam().translate(hitbox.torso.getLinearVelocity());
-		getGS().getCamera().translate(new Vector2(
-				(hitbox.torso.getPosition().x - x) 
-				,(hitbox.torso.getPosition().y - y)));
+	{	
+		getGS().getGeoCam().position.set(x * Config.PPM, y * Config.PPM, 0);
 		
 		x = hitbox.torso.getPosition().x;
 		y = hitbox.torso.getPosition().y;
 		
 		input.update();
-		
 	}
 	
 	public void render(SpriteBatch batch)
@@ -57,6 +53,11 @@ public class Player extends Thing
 	{
 		
 	}
+	
+	@Override
+	public void move(Vector2 movveVec){}
+	@Override 
+	public void setPosition(float x, float y){}
 	
 	//Return Statements
 	public PlayerHitbox getHitbox() {return hitbox;}

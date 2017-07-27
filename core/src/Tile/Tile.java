@@ -16,11 +16,6 @@ public class Tile extends Thing
 {
 	boolean collide;
 	
-	BodyDef bdef;
-	Body body;
-	FixtureDef fdef;
-	PolygonShape shape;
-	
 	
 	public Tile(GameScreen gs, float x, float y)
 	{
@@ -28,14 +23,15 @@ public class Tile extends Thing
 		collide = true;
 		
 		shape = new PolygonShape();
-		shape.setAsBox(1,1);
+		shape.setAsBox(0.5F, 0.5F);
 		
 		this.x = x;
 		this.y = y;
 		
+		
 		bdef = new BodyDef();
 		bdef.position.set(x, y);
-		bdef.type = BodyType.StaticBody;
+		bdef.type = BodyType.KinematicBody;
 		body = gs.getWorld().createBody(bdef);
 		
 		fdef = new FixtureDef();
@@ -48,6 +44,7 @@ public class Tile extends Thing
 		this.id = Config.TILE_Z + "-" + id;
 		body.createFixture(fdef).setUserData(Config.TILE_Z + "-" + id);
 		shape.dispose();
+		
 		return this;
 	}
 	
@@ -55,6 +52,8 @@ public class Tile extends Thing
 	public void update(float delta)
 	{
 		super.update(delta);
+		
+		//System.out.println(x + " " + y + " " + body.getPosition());
 	}
 	
 	@Override
