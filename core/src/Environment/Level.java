@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 
 public class Level 
 {
@@ -39,6 +40,7 @@ public class Level
 				+ "Hummus Files/School/Project IDC/Testing/Hummus's Test Map.tmx");
 		tmr = new OrthogonalTiledMapRenderer(map);
 		createTiles((TiledMapTileLayer)(map.getLayers().get("Normal")), "Normal");
+		
 		for(int i = 0; i < Things.size(); i ++)
 		{
 			Things.get(i).setID(i);
@@ -46,7 +48,7 @@ public class Level
 		}
 	}
 	
-	public void loadMap(int id)
+	public void loadMap(String id)
 	{
 		//Clears Previous Map
 		Things.clear();
@@ -88,8 +90,8 @@ public class Level
 					continue;
 				}
 				addThing(new Tile(gs,
-						(x + 0.5f) * size / Config.PPM, 
-						(y + 0.5f) * size / Config.PPM));
+						(x + 0.5f) * size / 32, 
+						(y + 0.5f) * size / 32));
 			}
 		}
 	}
@@ -108,13 +110,22 @@ public class Level
 	
 	public void render(SpriteBatch batch)
 	{
-		tmr.setView(gs.getGenCam());
+		tmr.setView(gs.getGeoCam());
 		tmr.render();
 		
 		for(Thing t: toShow)
 		{
 			t.render(batch);
 		}
+	}
+	
+	public void move(Vector2 moveVec)
+	{
+		for(Thing t: Things)
+		{
+			t.move(moveVec);
+		}
+		gs.getGeoCam().translate(moveVec);
 	}
 	
 	public ArrayList<Thing> getAlive() {return toShow;}

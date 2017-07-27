@@ -11,16 +11,18 @@ public class GameData implements Serializable
 	
 	public String name;
 	public String currentWeapon;
+	public String currentMap;
 	
 	public GameData()
 	{
 		
-	}
+	};
 	
 	public void init()
 	{
 		name = "";
 		currentWeapon = "";
+		currentMap = "Start";
 	}
 	
 	public void write(GameScreen gs, Player player)

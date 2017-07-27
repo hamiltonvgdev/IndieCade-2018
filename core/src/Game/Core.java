@@ -19,7 +19,7 @@ public class Core extends Game
 		batch = new SpriteBatch();
 		//setScreen(new MenuScreen(this));
 		//setScreen(new Test(this));
-		setScreen(new GameScreen(this, new GameData()));
+		setScreen(new GameScreen(this, new GameData(), "test"));
 		
 		Loadevas.init();
 	}

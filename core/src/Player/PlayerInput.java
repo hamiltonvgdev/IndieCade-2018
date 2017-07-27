@@ -29,5 +29,15 @@ public class PlayerInput
 		{
 			player.hitbox.torso.applyForceToCenter(new Vector2(-1, 0),  true); 
 		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.W))
+		{
+			player.hitbox.torso.applyForceToCenter(new Vector2(0, 1),  true); 
+		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.S))
+		{
+			player.hitbox.torso.applyForceToCenter(new Vector2(0, -1),  true); 
+		}
 	}
 }

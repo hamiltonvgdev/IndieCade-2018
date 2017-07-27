@@ -20,7 +20,7 @@ import com.blueacorn.spriter.LibGdxDrawer;
 
 public class GameScreen extends ModScreen
 {
-	OrthographicCamera GenCam;
+	OrthographicCamera GeoCam;
 	OrthographicCamera Camera;
 	GameData gd;
 	
@@ -33,12 +33,12 @@ public class GameScreen extends ModScreen
 	
 	//Test
 	
-	public GameScreen(Core core, GameData gd)
+	public GameScreen(Core core, GameData gd, String id)
 	{
 		super(core);
 		this.gd = gd;
 		
-		GenCam = new OrthographicCamera(Config.GAME_WIDTH / 2, Config.GAME_HEIGHT / 2);
+		GeoCam = new OrthographicCamera(Config.GAME_WIDTH , Config.GAME_HEIGHT);
 		Camera = new OrthographicCamera(Config.GAME_WIDTH / Config.PPM, 
 				Config.GAME_HEIGHT / Config.PPM);
 		
@@ -46,6 +46,7 @@ public class GameScreen extends ModScreen
 		b2dr = new Box2DDebugRenderer();
 
 		level = new Level(this);
+		//level.loadMap(id);
 		renderer = new SpriterAnimationEngine(Camera.combined);
 		player =  new Player(this).setID(0);
 		level.addThing(player);
@@ -60,7 +61,7 @@ public class GameScreen extends ModScreen
 		
 		level.update(delta);
 		player.update(delta);
-		GenCam.update();
+		GeoCam.update();
 		Camera.update();
 	}
 
@@ -77,7 +78,7 @@ public class GameScreen extends ModScreen
 	public Level getLevel() {return level;}
 	public GameData getGD() {return gd;}
 	public OrthographicCamera getCamera() {return Camera;}
-	public OrthographicCamera getGenCam() {return GenCam;}
+	public OrthographicCamera getGeoCam() {return GeoCam;}
 	public SpriterAnimationEngine getRenderer() {return renderer;}
 
 }

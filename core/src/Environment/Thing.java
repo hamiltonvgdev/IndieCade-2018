@@ -4,18 +4,32 @@ import Entities.AI;
 import Screen.GameScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Thing implements Comparable<Thing>
 {
-	
+	//GameScreen
 	protected GameScreen gs;
 	
+	//AI and id
 	AI ai;
 	protected String id;
 	
+	//Combat
 	float health, maxHealth;
 	
+	//Position
 	protected float x, y;
+	
+	//Hitbox
+	protected BodyDef bdef;
+	protected Body body;
+	protected FixtureDef fdef;
+	protected PolygonShape shape;
 	
 	public Thing(GameScreen gs)
 	{
@@ -62,6 +76,19 @@ public class Thing implements Comparable<Thing>
 	{
 		
 	}
+	
+	public void move(Vector2 moveVec) 
+	{
+		body.getPosition().add(moveVec);
+		System.out.println(moveVec);
+	}
+	
+	public void setPosition(float x, float y)
+	{
+		body.getPosition().set(x, y);
+//		this.x = x;
+//		this.y = y;
+	}
 
 	@Override
 	public int compareTo(Thing t) 
@@ -81,4 +108,6 @@ public class Thing implements Comparable<Thing>
 	public float getY() {return y;}
 	public String getID() {return id;}
 	public GameScreen getGS() {return gs;}
+	public Body getBody() {return body;}
+
 }
