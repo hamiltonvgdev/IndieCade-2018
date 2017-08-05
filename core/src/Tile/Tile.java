@@ -49,14 +49,6 @@ public class Tile extends Thing
 	}
 	
 	@Override
-	public void update(float delta)
-	{
-		super.update(delta);
-		
-		//System.out.println(x + " " + y + " " + body.getPosition());
-	}
-	
-	@Override
 	public void collideWith(Thing thing)
 	{
 		if(Integer.parseInt(thing.getID().split("-")[0]) == Config.ENTITY_Z)

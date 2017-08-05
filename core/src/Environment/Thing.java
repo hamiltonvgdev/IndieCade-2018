@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.brashmonkey.spriter.Drawer;
 
 public class Thing implements Comparable<Thing>
 {
@@ -31,6 +32,10 @@ public class Thing implements Comparable<Thing>
 	protected FixtureDef fdef;
 	protected PolygonShape shape;
 	
+	//Renders
+	protected Drawer draw;
+	protected com.brashmonkey.spriter.Player play;
+	
 	public Thing(GameScreen gs)
 	{
 		this.gs = gs;
@@ -51,6 +56,11 @@ public class Thing implements Comparable<Thing>
 	
 	public void update(float delta)
 	{
+		if(play != null)
+		{
+			play.update();
+		}
+		
 		if(health <= 0)
 		{
 			die();
@@ -59,7 +69,10 @@ public class Thing implements Comparable<Thing>
 	
 	public void render(SpriteBatch batch)
 	{
-		
+		if(play != null)
+		{
+			draw.draw(play);
+		}
 	}
 	
 	public void die()
@@ -109,5 +122,6 @@ public class Thing implements Comparable<Thing>
 	public String getID() {return id;}
 	public GameScreen getGS() {return gs;}
 	public Body getBody() {return body;}
+	public float getHealth() {return health;}
 
 }

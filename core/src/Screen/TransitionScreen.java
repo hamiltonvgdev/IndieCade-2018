@@ -10,7 +10,7 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,13 +22,28 @@ public class TransitionScreen extends ModScreen
 	private SpriteBatch batch;
 	private Sprite splash;
 	private TweenManager tweenmanager;
+	private float duration;
+	
+	private Sound music;
+	private long musicId;
+	private float volume;
 	
 	public TransitionScreen(Core core, ModScreen nextScreen)
 	{
 		super(core);
 		ScreenshotFactory.saveScreenshot();
 		ns = nextScreen;
+		duration = 1.5F;
 	}
+	
+	public TransitionScreen setFadeOutMusic(Sound music, long musicId)
+	{
+		this.music = music;
+		this.musicId = musicId;
+		volume = 1;
+		return this;
+	}
+	
 	@Override
 	public void show() 
 	{
@@ -41,8 +56,8 @@ public class TransitionScreen extends ModScreen
 		splash = new Sprite(splashTexture);
 		splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		splash.flip(false, true);
-		Tween.set(splash,SpriteAccessor.ALPHA).target(1).start(tweenmanager);
-		Tween.to(splash,SpriteAccessor.ALPHA,2).target(0).
+		Tween.set(splash, SpriteAccessor.ALPHA).target(1).start(tweenmanager);
+		Tween.to(splash, SpriteAccessor.ALPHA, duration).target(0).
 		setCallback(new TweenCallback()
 			{
 				public void onEvent(int type,BaseTween<?> source ){
@@ -101,12 +116,19 @@ public class TransitionScreen extends ModScreen
 		super.dispose();
 		batch.dispose();
 		splash.getTexture().dispose();
+		music.stop();
 	}
 	@Override
 	public void update(float delta) 
 	{
 		// TODO Auto-generated method stub
 		tweenmanager.update(delta);
+		
+		if(music != null)
+		{
+			volume -= delta / duration;
+			music.setVolume(musicId, volume);
+		}
 	}
 
 }

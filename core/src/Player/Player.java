@@ -4,9 +4,11 @@ import Environment.Thing;
 import Game.Config;
 import Screen.GameScreen;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.brashmonkey.spriter.Drawer;
 
 public class Player extends Thing
 {
@@ -25,6 +27,11 @@ public class Player extends Thing
 		input = new PlayerInput(this);	
 		
 		hitbox = new PlayerHitbox(gs, this);
+
+		play = gs.getRenderer().getPlayer("Test", "test/derp.scml");
+		draw = gs.getRenderer().getDrawer("Test", "test/derp.scml");
+		
+		play.setScale(3);
 	}
 	
 	@Override
@@ -36,7 +43,8 @@ public class Player extends Thing
 	
 	public void update(float delta)
 	{	
-		getGS().getGeoCam().position.set(x * Config.PPM, y * Config.PPM, 0);
+		super.update(delta);
+		getGS().getCamera().position.set(x * Config.PPM, y * Config.PPM, 0);
 		
 		x = hitbox.torso.getPosition().x;
 		y = hitbox.torso.getPosition().y;
@@ -46,7 +54,9 @@ public class Player extends Thing
 	
 	public void render(SpriteBatch batch)
 	{
+		super.render(batch);
 		
+		play.getBoudingRectangle(play.getBone("bone_002")).render(batch);
 	}
 	
 	public void move()

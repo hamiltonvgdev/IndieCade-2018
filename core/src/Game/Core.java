@@ -6,12 +6,17 @@ import Screen.GameScreen;
 import Screen.MenuScreen;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blueacorn.spriter.LibGdxDrawer;
+import com.brashmonkey.spriter.Drawer;
 
 public class Core extends Game
 {		
 	public SpriteBatch batch;
+	
+
 	
 	@Override
 	public void create () 

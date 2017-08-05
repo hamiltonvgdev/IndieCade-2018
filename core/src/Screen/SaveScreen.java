@@ -2,6 +2,9 @@ package Screen;
 
 import javax.swing.JOptionPane;
 
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
+
 import Util.MenuButton;
 import Game.Config;
 import Game.Core;
@@ -21,6 +24,9 @@ public class SaveScreen extends ModScreen
 	MenuButton DelSave2;
 	MenuButton DelSave3;
 	
+	Sound music;
+	long musicId;
+	
 	public SaveScreen(Core core)
 	{
 		super(core);
@@ -31,6 +37,13 @@ public class SaveScreen extends ModScreen
 				Config.GAME_HEIGHT / 5 * 2, 1.5F);
 		Save3 = new MenuButton(Config.GAME_WIDTH / 6 * 5, 
 				Config.GAME_HEIGHT / 5 * 2, 1.5F);
+	}
+
+	public ModScreen setPreviousMusic(Sound titleMusic, long musicId) 
+	{
+		music = titleMusic;
+		this.musicId = musicId;
+		return this;
 	}
 	
 	@Override
@@ -132,8 +145,10 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(1);
 			}
 
-			//core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
-			core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+			core.setScreen(new TransitionScreen(core,
+					new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
+					setFadeOutMusic(music, musicId));
+			//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
 		}
 		
 		if(Save2.confirmed)
@@ -149,8 +164,10 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(2);
 			}
 			
-			//core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
-			core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+			core.setScreen(new TransitionScreen(core,
+					new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
+					setFadeOutMusic(music, musicId));
+			//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
 		}
 		
 		if(Save3.confirmed)
@@ -166,8 +183,10 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(3);
 			}
 
-			//core.setScreen(new TransitionScreen(core,new GameScreen(core, Loadevas.gd)));
-			core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+			core.setScreen(new TransitionScreen(core,
+					new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
+					setFadeOutMusic(music, musicId));
+			//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
 		}
 		
 	}

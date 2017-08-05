@@ -13,10 +13,13 @@ public class GameData implements Serializable
 	public String currentWeapon;
 	public String currentMap;
 	
+	//Player stats;
+	public float playerHealth;
+	
 	public GameData()
 	{
 		
-	};
+	}
 	
 	public void init()
 	{
@@ -25,8 +28,8 @@ public class GameData implements Serializable
 		currentMap = "Start";
 	}
 	
-	public void write(GameScreen gs, Player player)
+	public void write(GameScreen gs)
 	{
-		
+		playerHealth = gs.getPlayer().getHealth();
 	}
 }
