@@ -1,5 +1,9 @@
 package com.brashmonkey.spriter;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 /**
  * Represents a 2D rectangle with left, top, right and bottom bounds.
  * A rectangle is responsible for calculating its own size and checking if a point is inside it or if it is intersecting with another rectangle.
@@ -16,6 +20,9 @@ public class Rectangle {
 	 * The size of this rectangle.
 	 */
 	public final Dimension size;
+
+	//SpriteBatch for libgdx rendering
+	public SpriteBatch batch;
 	
 	/**
 	 * Creates a rectangle with the given bounds.
@@ -24,10 +31,13 @@ public class Rectangle {
 	 * @param right right bounding
 	 * @param bottom bottom bounding
 	 */
+	
+	
 	public Rectangle(float left, float top, float right, float bottom){
 		this.set(left, top, right, bottom);
 		this.size = new Dimension(0, 0);
 		this.calculateSize();
+		batch = new SpriteBatch();
 	}
 	
 	/**
@@ -114,5 +124,17 @@ public class Rectangle {
 		target.right = Math.max(rect1.right, rect2.right);
 		target.top = Math.max(rect1.top, rect2.top);
 	}
-
+	
+	//Renders ligdx rectangle
+	public void render(SpriteBatch batch)
+	{
+		this.batch.setProjectionMatrix(batch.getProjectionMatrix());
+		
+		this.batch.begin();
+		
+		this.batch.draw(new TextureRegion(new Texture("Basic Square.png")), 
+				left, bottom, size.width, size.height);
+	
+		this.batch.end();
+	}
 }

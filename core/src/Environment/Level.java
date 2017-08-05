@@ -6,6 +6,7 @@ import Game.Config;
 import Screen.GameScreen;
 import Tile.Tile;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -110,8 +111,9 @@ public class Level
 	
 	public void render(SpriteBatch batch)
 	{
-		tmr.setView(gs.getGeoCam());
+		tmr.setView(gs.getCamera());
 		tmr.render();
+		
 		
 		for(Thing t: toShow)
 		{
@@ -125,7 +127,7 @@ public class Level
 		{
 			t.move(moveVec);
 		}
-		gs.getGeoCam().translate(moveVec);
+		gs.getCamera().translate(moveVec);
 	}
 	
 	public ArrayList<Thing> getAlive() {return toShow;}

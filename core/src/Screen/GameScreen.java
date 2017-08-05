@@ -12,16 +12,19 @@ import Util.ScreenshotFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.blueacorn.spriter.LibGdxDrawer;
+import com.brashmonkey.spriter.Drawer;
 
 public class GameScreen extends ModScreen
 {
-	OrthographicCamera GeoCam;
 	OrthographicCamera Camera;
+	OrthographicCamera B2Dcam;
 	GameData gd;
 	
 	World world;
@@ -38,8 +41,8 @@ public class GameScreen extends ModScreen
 		super(core);
 		this.gd = gd;
 		
-		GeoCam = new OrthographicCamera(Config.GAME_WIDTH , Config.GAME_HEIGHT);
-		Camera = new OrthographicCamera(Config.GAME_WIDTH / Config.PPM, 
+		Camera = new OrthographicCamera(Config.GAME_WIDTH , Config.GAME_HEIGHT);
+		B2Dcam = new OrthographicCamera(Config.GAME_WIDTH / Config.PPM, 
 				Config.GAME_HEIGHT / Config.PPM);
 		
 		world = new World(new Vector2(0, 0), true);
@@ -52,6 +55,7 @@ public class GameScreen extends ModScreen
 		level.addThing(player);
 		
 		world.setContactListener(new CollisionHandler(level));
+		
 	}
 	
 	@Override
@@ -61,24 +65,26 @@ public class GameScreen extends ModScreen
 		
 		level.update(delta);
 		player.update(delta);
-		GeoCam.update();
 		Camera.update();
+		B2Dcam.update();
 	}
 
 	@Override
 	public void render(float delta) 
 	{
 		super.render(delta);
+		core.batch.setProjectionMatrix(Camera.combined);
 		level.render(core.batch);
-		b2dr.render(world, Camera.combined);
+		b2dr.render(world, B2Dcam.combined);
 		player.render(core.batch);
 	}
 	
 	public World getWorld() {return world;}
 	public Level getLevel() {return level;}
+	public Player getPlayer() {return player;}
 	public GameData getGD() {return gd;}
+	public OrthographicCamera getB2Dcam() {return B2Dcam;}
 	public OrthographicCamera getCamera() {return Camera;}
-	public OrthographicCamera getGeoCam() {return GeoCam;}
 	public SpriterAnimationEngine getRenderer() {return renderer;}
-
+	
 }
