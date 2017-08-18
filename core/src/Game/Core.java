@@ -4,6 +4,7 @@ package Game;
 import Renders.SpriterAnimationEngine;
 import Screen.GameScreen;
 import Screen.MenuScreen;
+import Screen.SplashScreen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,8 +23,9 @@ public class Core extends Game
 	public void create () 
 	{	
 		batch = new SpriteBatch();
-		//setScreen(new MenuScreen(this));
-		//setScreen(new Test(this));
+//		setScreen(new SplashScreen(this, "Logo Animation", 
+//				"Logo SplashScreen/Parts/Logo Animation.scml").scale(0.3F).
+//				setMusic("Audio/title_theme.wav"));
 		setScreen(new GameScreen(this, new GameData(), "test"));
 		
 		Loadevas.init();

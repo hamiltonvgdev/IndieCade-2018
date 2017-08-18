@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Matrix4;
 import com.brashmonkey.spriter.Drawer;
 import com.brashmonkey.spriter.Loader;
 import com.brashmonkey.spriter.Timeline.Key.Object;
@@ -42,6 +43,11 @@ public class LibGdxDrawer extends Drawer<Sprite>{
 	public void circle(float x, float y, float radius)
 	{
 		renderer.circle(x, y, radius);
+	}
+
+	public void update(Matrix4 combined)
+	{
+		batch.setProjectionMatrix(combined);
 	}
 
 	@Override

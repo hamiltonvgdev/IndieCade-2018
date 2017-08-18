@@ -3,6 +3,7 @@ package Environment;
 import java.util.ArrayList;
 
 import Game.Config;
+import Mob.Test;
 import Screen.GameScreen;
 import Tile.Tile;
 
@@ -37,10 +38,7 @@ public class Level
 		toDie = new ArrayList<Thing>();
 		tmx = new TmxMapLoader();
 		
-		map = tmx.load("C:/Users/jahu2/"
-				+ "Hummus Files/School/Project IDC/Testing/Hummus's Test Map.tmx");
-		tmr = new OrthogonalTiledMapRenderer(map);
-		createTiles((TiledMapTileLayer)(map.getLayers().get("Normal")), "Normal");
+		
 		
 		for(int i = 0; i < Things.size(); i ++)
 		{
@@ -55,12 +53,21 @@ public class Level
 		Things.clear();
 		toShow.clear();
 		toDie.clear();
-		map.dispose();
+		if(map != null)
+		{
+			map.dispose();
+		}
 		
 		
 		//Loads New Maps
 		map = tmx.load("Maps/" + id + ".tmx");
 		tmr = new OrthogonalTiledMapRenderer(map);
+		tmr.setView(gs.getCamera());
+		
+		//Creates Tile Body
+		createTiles((TiledMapTileLayer)(map.getLayers().get("Normal")), "Normal");
+		
+		addThing(new Test(gs));
 		
 		//Assign IDs to all Entities
 		for(int i = 0; i < Things.size(); i ++)

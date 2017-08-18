@@ -6,6 +6,7 @@ import Screen.GameScreen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -28,6 +29,8 @@ public class PlayerHitbox
 	FixtureDef Headdef;
 	FixtureDef Torsodef;
 	FixtureDef Footdef;
+	
+	FixtureDef derpdef;
 	
 	public PlayerHitbox(GameScreen gs, Player player)
 	{
@@ -79,5 +82,12 @@ public class PlayerHitbox
 		gs.getWorld().createJoint(leg);
 		
 		shape.dispose();
+	}
+	
+	public void test(com.brashmonkey.spriter.Player player)
+	{
+//		derpdef = new FixtureDef();
+//		derpdef.shape = player.getBoudingRectangle(player.getBone("bone_002")).toShape();
+//		head.createFixture(derpdef).setUserData(Config.PLAYER_Z + "-" + 0);
 	}
 }

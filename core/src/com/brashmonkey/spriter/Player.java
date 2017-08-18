@@ -651,7 +651,7 @@ public class Player {
 	 * @param root the starting root. Set it to null to calculate the bounding box for the whole player
 	 * @return the bounding box
 	 */
-	public Rectangle getBoudingRectangle(Bone root){
+	public Rectangle getBoundingRectangle(Bone root){
 		return this.getBoundingRectangle(root == null ? null: getBoneRef(root));
 	}
 	

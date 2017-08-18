@@ -1,8 +1,11 @@
 package com.brashmonkey.spriter;
 
+import Game.Config;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 /**
  * Represents a 2D rectangle with left, top, right and bottom bounds.
@@ -16,6 +19,7 @@ public class Rectangle {
 	 * Belongs to the bounds of this rectangle.
 	 */
 	public float left, top, right, bottom;
+	PolygonShape shape;
 	/**
 	 * The size of this rectangle.
 	 */
@@ -72,6 +76,7 @@ public class Rectangle {
 	 */
 	public void calculateSize(){
 		this.size.set(right-left, top-bottom);
+		orient();
 	}
 	
 	/**
@@ -125,6 +130,14 @@ public class Rectangle {
 		target.top = Math.max(rect1.top, rect2.top);
 	}
 	
+	public void orient()
+	{
+//		left = x;
+//		right = x + size.width;
+//		top = y;
+//		bottom = y - size.height / 2;
+	}
+	
 	//Renders ligdx rectangle
 	public void render(SpriteBatch batch)
 	{
@@ -134,7 +147,14 @@ public class Rectangle {
 		
 		this.batch.draw(new TextureRegion(new Texture("Basic Square.png")), 
 				left, bottom, size.width, size.height);
-	
+		
 		this.batch.end();
+	}
+	
+	//Converts to Libgdx Shape
+	public PolygonShape toShape()
+	{
+		shape.setAsBox((right - left) / Config.PPM, (top - bottom) / Config.PPM);
+		return shape;
 	}
 }
