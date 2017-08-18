@@ -5,21 +5,14 @@ import Environment.Level;
 import Game.Config;
 import Game.Core;
 import Game.GameData;
+import Mob.Test;
 import Player.Player;
 import Renders.SpriterAnimationEngine;
-import Util.ScreenshotFactory;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.blueacorn.spriter.LibGdxDrawer;
-import com.brashmonkey.spriter.Drawer;
 
 public class GameScreen extends ModScreen
 {
@@ -54,6 +47,8 @@ public class GameScreen extends ModScreen
 		player =  new Player(this).setID(0);
 		level.addThing(player);
 		
+		level.loadMap(id);
+		
 		world.setContactListener(new CollisionHandler(level));
 		
 	}
@@ -61,10 +56,12 @@ public class GameScreen extends ModScreen
 	@Override
 	public void update(float delta) 
 	{
+		player.update(delta);
 		world.step(delta, 1, 1);
 		
+		renderer.update(Camera.combined);
+		
 		level.update(delta);
-		player.update(delta);
 		Camera.update();
 		B2Dcam.update();
 	}
@@ -73,7 +70,7 @@ public class GameScreen extends ModScreen
 	public void render(float delta) 
 	{
 		super.render(delta);
-		core.batch.setProjectionMatrix(Camera.combined);
+		//core.batch.setProjectionMatrix(Camera.combined);
 		level.render(core.batch);
 		b2dr.render(world, B2Dcam.combined);
 		player.render(core.batch);

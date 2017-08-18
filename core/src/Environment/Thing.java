@@ -93,7 +93,6 @@ public class Thing implements Comparable<Thing>
 	public void move(Vector2 moveVec) 
 	{
 		body.getPosition().add(moveVec);
-		System.out.println(moveVec);
 	}
 	
 	public void setPosition(float x, float y)

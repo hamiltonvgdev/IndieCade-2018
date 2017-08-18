@@ -74,4 +74,12 @@ public class SpriterAnimationEngine
 			return getDrawer(name, ref);
 		}
 	}
+
+	public void update(Matrix4 combined) 
+	{
+		for(LibGdxDrawer draw: Drawers.values())
+		{
+			draw.update(combined);
+		}
+	}
 }

@@ -32,4 +32,15 @@ public class GameData implements Serializable
 	{
 		playerHealth = gs.getPlayer().getHealth();
 	}
+	
+	public boolean ready()
+	{
+		if(name.equals(""))
+		{
+			return false;
+		}else
+		{
+			return true;
+		}
+	}
 }

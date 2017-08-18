@@ -32,11 +32,11 @@ public class SaveScreen extends ModScreen
 		super(core);
 		
 		Save1 = new MenuButton(Config.GAME_WIDTH / 6, 
-				Config.GAME_HEIGHT / 5 * 2, 1.5F);
+				Config.GAME_HEIGHT / 20 * 9, 1.5F);
 		Save2 = new MenuButton(Config.GAME_WIDTH / 6 * 3, 
-				Config.GAME_HEIGHT / 5 * 2, 1.5F);
+				Config.GAME_HEIGHT / 20 * 9, 1.5F);
 		Save3 = new MenuButton(Config.GAME_WIDTH / 6 * 5, 
-				Config.GAME_HEIGHT / 5 * 2, 1.5F);
+				Config.GAME_HEIGHT / 20 * 9, 1.5F);
 	}
 
 	public ModScreen setPreviousMusic(Sound titleMusic, long musicId) 
@@ -59,7 +59,7 @@ public class SaveScreen extends ModScreen
 		{
 			Save1.setPhrase("Load Save 1");
 			DelSave1 = new MenuButton(Config.GAME_WIDTH / 6, 
-					Config.GAME_HEIGHT / 5, 1.25F).
+					Config.GAME_HEIGHT / 7, 1.25F).
 					setPhrase("Delete Save 1");
 		}else
 		{
@@ -70,7 +70,7 @@ public class SaveScreen extends ModScreen
 		{
 			Save2.setPhrase("Load Save 2");
 			DelSave2 = new MenuButton(Config.GAME_WIDTH / 6 * 3, 
-					Config.GAME_HEIGHT / 5, 1.25F).
+					Config.GAME_HEIGHT / 7, 1.25F).
 					setPhrase("Delete Save 2");
 		}else
 		{
@@ -81,7 +81,7 @@ public class SaveScreen extends ModScreen
 		{
 			Save3.setPhrase("Load Save 3");
 			DelSave3 = new MenuButton(Config.GAME_WIDTH / 6 * 5, 
-					Config.GAME_HEIGHT / 5, 1.25F).
+					Config.GAME_HEIGHT / 7, 1.25F).
 					setPhrase("Delete Save 3");
 		}else
 		{
@@ -143,12 +143,16 @@ public class SaveScreen extends ModScreen
 				Loadevas.gd.name = JOptionPane.
 						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(1);
+				music.stop();
 			}
 
-			core.setScreen(new TransitionScreen(core,
-					new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
-					setFadeOutMusic(music, musicId));
-			//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+			if(Loadevas.gd.ready())
+			{
+				core.setScreen(new TransitionScreen(core,
+						new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
+						setFadeOutMusic(music, musicId));
+				//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+			}
 		}
 		
 		if(Save2.confirmed)
@@ -162,12 +166,16 @@ public class SaveScreen extends ModScreen
 				Loadevas.gd.name = JOptionPane.
 						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(2);
+				music.stop();
 			}
-			
-			core.setScreen(new TransitionScreen(core,
-					new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
-					setFadeOutMusic(music, musicId));
-			//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+
+			if(Loadevas.gd.ready())
+			{
+				core.setScreen(new TransitionScreen(core,
+						new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
+						setFadeOutMusic(music, musicId));
+				//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+			}
 		}
 		
 		if(Save3.confirmed)
@@ -181,12 +189,16 @@ public class SaveScreen extends ModScreen
 				Loadevas.gd.name = JOptionPane.
 						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(3);
+				music.stop();
 			}
 
-			core.setScreen(new TransitionScreen(core,
-					new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
-					setFadeOutMusic(music, musicId));
-			//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+			if(Loadevas.gd.ready())
+			{
+				core.setScreen(new TransitionScreen(core,
+						new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap)).
+						setFadeOutMusic(music, musicId));
+				//core.setScreen(new GameScreen(core, Loadevas.gd, Loadevas.gd.currentMap));
+			}
 		}
 		
 	}

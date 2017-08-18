@@ -15,7 +15,7 @@ public class MenuScreen extends ModScreen
 	MenuButton exit;
 	
 	long musicId;
-	Sound titleMusic;
+	Sound music;
 	
 	public MenuScreen(Core core)
 	{
@@ -25,14 +25,17 @@ public class MenuScreen extends ModScreen
 				, Config.GAME_HEIGHT / 2, 1.5F).setPhrase("PLAY");
 		exit = new MenuButton(Config.GAME_WIDTH / 2
 				, Config.GAME_HEIGHT / 2 - Config.MENU_BUTTON_HEIGHT, 1F).setPhrase("EXIT");
-		
-		titleMusic = Gdx.audio.newSound(Gdx.files.internal("Audio/title_theme.wav"));
-		musicId = titleMusic.loop();
 	}
 	
 	@Override
 	public void update(float delta) 
 	{
+		if(music == null)
+		{
+			music = Gdx.audio.newSound(Gdx.files.internal("Audio/menu.wav"));
+			musicId = music.loop();
+		}
+		
 		play.update(delta);
 		exit.update(delta);
 		
@@ -40,7 +43,7 @@ public class MenuScreen extends ModScreen
 		{
 			//core.setScreen(new TransitionScreen(core, new SaveScreen(core)));
 			core.setScreen(new TransitionScreen(core, 
-					new SaveScreen(core).setPreviousMusic(titleMusic, musicId)));
+					new SaveScreen(core).setPreviousMusic(music, musicId)));
 		}
 		
 		if(exit.confirmed)

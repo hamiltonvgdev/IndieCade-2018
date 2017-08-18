@@ -38,9 +38,12 @@ public class TransitionScreen extends ModScreen
 	
 	public TransitionScreen setFadeOutMusic(Sound music, long musicId)
 	{
-		this.music = music;
-		this.musicId = musicId;
-		volume = 1;
+		if(music != null)
+		{
+			this.music = music;
+			this.musicId = musicId;
+			volume = 1;
+		}
 		return this;
 	}
 	
