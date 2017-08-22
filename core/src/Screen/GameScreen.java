@@ -5,7 +5,6 @@ import Environment.Level;
 import Game.Config;
 import Game.Core;
 import Game.GameData;
-import Mob.Test;
 import Player.Player;
 import Renders.SpriterAnimationEngine;
 
@@ -26,7 +25,7 @@ public class GameScreen extends ModScreen
 	Player player;
 	Level level;
 	SpriterAnimationEngine renderer;
-	
+	HUD hud;
 	//Test
 	
 	public GameScreen(Core core, GameData gd, String id)
@@ -51,6 +50,7 @@ public class GameScreen extends ModScreen
 		
 		world.setContactListener(new CollisionHandler(level));
 		
+		hud = new HUD(this);
 	}
 	
 	@Override
@@ -64,6 +64,7 @@ public class GameScreen extends ModScreen
 		level.update(delta);
 		Camera.update();
 		B2Dcam.update();
+		hud.update();
 	}
 
 	@Override
@@ -74,6 +75,7 @@ public class GameScreen extends ModScreen
 		level.render(core.batch);
 		b2dr.render(world, B2Dcam.combined);
 		player.render(core.batch);
+		hud.render();
 	}
 	
 	public World getWorld() {return world;}

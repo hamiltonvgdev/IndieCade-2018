@@ -4,7 +4,6 @@ package Game;
 import Renders.SpriterAnimationEngine;
 import Screen.GameScreen;
 import Screen.MenuScreen;
-import Screen.SplashScreen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
