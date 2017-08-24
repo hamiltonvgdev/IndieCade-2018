@@ -3,6 +3,8 @@ package Environment;
 import java.util.ArrayList;
 
 import Mob.Test;
+import Game.Config;
+import Player.Health;
 import Screen.GameScreen;
 import Tile.Tile;
 
@@ -26,6 +28,8 @@ public class Level
 	TiledMap map;
 	TmxMapLoader tmx;
 	TiledMapRenderer tmr;
+	
+	Health health;
 	
 	public Level(GameScreen gs)
 	{
@@ -58,14 +62,13 @@ public class Level
 		
 		
 		//Loads New Maps
-		map = tmx.load("Maps/" + id + ".tmx");
-		tmr = new OrthogonalTiledMapRenderer(map);
-		tmr.setView(gs.getCamera());
-		
+//		map = tmx.load("Maps/" + id + ".tmx");
+//		tmr = new OrthogonalTiledMapRenderer(map);
+//		tmr.setView(gs.getCamera());
+//		
 		//Creates Tile Body
-		createTiles((TiledMapTileLayer)(map.getLayers().get("Normal")), "Normal");
+//		createTiles((TiledMapTileLayer)(map.getLayers().get("Normal")), "Normal");
 		
-		addThing(new Test(gs));
 		
 		//Assign IDs to all Entities
 		for(int i = 0; i < Things.size(); i ++)
@@ -116,9 +119,8 @@ public class Level
 	
 	public void render(SpriteBatch batch)
 	{
-		tmr.setView(gs.getCamera());
-		tmr.render();
-		
+//		tmr.setView(gs.getCamera());
+//		tmr.render();
 		
 		for(Thing t: toShow)
 		{
