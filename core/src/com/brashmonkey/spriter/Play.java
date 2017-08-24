@@ -25,8 +25,8 @@ import com.brashmonkey.spriter.Timeline.Key.Object;
  * @author Trixt0r
  *
  */
-public class Player {
-	
+public class Play {
+
 	protected Entity entity;
 	Animation animation;
 	int time;
@@ -49,10 +49,10 @@ public class Player {
 	public boolean copyObjects = true;
 	
 	/**
-	 * Creates a {@link Player} instance with the given entity.
+	 * Creates a {@link Play} instance with the given entity.
 	 * @param entity the entity this player will animate
 	 */
-	public Player(Entity entity){
+	public Play(Entity entity){
 		this.boneIterator = new BoneIterator();
 		this.objectIterator = new ObjectIterator();
 		this.speed = 15;
@@ -694,7 +694,7 @@ public class Player {
 	 * @param time the new time
 	 * @return this player to enable chained operations
 	 */
-	public Player setTime(int time){
+	public Play setTime(int time){
 		this.time = time;
 		int prevSpeed = this.speed;
 		this.speed = 0;
@@ -709,7 +709,7 @@ public class Player {
 	 * @param scale the new scale. 1f means 100% scale.
 	 * @return this player to enable chained operations
 	 */
-	public Player setScale(float scale){
+	public Play setScale(float scale){
 		this.root.scale.set(scale*flippedX(), scale*flippedY());
 		return this;
 	}
@@ -719,7 +719,7 @@ public class Player {
 	 * @param scale the scaling factor. 1f means no scale.
 	 * @return this player to enable chained operations
 	 */
-	public Player scale(float scale){
+	public Play scale(float scale){
 		this.root.scale.scale(scale, scale);
 		return this;
 	}
@@ -738,7 +738,7 @@ public class Player {
 	 * @param y whether to flip the player around the y axis
 	 * @return this player to enable chained operations
 	 */
-	public Player flip(boolean x, boolean y){
+	public Play flip(boolean x, boolean y){
 		if(x) this.flipX();
 		if(y) this.flipY();
 		return this;
@@ -748,7 +748,7 @@ public class Player {
 	 * Flips the player around the x axis.
 	 * @return this player to enable chained operations
 	 */
-	public Player flipX(){
+	public Play flipX(){
 		this.root.scale.x *= -1;
 		return this;
 	}
@@ -757,7 +757,7 @@ public class Player {
 	 * Flips the player around the y axis.
 	 * @return this player to enable chained operations
 	 */
-	public Player flipY(){
+	public Play flipY(){
 		this.root.scale.y *= -1;
 		return this;
 	}
@@ -784,7 +784,7 @@ public class Player {
 	 * @param y the new position in y direction
 	 * @return this player to enable chained operations
 	 */
-	public Player setPosition(float x, float y){
+	public Play setPosition(float x, float y){
 		this.dirty = true;
 		this.position.set(x,y);
 		return this;
@@ -795,7 +795,7 @@ public class Player {
 	 * @param position the new position
 	 * @return this player to enable chained operations
 	 */
-	public Player setPosition(Point position){
+	public Play setPosition(Point position){
 		return this.setPosition(position.x, position.y);
 	}
 	
@@ -805,7 +805,7 @@ public class Player {
 	 * @param y the amount in y direction
 	 * @return this player to enable chained operations
 	 */
-	public Player translatePosition(float x, float y){
+	public Play translatePosition(float x, float y){
 		return this.setPosition(position.x+x, position.y+y);
 	}
 	
@@ -814,7 +814,7 @@ public class Player {
 	 * @param amount the amount to add
 	 * @return this player to enable chained operations
 	 */
-	public Player translate(Point amount){
+	public Play translate(Point amount){
 		return this.translatePosition(amount.x, amount.y);
 	}
 	
@@ -839,7 +839,7 @@ public class Player {
 	 * @param angle the angle in degrees
 	 * @return this player to enable chained operations
 	 */
-	public Player setAngle(float angle){
+	public Play setAngle(float angle){
 		this.dirty = true;
 		this.angle = angle;
 		return this;
@@ -850,7 +850,7 @@ public class Player {
 	 * @param angle the angle in degrees
 	 * @return this player to enable chained operations
 	 */
-	public Player rotate(float angle){
+	public Play rotate(float angle){
 		return this.setAngle(angle+this.angle);
 	}
 	
@@ -869,7 +869,7 @@ public class Player {
 	 * @param y the new pivot in y direction
 	 * @return this player to enable chained operations
 	 */
-	public Player setPivot(float x, float y){
+	public Play setPivot(float x, float y){
 		this.dirty = true;
 		this.pivot.set(x, y);
 		return this;
@@ -881,7 +881,7 @@ public class Player {
 	 * @param pivot the new pivot
 	 * @return this player to enable chained operations
 	 */
-	public Player setPivot(Point pivot){
+	public Play setPivot(Point pivot){
 		return this.setPivot(pivot.x, pivot.y);
 	}
 	
@@ -891,7 +891,7 @@ public class Player {
 	 * @param y the amount in y direction
 	 * @return this player to enable chained operations
 	 */
-	public Player translatePivot(float x, float y){
+	public Play translatePivot(float x, float y){
 		return this.setPivot(pivot.x+x, pivot.y+y);
 	}
 	
@@ -900,7 +900,7 @@ public class Player {
 	 * @param amount the amount to add
 	 * @return this player to enable chained operations
 	 */
-	public Player translatePivot(Point amount){
+	public Play translatePivot(Point amount){
 		return this.translatePivot(amount.x, amount.y);
 	}
 	
@@ -1018,21 +1018,21 @@ public class Player {
 	}
 
 	/**
-	 * A listener to listen for specific events which can occur during the runtime of a {@link Player} instance.
+	 * A listener to listen for specific events which can occur during the runtime of a {@link Play} instance.
 	 * @author Trixt0r
 	 *
 	 */
 	public static interface PlayerListener{
 		
 		/**
-		 * Gets called if the current animation has reached it's end or it's beginning (depends on the current set {@link Player#speed}).
+		 * Gets called if the current animation has reached it's end or it's beginning (depends on the current set {@link Play#speed}).
 		 * @param animation the animation which finished.
 		 */
 		public void animationFinished(Animation animation);
 		
 		/**
 		 * Gets called if the animation of the player gets changed.
-		 * If {@link Player#setAnimation(Animation)} gets called and the new animation is the same as the previous one, this method will not be called.
+		 * If {@link Play#setAnimation(Animation)} gets called and the new animation is the same as the previous one, this method will not be called.
 		 * @param oldAnim the old animation
 		 * @param newAnim the new animation
 		 */
@@ -1042,17 +1042,17 @@ public class Player {
 		 * Gets called before a player updates the current animation.
 		 * @param player the player which is calling this method.
 		 */
-		public void preProcess(Player player);
+		public void preProcess(Play player);
 		
 		/**
 		 * Gets called after a player updated the current animation.
 		 * @param player the player which is calling this method.
 		 */
-		public void postProcess(Player player);
+		public void postProcess(Play player);
 		
 		/**
 		 * Gets called if the mainline key gets changed.
-		 * If {@link Player#speed} is big enough it can happen that mainline keys between the previous and the new mainline key will be ignored.
+		 * If {@link Play#speed} is big enough it can happen that mainline keys between the previous and the new mainline key will be ignored.
 		 * @param prevKey the previous mainline key
 		 * @param newKey the new mainline key
 		 */
@@ -1060,9 +1060,9 @@ public class Player {
 	}
 	
 	/**
-	 * An attachment is an abstract object which can be attached to a {@link Player} object.
+	 * An attachment is an abstract object which can be attached to a {@link Play} object.
 	 * An attachment extends a {@link Bone} which means that {@link Bone#position}, {@link Bone#scale} and {@link Bone#angle} can be set to change the relative position to its {@link Attachment#parent}
-	 * The {@link Player} object will make sure that the attachment will be transformed relative to its {@link Attachment#parent}.
+	 * The {@link Play} object will make sure that the attachment will be transformed relative to its {@link Attachment#parent}.
 	 * @author Trixt0r
 	 *
 	 */

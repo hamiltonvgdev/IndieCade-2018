@@ -32,8 +32,8 @@ public class Config
 	
 	//World Dimensions
 	public static final float WORLD_SCALE = 1;
-	public static final int WEAPON_Z = 0;
-	public static final int TILE_Z = 1;
-	public static final int ENTITY_Z = 2;
-	public static final int PLAYER_Z = 3;
+	public static final String WEAPON_Z = "0";
+	public static final String TILE_Z = "1";
+	public static final String ENTITY_Z = "2";
+	public static final String PLAYER_Z = "3";
 }

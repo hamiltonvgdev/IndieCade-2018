@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.brashmonkey.spriter.Drawer;
+import com.brashmonkey.spriter.Play;
 
 public class Thing implements Comparable<Thing>
 {
@@ -34,7 +35,7 @@ public class Thing implements Comparable<Thing>
 	
 	//Renders
 	protected Drawer draw;
-	protected com.brashmonkey.spriter.Player play;
+	protected Play play;
 	
 	public Thing(GameScreen gs)
 	{
@@ -122,5 +123,7 @@ public class Thing implements Comparable<Thing>
 	public GameScreen getGS() {return gs;}
 	public Body getBody() {return body;}
 	public float getHealth() {return health;}
+	public Play getPlay() {return play;}
+	public Drawer getDraw() {return draw;}
 
 }

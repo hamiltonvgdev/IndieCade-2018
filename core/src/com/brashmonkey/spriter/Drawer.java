@@ -9,11 +9,11 @@ import com.brashmonkey.spriter.Timeline.Key.Bone;
 import com.brashmonkey.spriter.Timeline.Key.Object;
 
 /**
- * A Drawer is responsible for drawing a {@link Player}.
+ * A Drawer is responsible for drawing a {@link Play}.
  * Since this library is meant to be as generic as possible this class has to be abstract, because it cannot be assumed how to draw a resource.
- * Anyone who wants to draw a {@link Player} has to know how to draw a resource. A resource can be e.g. a sprite, a texture or a texture region.
- * To draw a {@link Player} call {@link #draw(Player)}. This method relies on {@link #draw(Object)}, which has to be implemented with the chosen backend.
- * To debug draw a {@link Player} call {@link #drawBones(Player)}, {@link #drawBoxes(Player)} and {@link #drawPoints(Player)},
+ * Anyone who wants to draw a {@link Play} has to know how to draw a resource. A resource can be e.g. a sprite, a texture or a texture region.
+ * To draw a {@link Play} call {@link #draw(Play)}. This method relies on {@link #draw(Object)}, which has to be implemented with the chosen backend.
+ * To debug draw a {@link Play} call {@link #drawBones(Play)}, {@link #drawBoxes(Play)} and {@link #drawPoints(Play)},
  * which rely on {@link #rectangle(float, float, float, float)}, {@link #circle(float, float, float)}, {@link #line(float, float, float, float)} and {@link #setColor(float, float, float, float)}.
  * @author Trixt0r
  *
@@ -49,7 +49,7 @@ public abstract class Drawer<R> {
 	 * Draws the bones of the given player composed of lines.
 	 * @param player the player to draw
 	 */
-	public void drawBones(Player player){
+	public void drawBones(Play player){
 		this.setColor(1, 0, 0, 1);
 		Iterator<Bone> it = player.boneIterator();
 		while(it.hasNext()){
@@ -99,7 +99,7 @@ public abstract class Drawer<R> {
 	 * Draws the boxes of the player.
 	 * @param player the player to draw the boxes from
 	 */
-	public void drawBoxes(Player player){
+	public void drawBoxes(Play player){
 		this.setColor(0f, 1f, 0f, 1f);
 		this.drawBoneBoxes(player);
 		this.drawObjectBoxes(player);
@@ -110,7 +110,7 @@ public abstract class Drawer<R> {
 	 * Draws the boxes of all bones of the given player.
 	 * @param player the player to draw the bone boxes of
 	 */
-	public void drawBoneBoxes(Player player){
+	public void drawBoneBoxes(Play player){
 		drawBoneBoxes(player, player.boneIterator());
 	}
 	
@@ -119,7 +119,7 @@ public abstract class Drawer<R> {
 	 * @param player the player to draw the bone boxes of
 	 * @param it the iterator iterating over the bones to draw
 	 */
-	public void drawBoneBoxes(Player player, Iterator<Bone> it){
+	public void drawBoneBoxes(Play player, Iterator<Bone> it){
 		while(it.hasNext()){
 			Bone bone = it.next();
 			this.drawBox(player.getBox(bone));
@@ -130,7 +130,7 @@ public abstract class Drawer<R> {
 	 * Draws the boxes of the player objects, i.e. sprites and objects.
 	 * @param player the player to draw the object boxes of
 	 */
-	public void drawObjectBoxes(Player player){
+	public void drawObjectBoxes(Play player){
 		drawObjectBoxes(player, player.objectIterator());
 	}
 	
@@ -139,7 +139,7 @@ public abstract class Drawer<R> {
 	 * @param player player the player to draw the object boxes of
 	 * @param it the iterator iterating over the object to draw
 	 */
-	public void drawObjectBoxes(Player player, Iterator<Object> it){
+	public void drawObjectBoxes(Play player, Iterator<Object> it){
 		while(it.hasNext()){
 			Object bone = it.next();
 			this.drawBox(player.getBox(bone));
@@ -150,7 +150,7 @@ public abstract class Drawer<R> {
 	 * Draws all points of the given player.
 	 * @param player the player to draw the points of.
 	 */
-	public void drawPoints(Player player){
+	public void drawPoints(Play player){
 		drawPoints(player, player.objectIterator());
 	}
 	
@@ -159,7 +159,7 @@ public abstract class Drawer<R> {
 	 * @param player player the player to draw the points of
 	 * @param it the iterator iterating over the points to draw
 	 */
-	public void drawPoints(Player player, Iterator<Object> it){
+	public void drawPoints(Play player, Iterator<Object> it){
 		while(it.hasNext()){
 			Object point = it.next();
 			if(player.getObjectInfoFor(point).type == ObjectType.Point){
@@ -175,7 +175,7 @@ public abstract class Drawer<R> {
 	 * Draws the given player with its current character map.
 	 * @param player the player to draw
 	 */
-	public void draw(Player player){
+	public void draw(Play player){
 		this.draw(player, player.characterMaps);
 	}
 	
@@ -184,7 +184,7 @@ public abstract class Drawer<R> {
 	 * @param player the player to draw
 	 * @param map the character map to draw
 	 */
-	public void draw(Player player, CharacterMap[] maps){
+	public void draw(Play player, CharacterMap[] maps){
 		this.draw(player.objectIterator(), maps);
 	}
 	

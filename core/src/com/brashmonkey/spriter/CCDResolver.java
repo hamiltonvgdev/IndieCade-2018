@@ -13,7 +13,7 @@ import com.brashmonkey.spriter.Timeline.Key.Bone;
  */
 public class CCDResolver extends IKResolver {
 	
-	public CCDResolver(Player player) {
+	public CCDResolver(Play player) {
 		super(player);
 	}
 

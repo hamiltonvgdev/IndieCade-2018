@@ -25,12 +25,12 @@ public abstract class IKResolver {
 	
 	protected HashMap<IKObject, BoneRef> ikMap;
 	protected float tolerance;
-	protected Player player;
+	protected Play player;
 
 	/**
 	 * Creates a resolver with a default tolerance of 5f.
 	 */
-	public IKResolver(Player player) {
+	public IKResolver(Play player) {
 		this.tolerance = 5f;
 		this.ikMap = new HashMap<IKObject, BoneRef>();
 		this.setPlayer(player);
@@ -41,7 +41,7 @@ public abstract class IKResolver {
 	 * @param player the player which gets affected.
 	 * @throws SpriterException if player is <code>null</code>
 	 */
-	public void setPlayer(Player player){
+	public void setPlayer(Play player){
 		if(player == null) throw new SpriterException("player cannot be null!");
 		this.player = player;
 	}
@@ -50,7 +50,7 @@ public abstract class IKResolver {
 	 * Returns the current set player.
 	 * @return the current player.
 	 */
-	public Player getPlayer(){
+	public Play getPlayer(){
 		return this.player;
 	}
 	

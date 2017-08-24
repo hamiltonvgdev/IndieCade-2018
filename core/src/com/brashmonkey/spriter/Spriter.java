@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * A utility class for managing multiple {@link Loader} and {@link Player} instances.
+ * A utility class for managing multiple {@link Loader} and {@link Play} instances.
  * @author Trixt0r
  *
  */
@@ -26,7 +26,7 @@ public class Spriter {
 	private static Class<? extends Loader> loaderClass;
 	
 	private static final HashMap<String, Data> loadedData = new HashMap<String, Data>();
-	private static final List<Player> players = new ArrayList<Player>();
+	private static final List<Play> players = new ArrayList<Play>();
 	private static final List<Loader> loaders = new ArrayList<Loader>();
 	private static Drawer<?> drawer;
 	private static final HashMap<Entity, Loader> entityToLoader = new HashMap<Entity, Loader>();
@@ -121,28 +121,28 @@ public class Spriter {
 	}
 	
 	/**
-	 * Creates a new {@link Player} instance based on the given SCML file with the given entity index
+	 * Creates a new {@link Play} instance based on the given SCML file with the given entity index
 	 * @param scmlFile name of the SCML file
 	 * @param entityIndex the index of the entity
-	 * @return a {@link Player} instance managed by this class
+	 * @return a {@link Play} instance managed by this class
 	 * @throws SpriterException if the given SCML file was not loaded yet
 	 */
-	public static Player newPlayer(String scmlFile, int entityIndex){
-		return newPlayer(scmlFile, entityIndex, Player.class);
+	public static Play newPlayer(String scmlFile, int entityIndex){
+		return newPlayer(scmlFile, entityIndex, Play.class);
 	}
 	
 	/**
-	 * Creates a new {@link Player} instance based on the given SCML file with the given entity index and the given class extending a {@link Player}
+	 * Creates a new {@link Play} instance based on the given SCML file with the given entity index and the given class extending a {@link Play}
 	 * @param scmlFile name of the SCML file
 	 * @param entityIndex the index of the entity
-	 * @param playerClass the class extending a {@link Player} class, e.g. {@link PlayerTweener}.
-	 * @return a {@link Player} instance managed by this class
+	 * @param playerClass the class extending a {@link Play} class, e.g. {@link PlayTweener}.
+	 * @return a {@link Play} instance managed by this class
 	 * @throws SpriterException if the given SCML file was not loaded yet
 	 */
-	public static Player newPlayer(String scmlFile, int entityIndex, Class<? extends Player> playerClass){
+	public static Play newPlayer(String scmlFile, int entityIndex, Class<? extends Play> playerClass){
 		if(!loadedData.containsKey(scmlFile)) throw new SpriterException("You have to load \""+scmlFile+"\" before using it!");
 		try {
-			Player player = playerClass.getDeclaredConstructor(Entity.class).newInstance(loadedData.get(scmlFile).getEntity(entityIndex));
+			Play player = playerClass.getDeclaredConstructor(Entity.class).newInstance(loadedData.get(scmlFile).getEntity(entityIndex));
 			players.add(player);
 			return player;
 		} catch (Exception e) {
@@ -152,13 +152,13 @@ public class Spriter {
 	}
 	
 	/**
-	 * Creates a new {@link Player} instance based on the given SCML file with the given entity name
+	 * Creates a new {@link Play} instance based on the given SCML file with the given entity name
 	 * @param scmlFile name of the SCML file
 	 * @param entityName name of the entity
-	 * @return a {@link Player} instance managed by this class
+	 * @return a {@link Play} instance managed by this class
 	 * @throws SpriterException if the given SCML file was not loaded yet
 	 */
-	public static Player newPlayer(String scmlFile, String entityName){
+	public static Play newPlayer(String scmlFile, String entityName){
 		if(!loadedData.containsKey(scmlFile)) throw new SpriterException("You have to load \""+scmlFile+"\" before using it!");
 		return newPlayer(scmlFile, loadedData.get(scmlFile).getEntityIndex(entityName));
 	}

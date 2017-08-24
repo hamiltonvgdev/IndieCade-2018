@@ -25,7 +25,7 @@ public class GameData implements Serializable
 	{
 		name = "";
 		currentWeapon = "";
-		currentMap = "Start";
+		currentMap = "test";
 	}
 	
 	public void write(GameScreen gs)
