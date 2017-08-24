@@ -12,14 +12,14 @@ import com.badlogic.gdx.math.Matrix4;
 import com.blueacorn.spriter.LibGdxDrawer;
 import com.blueacorn.spriter.LibGdxLoader;
 import com.brashmonkey.spriter.Data;
-import com.brashmonkey.spriter.Player;
+import com.brashmonkey.spriter.Play;
 import com.brashmonkey.spriter.SCMLReader;
 
 public class SpriterAnimationEngine 
 {	
 	ShapeRenderer renderer;
 	
-	HashMap<String, Player> Players;
+	HashMap<String, Play> Players;
 	HashMap<String, LibGdxDrawer> Drawers;
 	
 	SpriteBatch batch;
@@ -30,7 +30,7 @@ public class SpriterAnimationEngine
 		batch.setProjectionMatrix(proj);
 		renderer = new ShapeRenderer();
 		
-		Players = new HashMap<String, Player>();
+		Players = new HashMap<String, Play>();
 		Drawers = new HashMap<String, LibGdxDrawer>();
 	}
 	
@@ -42,7 +42,7 @@ public class SpriterAnimationEngine
 		LibGdxLoader loader = new LibGdxLoader(data);
 		loader.load(handle.file());
 		
-		Player player = new Player(data.getEntity(0));
+		Play player = new Play(data.getEntity(0));
 		player.scale(1.0F / Config.PPM);
 		
 		LibGdxDrawer drawer = new LibGdxDrawer(loader, batch, renderer);
@@ -51,7 +51,7 @@ public class SpriterAnimationEngine
 		Drawers.put(name, drawer);
 	}
 	
-	public Player getPlayer(String name, String ref)
+	public Play getPlayer(String name, String ref)
 	{
 		if(Players.containsKey(name))
 		{

@@ -28,9 +28,11 @@ public class Mob extends Thing
 		
 		shape.setAsBox(
 				play.getBoundingRectangle(play.
-						getBone("TileHitbox")).size.width * 0.75F / Config.PPM * play.getScale(), 
+						getBone("Hitbox")).size.width * 0.4F / 
+						Config.PPM * play.getScale(), 
 				play.getBoundingRectangle(play.
-						getBone("TileHitbox")).size.height * 0.75F / Config.PPM * play.getScale());
+						getBone("Hitbox")).size.height * 0.4F / 
+						Config.PPM * play.getScale());
 		
 		
 		fdef = new FixtureDef();

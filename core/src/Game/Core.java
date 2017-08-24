@@ -20,7 +20,7 @@ public class Core extends Game
 
 	
 	@Override
-	public void create () 
+	public void create() 
 	{	
 		batch = new SpriteBatch();
 //		setScreen(new SplashScreen(this, "Logo Animation", 

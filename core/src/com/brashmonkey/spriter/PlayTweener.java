@@ -1,18 +1,18 @@
 package com.brashmonkey.spriter;
 
 /**
- * A player tweener is responsible for tweening to {@link Player} instances.
+ * A player tweener is responsible for tweening to {@link Play} instances.
  * Such a 
  * @author Trixt0r
  *
  */
-public class PlayerTweener extends Player{
+public class PlayTweener extends Play{
 	
 	private TweenedAnimation anim;
-	private Player player1, player2;
+	private Play player1, player2;
 	/**
-	 * Indicates whether to update the {@link Player} instances this instance is holding.
-	 * If this variable is set to <code>false</code>, you will have to call {@link Player#update()} on your own.
+	 * Indicates whether to update the {@link Play} instances this instance is holding.
+	 * If this variable is set to <code>false</code>, you will have to call {@link Play#update()} on your own.
 	 */
 	public boolean updatePlayers = true;
 	
@@ -27,7 +27,7 @@ public class PlayerTweener extends Player{
 	 * @param player1 the first player
 	 * @param player2 the second player
 	 */
-	public PlayerTweener(Player player1, Player player2){
+	public PlayTweener(Play player1, Play player2){
 		super(player1.getEntity());
 		this.setPlayers(player1, player2);
 	}
@@ -37,8 +37,8 @@ public class PlayerTweener extends Player{
 	 * The players to tween will be created by this instance.
 	 * @param entity the entity the players will animate
 	 */
-	public PlayerTweener(Entity entity){
-		this(new Player(entity), new Player(entity));
+	public PlayTweener(Entity entity){
+		this(new Play(entity), new Play(entity));
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public class PlayerTweener extends Player{
 	 * @param player1 the first player
 	 * @param player2 the second player
 	 */
-	public void setPlayers(Player player1, Player player2){
+	public void setPlayers(Play player1, Play player2){
 		if(player1.entity != player2.entity)
 			throw new SpriterException("player1 and player2 have to hold the same entity!");
 		this.player1 = player1;
@@ -84,7 +84,7 @@ public class PlayerTweener extends Player{
 	 * Returns the first set player.
 	 * @return the first player
 	 */
-	public Player getFirstPlayer(){
+	public Play getFirstPlayer(){
 		return this.player1;
 	}
 	
@@ -92,7 +92,7 @@ public class PlayerTweener extends Player{
 	 * Returns the second set player.
 	 * @return the second player
 	 */
-	public Player getSecondPlayer(){
+	public Play getSecondPlayer(){
 		return this.player2;
 	}
 	

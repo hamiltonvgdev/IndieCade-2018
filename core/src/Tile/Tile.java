@@ -36,6 +36,7 @@ public class Tile extends Thing
 		
 		fdef = new FixtureDef();
 		fdef.shape = shape;
+		fdef.filter.categoryBits = Config.BIT_TILE;
 	}
 	
 	@Override
@@ -51,10 +52,10 @@ public class Tile extends Thing
 	@Override
 	public void collideWith(Thing thing)
 	{
-		if(Integer.parseInt(thing.getID().split("-")[0]) == Config.ENTITY_Z)
+		if(thing.getID().split("-")[0].equals(Config.ENTITY_Z))
 		{
 			collideWithEnt((Mob) thing);
-		}else if(Integer.parseInt(thing.getID().split("-")[0]) == Config.PLAYER_Z)
+		}else if(thing.getID().split("-")[0].equals(Config.PLAYER_Z))
 		{
 			collideWithPlayer((Player) thing);
 		}

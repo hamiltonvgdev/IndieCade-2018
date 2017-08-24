@@ -22,22 +22,22 @@ public class PlayerInput
 	{
 		if(!Ddis && Gdx.input.isKeyPressed(Input.Keys.D))
 		{
-			player.hitbox.torso.applyForceToCenter(new Vector2(1, 0),  true); 
+			player.getBody().applyForceToCenter(new Vector2(1, 0),  true); 
 		}
 		
 		if(!Adis && Gdx.input.isKeyPressed(Input.Keys.A))
 		{
-			player.hitbox.torso.applyForceToCenter(new Vector2(-1, 0),  true); 
+			player.getBody().applyForceToCenter(new Vector2(-1, 0),  true); 
 		}
 		
 		if(Gdx.input.isKeyPressed(Input.Keys.W))
 		{
-			player.hitbox.torso.applyForceToCenter(new Vector2(0, 1),  true); 
+			player.getBody().applyForceToCenter(new Vector2(0, 1),  true); 
 		}
 		
 		if(Gdx.input.isKeyPressed(Input.Keys.S))
 		{
-			player.hitbox.torso.applyForceToCenter(new Vector2(0, -1),  true); 
+			player.getBody().applyForceToCenter(new Vector2(0, -1),  true); 
 		}
 	}
 }

@@ -8,11 +8,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.blueacorn.spriter.LibGdxDrawer;
-import com.brashmonkey.spriter.Player;
+import com.brashmonkey.spriter.Play;
 
 public class SplashScreen extends ModScreen
 {
-	Player play;
+	Play play;
 	LibGdxDrawer draw;
 	SpriterAnimationEngine renderer;
 	OrthographicCamera camera;
