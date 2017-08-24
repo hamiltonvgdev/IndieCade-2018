@@ -62,12 +62,12 @@ public class Level
 		
 		
 		//Loads New Maps
-//		map = tmx.load("Maps/" + id + ".tmx");
-//		tmr = new OrthogonalTiledMapRenderer(map);
-//		tmr.setView(gs.getCamera());
-//		
+		map = tmx.load("Maps/" + id + ".tmx");
+		tmr = new OrthogonalTiledMapRenderer(map);
+		tmr.setView(gs.getCamera());
+		
 		//Creates Tile Body
-//		createTiles((TiledMapTileLayer)(map.getLayers().get("Normal")), "Normal");
+		createTiles((TiledMapTileLayer)(map.getLayers().get("Normal")), "Normal");
 		
 		
 		//Assign IDs to all Entities
@@ -119,8 +119,8 @@ public class Level
 	
 	public void render(SpriteBatch batch)
 	{
-//		tmr.setView(gs.getCamera());
-//		tmr.render();
+		tmr.setView(gs.getCamera());
+		tmr.render();
 		
 		for(Thing t: toShow)
 		{
