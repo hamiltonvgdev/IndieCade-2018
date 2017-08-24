@@ -1,14 +1,13 @@
 package Player;
 
+import Environment.Thing;
+import Screen.GameScreen;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.brashmonkey.spriter.Drawer;
-
-import Environment.Thing;
-import Screen.GameScreen;
 
 public class Health extends Thing{
 	protected int Healthnumber;
@@ -16,7 +15,7 @@ public class Health extends Thing{
 	private Sprite healthSprite;
 	protected Drawer draw;
 	private int scale = 100;
-	protected com.brashmonkey.spriter.Player play;
+	protected com.brashmonkey.spriter.Play play;
 	public Health(GameScreen gs) {
 		super(gs);
 		Healthnumber = 6;
