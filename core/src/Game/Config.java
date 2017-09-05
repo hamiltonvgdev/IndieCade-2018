@@ -21,6 +21,7 @@ public class Config
 	public static final short BIT_PLAYER = 4;
 	public static final short BIT_ENEMY = 6;
 	public static final short BIT_PROJ = 8;
+	public static final short BIT_DEAD = 10;
 	
 	//Player Dimensions
 	public static final float HEAD_WIDTH = 1 * FOOT_2_METER;

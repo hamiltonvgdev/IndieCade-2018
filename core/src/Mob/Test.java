@@ -45,7 +45,6 @@ public class Test extends Mob
 		{
 			body.applyForceToCenter(-1, 0, true);
 		}
-		
 	}
 	
 	@Override

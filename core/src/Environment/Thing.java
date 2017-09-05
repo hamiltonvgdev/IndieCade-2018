@@ -1,12 +1,14 @@
 package Environment;
 
 import Entities.AI;
+import Game.Config;
 import Screen.GameScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.brashmonkey.spriter.Drawer;
@@ -22,7 +24,7 @@ public class Thing implements Comparable<Thing>
 	protected String id;
 	
 	//Combat
-	float health, maxHealth;
+	protected float health, maxHealth;
 	
 	//Position
 	protected float x, y;
@@ -40,7 +42,7 @@ public class Thing implements Comparable<Thing>
 	public Thing(GameScreen gs)
 	{
 		this.gs = gs;
-		health = 0;
+		health = 1;
 	}
 	
 	public Thing setAI(AI ai)
@@ -78,7 +80,16 @@ public class Thing implements Comparable<Thing>
 	
 	public void die()
 	{
+		Filter f = new Filter();
+	    f.categoryBits = 1;
+	    f.groupIndex = 2;
+	    f.maskBits = (short)0;
+		
 		gs.getLevel().toDie.add(this);
+		body.setLinearVelocity(0, 0);
+		body.setAwake(false);
+		body.getFixtureList().get(0).setFilterData(f);
+		
 	}
 	
 	public void collideWith(Thing thing)
@@ -99,8 +110,6 @@ public class Thing implements Comparable<Thing>
 	public void setPosition(float x, float y)
 	{
 		body.getPosition().set(x, y);
-//		this.x = x;
-//		this.y = y;
 	}
 
 	@Override

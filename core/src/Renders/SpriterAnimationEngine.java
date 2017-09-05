@@ -13,6 +13,7 @@ import com.blueacorn.spriter.LibGdxDrawer;
 import com.blueacorn.spriter.LibGdxLoader;
 import com.brashmonkey.spriter.Data;
 import com.brashmonkey.spriter.Play;
+import com.brashmonkey.spriter.PlayTweener;
 import com.brashmonkey.spriter.SCMLReader;
 
 public class SpriterAnimationEngine 
@@ -21,6 +22,7 @@ public class SpriterAnimationEngine
 	
 	HashMap<String, Play> Players;
 	HashMap<String, LibGdxDrawer> Drawers;
+	HashMap<String, PlayTweener> Tweeners;
 	
 	SpriteBatch batch;
 	
@@ -32,6 +34,7 @@ public class SpriterAnimationEngine
 		
 		Players = new HashMap<String, Play>();
 		Drawers = new HashMap<String, LibGdxDrawer>();
+		Tweeners = new HashMap<String, PlayTweener>();
 	}
 	
 	public void load(String name, String ref)
@@ -45,10 +48,13 @@ public class SpriterAnimationEngine
 		Play player = new Play(data.getEntity(0));
 		player.scale(1.0F / Config.PPM);
 		
+		PlayTweener tweener = new PlayTweener(data.getEntity(0));
+		
 		LibGdxDrawer drawer = new LibGdxDrawer(loader, batch, renderer);
 		
 		Players.put(name, player);
 		Drawers.put(name, drawer);
+		Tweeners.put(name, tweener);
 	}
 	
 	public Play getPlayer(String name, String ref)
@@ -72,6 +78,18 @@ public class SpriterAnimationEngine
 		{
 			load(name, ref);
 			return getDrawer(name, ref);
+		}
+	}
+	
+	public PlayTweener getTweener(String name, String ref)
+	{
+		if(Drawers.containsKey(name))
+		{
+			return Tweeners.get(name);
+		}else
+		{
+			load(name, ref);
+			return getTweener(name, ref);
 		}
 	}
 

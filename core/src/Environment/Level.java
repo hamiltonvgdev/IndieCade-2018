@@ -2,13 +2,14 @@ package Environment;
 
 import java.util.ArrayList;
 
-import Mob.Test;
 import Game.Config;
+import Mob.Test;
 import Player.Health;
 import Screen.GameScreen;
-import Tile.Tile;
+import Tile.*;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -28,8 +29,12 @@ public class Level
 	TiledMap map;
 	TmxMapLoader tmx;
 	TiledMapRenderer tmr;
+	String id;
 	
 	Health health;
+	
+	//Testing
+	Test test;
 	
 	public Level(GameScreen gs)
 	{
@@ -47,10 +52,14 @@ public class Level
 			Things.get(i).setID(i);
 			toShow.add(Things.get(i));
 		}
+		
+		test = new Test(gs);
 	}
 	
 	public void loadMap(String id)
 	{
+		this.id = id;
+		
 		//Clears Previous Map
 		Things.clear();
 		toShow.clear();
@@ -67,8 +76,12 @@ public class Level
 		tmr.setView(gs.getCamera());
 		
 		//Creates Tile Body
-		createTiles((TiledMapTileLayer)(map.getLayers().get("Normal")), "Normal");
+		for(MapLayer layer: map.getLayers())
+		{
+			createTiles((TiledMapTileLayer) layer);
+		}
 		
+		addThing(test);
 		
 		//Assign IDs to all Entities
 		for(int i = 0; i < Things.size(); i ++)
@@ -81,10 +94,10 @@ public class Level
 	public void addThing(Thing thing)
 	{
 		Things.add(thing);
-		toShow.add(thing);
+//		toShow.add(thing);
 	}
 	
-	public void createTiles(TiledMapTileLayer layer, String name)
+	public void createTiles(TiledMapTileLayer layer)
 	{
 		Cell cell;
 		float size = layer.getTileWidth();
@@ -94,27 +107,27 @@ public class Level
 			for(int y = 0; y < layer.getHeight(); y ++)
 			{
 				cell = layer.getCell(x, y);
-				if(cell == null || cell.getTile() == null)
+				if(cell == null || cell.getTile() == null || decodeTile(layer, x, y) == null)
 				{
 					continue;
 				}
-				addThing(new Tile(gs,
-						(x + 0.5f) * size / 32, 
-						(y + 0.5f) * size / 32));
+				addThing(decodeTile(layer, 
+						(x + 0.5F) * size / Config.PPM, 
+						(y + 0.5F) * size / Config.PPM));
 			}
 		}
 	}
 	
 	public void update(float delta)
 	{
-		toDie.clear();
 		
 		for(Thing t: toShow)
 		{
 			t.update(delta);
 		}
 		
-		toShow.remove(toDie);
+		toShow.removeAll(toDie);
+		toDie.clear();
 	}
 	
 	public void render(SpriteBatch batch)
@@ -140,4 +153,36 @@ public class Level
 	public ArrayList<Thing> getAlive() {return toShow;}
 	public ArrayList<Thing> getThings() {return Things;}
 	public ArrayList<Thing> getDieing() {return toDie;}
+	public String getId() {return id;}
+	public TiledMap getMap() {return map;}
+	public TmxMapLoader getMapLoader() {return tmx;}
+	public TiledMapRenderer getMapRenderer() {return tmr;}
+	
+	
+	
+	public Tile decodeTile(TiledMapTileLayer layer, float x, float y)
+	{	
+		if(layer.getName().contains("Normal"))
+		{
+			return new Tile(gs, x, y);
+		}else if(layer.getName().contains("Hurt"))
+		{
+			return new HurtTile(gs, x, y).setDamage(
+					layer.getProperties().get("Destination").toString());
+		}else if(layer.getName().contains("Death"))
+		{
+			return new HurtTile(gs, x, y).setDamage("10000000000");
+		}else if(layer.getName().contains("Portal"))
+		{
+			return new PortalTile(gs, x, y).
+					setDestination(layer.getName(), 
+							layer.getProperties().get("Cost").toString());
+		}
+		
+		
+		else
+		{
+			return null;
+		}
+	}
 }
