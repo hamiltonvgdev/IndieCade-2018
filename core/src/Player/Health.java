@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.brashmonkey.spriter.Drawer;
 
 public class Health extends Thing{
-	protected int Healthnumber;
+	private int Healthnumber;
 	private Texture texture;
 	private Sprite healthSprite;
 	protected Drawer draw;
@@ -42,9 +42,12 @@ public class Health extends Thing{
 	public void plusHealth(){
 		Healthnumber++;
 	}
+	public int healthnumber(){
+		return Healthnumber;
+	}
 	public void checkHealth(){
-		if (Healthnumber == 0){
-			System.out.print("You suck");
+		if(Healthnumber == 0){
+			Healthnumber = 6;
 		}
 	}
 
