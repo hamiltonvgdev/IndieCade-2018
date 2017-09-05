@@ -134,5 +134,5 @@ public class Thing implements Comparable<Thing>
 	public float getHealth() {return health;}
 	public Play getPlay() {return play;}
 	public Drawer getDraw() {return draw;}
-
+	
 }

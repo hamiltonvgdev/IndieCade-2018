@@ -70,6 +70,10 @@ public class GameScreen extends ModScreen
 		Camera.update();
 		B2Dcam.update();
 		hud.update();
+		System.out.println(hud.healthnumber());
+		if(hud.healthnumber() == 0){
+			player.reset();
+		}
 	}
 
 	@Override
