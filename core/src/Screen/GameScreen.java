@@ -41,32 +41,25 @@ public class GameScreen extends ModScreen
 		world = new World(new Vector2(0, 0), true);
 		b2dr = new Box2DDebugRenderer();
 
-		
 		level = new Level(this);
 		//level.loadMap(id);
-		player =  new Player(this).setID(0);
-		
-		level.loadMap(id);
+		player = new Player(this);
+
+		level.loadMap(id, this.player);
 		
 		world.setContactListener(new CollisionHandler(level));
 		
 		hud = new HUD(this);
 	}
 	
-	public void setPlayer(Player player)
-	{
-		this.player = player;
-	}
-	
 	@Override
 	public void update(float delta) 
 	{
-		player.update(delta);
+		level.update(delta);
 		world.step(delta, 1, 1);
 		
 		renderer.update(Camera.combined);
 		
-		level.update(delta);
 		Camera.update();
 		B2Dcam.update();
 		hud.update();
@@ -79,7 +72,6 @@ public class GameScreen extends ModScreen
 		//core.batch.setProjectionMatrix(Camera.combined);
 		level.render(core.batch);
 		b2dr.render(world, B2Dcam.combined);
-		player.render(core.batch);
 		hud.render();
 	}
 	

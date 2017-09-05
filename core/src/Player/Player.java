@@ -72,13 +72,16 @@ public class Player extends Mob
 	public Player setID(int id)
 	{
 		this.id = Config.PLAYER_Z + "-" + id;
-		body.createFixture(fdef).setUserData(this.id);
-		shape.dispose();
 		return this;
 	}
 	
 	public void update(float delta)
 	{	
+		if(body.getFixtureList().size == 0)
+		{
+			body.createFixture(fdef).setUserData(this.id);
+		}
+		
 		super.update(delta);
 		
 		getGS().getCamera().position.set(x, y , 0);
@@ -88,7 +91,7 @@ public class Player extends Mob
 		
 		input.update();
 		
-		play.setPosition(x, y );
+		play.setPosition(x, y);
 		
 		weapon.update(delta);
 	}
@@ -113,5 +116,4 @@ public class Player extends Mob
 	//Return Statements
 	public PlayerInput getInput() {return input;}
 	public Weapon getWeapon() {return weapon;}
-	
 }
