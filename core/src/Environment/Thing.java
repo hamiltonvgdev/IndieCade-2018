@@ -109,7 +109,11 @@ public class Thing implements Comparable<Thing>
 	
 	public void setPosition(float x, float y)
 	{
-		body.getPosition().set(x, y);
+		body.setTransform(x - body.getPosition().x, y - body.getPosition().y, 0);
+		this.x = x;
+		this.y = y;
+		play.setPosition(x, y);
+		
 	}
 
 	@Override
