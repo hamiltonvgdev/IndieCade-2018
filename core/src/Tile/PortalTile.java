@@ -21,9 +21,9 @@ public class PortalTile extends Tile
 		super(gs, x, y);
 	}
 
-	public PortalTile setDestination(String DestDirect, String cost)
+	public PortalTile setDestination(String name, String cost)
 	{
-		Destination = DestDirect.split("-")[1];
+		Destination = name.split("-")[1];
 		this.cost = Integer.parseInt(cost);
 		return this;
 	}
