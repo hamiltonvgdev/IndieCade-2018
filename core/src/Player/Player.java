@@ -23,6 +23,7 @@ public class Player extends Mob
 	//Testing
 	Weapon weapon;
 	
+	
 	public Player(GameScreen gs)
 	{
 		super(gs);
@@ -116,4 +117,8 @@ public class Player extends Mob
 	//Return Statements
 	public PlayerInput getInput() {return input;}
 	public Weapon getWeapon() {return weapon;}
+	public void reset(){
+		x = 0;
+		y = 0;
+	}
 }

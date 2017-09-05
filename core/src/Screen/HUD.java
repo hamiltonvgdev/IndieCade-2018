@@ -20,13 +20,17 @@ public class HUD{
 	public void update(){
 		if(Gdx.input.isKeyJustPressed(Keys.B)){
 			health.minusHealth();
-			System.out.println("k");
 		}
+		health.checkHealth();
+		health.healthnumber();
 	}
 	public void render()
 	{
 		batch.begin();
 		health.render(batch);
 		batch.end();
+	}
+	public int healthnumber(){
+		return health.healthnumber();
 	}
 }
