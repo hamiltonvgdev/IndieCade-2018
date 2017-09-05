@@ -14,7 +14,7 @@ public class Health extends Thing{
 	private Texture texture;
 	private Sprite healthSprite;
 	protected Drawer draw;
-	private int scale = 100;
+	private int scale = 50;
 	protected com.brashmonkey.spriter.Play play;
 	public Health(GameScreen gs) {
 		super(gs);

@@ -54,10 +54,10 @@ public class Player extends Mob
 		
 		shape.setAsBox(
 				play.getBoundingRectangle(play.
-						getBone("Hitbox")).size.width * 0.4F /
+						getBone("Hitbox")).size.width * 0.1F /
 						Config.PPM * play.getScale(), 
 				play.getBoundingRectangle(play.
-						getBone("Hitbox")).size.height * 0.4F / 
+						getBone("Hitbox")).size.height * 0.1F / 
 						Config.PPM * play.getScale());
 		
 		
@@ -107,8 +107,8 @@ public class Player extends Mob
 	
 	@Override
 	public void move(Vector2 movveVec){}
-	@Override 
-	public void setPosition(float x, float y){}
+//	@Override 
+//	public void setPosition(float x, float y){}
 	
 	//Return Statements
 	public PlayerInput getInput() {return input;}

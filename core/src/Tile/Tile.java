@@ -45,7 +45,6 @@ public class Tile extends Thing
 		this.id = Config.TILE_Z + "-" + id;
 		body.createFixture(fdef).setUserData(Config.TILE_Z + "-" + id);
 		shape.dispose();
-		
 		return this;
 	}
 	

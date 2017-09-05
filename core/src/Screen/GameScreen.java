@@ -36,21 +36,26 @@ public class GameScreen extends ModScreen
 		Camera = new OrthographicCamera(Config.GAME_WIDTH , Config.GAME_HEIGHT);
 		B2Dcam = new OrthographicCamera(Config.GAME_WIDTH / Config.PPM, 
 				Config.GAME_HEIGHT / Config.PPM);
+		renderer = new SpriterAnimationEngine(Camera.combined);
 		
 		world = new World(new Vector2(0, 0), true);
 		b2dr = new Box2DDebugRenderer();
 
+		
 		level = new Level(this);
 		//level.loadMap(id);
-		renderer = new SpriterAnimationEngine(Camera.combined);
 		player =  new Player(this).setID(0);
-		level.addThing(player);
 		
 		level.loadMap(id);
 		
 		world.setContactListener(new CollisionHandler(level));
 		
 		hud = new HUD(this);
+	}
+	
+	public void setPlayer(Player player)
+	{
+		this.player = player;
 	}
 	
 	@Override

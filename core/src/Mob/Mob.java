@@ -41,6 +41,11 @@ public class Mob extends Thing
 		fdef.filter.maskBits = Config.BIT_TILE;
 	}
 	
+	public void health(float health)
+	{
+		this.health += health;
+	}
+	
 	@Override
 	public Thing setID(int id)
 	{
