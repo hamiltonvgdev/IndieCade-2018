@@ -26,14 +26,6 @@ public class HUD{
 		if(Gdx.input.isKeyJustPressed(Keys.B)){
 			gs.getPlayer().health(-1);;
 		}
-<<<<<<< HEAD
-		health.checkHealth();
-		health.healthnumber();
-		if(Gdx.input.isKeyJustPressed(Keys.P)){
-			pause = true;
-		}
-=======
->>>>>>> fac323bcfd86e88e157412d98264316a171274ee
 	}
 	public void render()
 	{
@@ -42,13 +34,4 @@ public class HUD{
 		pausebutton.render(batch);
 		batch.end();
 	}
-<<<<<<< HEAD
-	public int healthnumber(){
-		return health.healthnumber();
-	}
-	public boolean pause(){
-		return pause();
-	}
-=======
->>>>>>> fac323bcfd86e88e157412d98264316a171274ee
 }
