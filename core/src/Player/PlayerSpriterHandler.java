@@ -28,15 +28,19 @@ public class PlayerSpriterHandler implements PlayerListener
 		if(Gdx.input.isKeyPressed(Input.Keys.P))
 		{
 			player.getPlay().setAnimation(player.getWeapon().getPAnimation());
+			player.getWeapon().pMove();
 		}else if(Gdx.input.isKeyPressed(Input.Keys.O))
 		{
 			player.getPlay().setAnimation(player.getWeapon().getOAnimation());
+			player.getWeapon().oMove();
 		}else if(Gdx.input.isKeyPressed(Input.Keys.L))
 		{
 			player.getPlay().setAnimation(player.getWeapon().getLAnimation());
+			player.getWeapon().lMove();
 		}else if(Gdx.input.isKeyPressed(Input.Keys.K))
 		{
 			player.getPlay().setAnimation(player.getWeapon().getKAnimation());
+			player.getWeapon().kMove();
 		}else
 		{
 			player.getPlay().setAnimation(player.getWeapon().getIdleAnimation());
@@ -62,15 +66,19 @@ public class PlayerSpriterHandler implements PlayerListener
 				if(Gdx.input.isKeyPressed(Input.Keys.P))
 				{
 					player.getPlay().setAnimation(player.getWeapon().getPAnimation());
+					player.getWeapon().pMove();
 				}else if(Gdx.input.isKeyPressed(Input.Keys.O))
 				{
 					player.getPlay().setAnimation(player.getWeapon().getOAnimation());
+					player.getWeapon().oMove();
 				}else if(Gdx.input.isKeyPressed(Input.Keys.L))
 				{
 					player.getPlay().setAnimation(player.getWeapon().getLAnimation());
+					player.getWeapon().lMove();
 				}else if(Gdx.input.isKeyPressed(Input.Keys.K))
 				{
 					player.getPlay().setAnimation(player.getWeapon().getKAnimation());
+					player.getWeapon().kMove();
 				}
 			}
 		}else if(!player.getPlay().getAnimation().name.equals("Death"))
@@ -88,7 +96,8 @@ public class PlayerSpriterHandler implements PlayerListener
 			play.flipX();
 		}
 		
-		if(play.getAnimation().name.contains("Idle"))
+		if(play.getAnimation().name.contains("Idle") || 
+				play.getAnimation().name.contains("Jump"))
 		{
 			if(player.getBody().getLinearVelocity().y != 0)
 			{
@@ -99,6 +108,9 @@ public class PlayerSpriterHandler implements PlayerListener
 				{
 					play.setAnimation("Fall Jump");
 				}
+			}else
+			{
+				player.getPlay().setAnimation(player.getWeapon().getIdleAnimation());
 			}
 		}
 	}
