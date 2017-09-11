@@ -136,4 +136,15 @@ public class Player extends Mob
 	//Return Statements
 	public PlayerInput getInput() {return input;}
 	public Weapon getWeapon() {return weapon;}
+<<<<<<< HEAD
+	public void reset(){
+		x = 0;
+		y = 0;
+	}
+
+	public void pause() {
+		
+	}
+=======
+>>>>>>> fac323bcfd86e88e157412d98264316a171274ee
 }
