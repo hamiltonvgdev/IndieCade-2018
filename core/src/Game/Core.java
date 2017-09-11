@@ -25,7 +25,7 @@ public class Core extends Game
 //		setScreen(new SplashScreen(this, "Logo Animation", 
 //				"Logo SplashScreen/Parts/Logo Animation.scml").scale(0.3F).
 //				setMusic("Audio/title_theme.wav"));
-		setScreen(new GameScreen(this, new GameData(), "test2"));
+		setScreen(new GameScreen(this, new GameData(), "test"));
 		
 		Loadevas.init();
 	}

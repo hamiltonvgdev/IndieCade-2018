@@ -38,7 +38,7 @@ public class Tile extends Thing
 		
 		fdef = new FixtureDef();
 		fdef.shape = shape;
-		fdef.friction = 0.35F;
+		fdef.friction = 0.4F;
 		fdef.filter.categoryBits = Config.BIT_TILE;
 		
 		inContactIndex = -1;

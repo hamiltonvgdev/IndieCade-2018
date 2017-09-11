@@ -94,27 +94,26 @@ public class Weapon
 	public void attack(Thing thing)
 	{
 		Hitted.add(thing);
-		System.out.println("Derp");
 	}
 	
 	public void pMove()
 	{
-		player.getPlay().setAnimation(p);
+		System.out.println("p");
 	}
 	
 	public void oMove()
 	{
-		player.getPlay().setAnimation(o);
+		System.out.println("o");
 	}
 	
 	public void lMove()
 	{
-		player.getPlay().setAnimation(l);
+		System.out.println("l");
 	}
 	
 	public void kMove()
 	{
-		player.getPlay().setAnimation(k);
+		System.out.println("k");
 	}
 	
 	//Return Statements
