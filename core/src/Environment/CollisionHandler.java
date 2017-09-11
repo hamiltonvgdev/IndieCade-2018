@@ -38,7 +38,6 @@ public class CollisionHandler implements ContactListener
 		Collections.sort(things);
 		
 		things.get(0).collideWith(things.get(1));
-		System.out.println(things.get(0));
 	}
 
 	@Override

@@ -64,19 +64,9 @@ public class GameScreen extends ModScreen
 		
 		Camera.update();
 		B2Dcam.update();
-<<<<<<< HEAD
-		hud.update();
-		if(hud.healthnumber() == 0){
-			player.reset();
-		}
-		if(hud.pause()== true){
-			player.pause();
-		}
-=======
 		hud.update(delta);
->>>>>>> fac323bcfd86e88e157412d98264316a171274ee
 	}
-
+	
 	@Override
 	public void render(float delta) 
 	{
