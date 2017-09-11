@@ -18,7 +18,7 @@ public class GameData implements Serializable
 	
 	public GameData()
 	{
-		
+		playerHealth = 10;
 	}
 	
 	public void init()

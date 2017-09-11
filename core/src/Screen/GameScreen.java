@@ -40,37 +40,31 @@ public class GameScreen extends ModScreen
 				Config.GAME_HEIGHT / Config.PPM);
 		renderer = new SpriterAnimationEngine(Camera.combined);
 		
-		world = new World(new Vector2(0, 0), true);
+		world = new World(new Vector2(0, -9.81F), true);
 		b2dr = new Box2DDebugRenderer();
 
-		
 		level = new Level(this);
 		//level.loadMap(id);
-		player =  new Player(this).setID(0);
-		
-		level.loadMap(id);
+		player = new Player(this);
+
+		level.loadMap(id, this.player);
 		
 		world.setContactListener(new CollisionHandler(level));
 		
 		hud = new HUD(this);
 	}
 	
-	public void setPlayer(Player player)
-	{
-		this.player = player;
-	}
-	
 	@Override
 	public void update(float delta) 
 	{
-		player.update(delta);
+		level.update(delta);
 		world.step(delta, 1, 1);
 		
 		renderer.update(Camera.combined);
 		
-		level.update(delta);
 		Camera.update();
 		B2Dcam.update();
+<<<<<<< HEAD
 		hud.update();
 		if(hud.healthnumber() == 0){
 			player.reset();
@@ -78,6 +72,9 @@ public class GameScreen extends ModScreen
 		if(hud.pause()== true){
 			player.pause();
 		}
+=======
+		hud.update(delta);
+>>>>>>> fac323bcfd86e88e157412d98264316a171274ee
 	}
 
 	@Override
@@ -87,7 +84,6 @@ public class GameScreen extends ModScreen
 		//core.batch.setProjectionMatrix(Camera.combined);
 		level.render(core.batch);
 		b2dr.render(world, B2Dcam.combined);
-		player.render(core.batch);
 		hud.render();
 	}
 	
@@ -98,5 +94,6 @@ public class GameScreen extends ModScreen
 	public OrthographicCamera getB2Dcam() {return B2Dcam;}
 	public OrthographicCamera getCamera() {return Camera;}
 	public SpriterAnimationEngine getRenderer() {return renderer;}
+	public HUD getHud() {return hud;}
 	
 }

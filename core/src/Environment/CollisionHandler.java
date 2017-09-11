@@ -38,6 +38,7 @@ public class CollisionHandler implements ContactListener
 		Collections.sort(things);
 		
 		things.get(0).collideWith(things.get(1));
+		System.out.println(things.get(0));
 	}
 
 	@Override
@@ -49,6 +50,16 @@ public class CollisionHandler implements ContactListener
 	@Override
 	public void endContact(Contact c)
 	{
+		t1 = level.getThings().get(Integer.parseInt(
+				c.getFixtureA().getUserData().toString().split("-")[1]));
+		t2 = level.getThings().get(Integer.parseInt(
+				c.getFixtureB().getUserData().toString().split("-")[1]));
+		
+		things = new ArrayList<Thing>();
+		things.add(t1);
+		things.add(t2);
+		Collections.sort(things);
+		
 		things.get(0).unCollideWith(things.get(1));
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Game.Config;
 import Mob.Test;
 import Player.Health;
+import Player.Player;
 import Screen.GameScreen;
 import Tile.*;
 
@@ -21,6 +22,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Level 
 {
 	GameScreen gs;
+	public boolean reset;
 	
 	ArrayList<Thing> Things;
 	ArrayList<Thing> toShow;
@@ -34,7 +36,7 @@ public class Level
 	Health health;
 	
 	//Testing
-	Test test;
+//	Test test;
 	
 	public Level(GameScreen gs)
 	{
@@ -45,7 +47,7 @@ public class Level
 		toDie = new ArrayList<Thing>();
 		tmx = new TmxMapLoader();
 		
-		
+		reset = false;
 		
 		for(int i = 0; i < Things.size(); i ++)
 		{
@@ -53,10 +55,10 @@ public class Level
 			toShow.add(Things.get(i));
 		}
 		
-		test = new Test(gs);
+//		test = new Test(gs);
 	}
 	
-	public void loadMap(String id)
+	public void loadMap(String id, Player player)
 	{
 		this.id = id;
 		
@@ -69,7 +71,8 @@ public class Level
 			map.dispose();
 		}
 		
-		
+		Things.add(player);
+
 		//Loads New Maps
 		map = tmx.load("Maps/" + id + ".tmx");
 		tmr = new OrthogonalTiledMapRenderer(map);
@@ -80,9 +83,8 @@ public class Level
 		{
 			createTiles((TiledMapTileLayer) layer);
 		}
-		
-		addThing(test);
-		
+
+//		addThing(test);
 		//Assign IDs to all Entities
 		for(int i = 0; i < Things.size(); i ++)
 		{
@@ -120,14 +122,18 @@ public class Level
 	
 	public void update(float delta)
 	{
-		
 		for(Thing t: toShow)
 		{
 			t.update(delta);
 		}
-		
 		toShow.removeAll(toDie);
+		
 		toDie.clear();
+		
+		if(reset)
+		{
+			reset();
+		}
 	}
 	
 	public void render(SpriteBatch batch)
@@ -139,6 +145,7 @@ public class Level
 		{
 			t.render(batch);
 		}
+		
 	}
 	
 	public void move(Vector2 moveVec)
@@ -148,6 +155,13 @@ public class Level
 			t.move(moveVec);
 		}
 		gs.getCamera().translate(moveVec);
+	}
+	
+	public void reset()
+	{
+		toShow.clear();
+		toShow.addAll(Things);
+		reset = false;
 	}
 	
 	public ArrayList<Thing> getAlive() {return toShow;}
