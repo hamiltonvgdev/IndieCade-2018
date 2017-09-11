@@ -118,4 +118,8 @@ public class Player extends Mob
 		x = 0;
 		y = 0;
 	}
+
+	public void pause() {
+		
+	}
 }

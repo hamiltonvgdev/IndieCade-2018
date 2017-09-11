@@ -8,6 +8,8 @@ import Game.GameData;
 import Player.Player;
 import Renders.SpriterAnimationEngine;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -70,9 +72,11 @@ public class GameScreen extends ModScreen
 		Camera.update();
 		B2Dcam.update();
 		hud.update();
-		System.out.println(hud.healthnumber());
 		if(hud.healthnumber() == 0){
 			player.reset();
+		}
+		if(hud.pause()== true){
+			player.pause();
 		}
 	}
 
