@@ -29,6 +29,7 @@ public class Health extends Thing{
 		// TODO Auto-generated method stub
 		super.update(delta);
 		
+		Healthnumber = (int) gs.getPlayer().getHealth();
 	}
 	public void render(SpriteBatch batch){
 		super.render(batch);
@@ -36,20 +37,4 @@ public class Health extends Thing{
 			batch.draw(healthSprite,i,0,scale,scale);
 		}
 	}
-	public void minusHealth(){
-		Healthnumber--;
-	}
-	public void plusHealth(){
-		Healthnumber++;
-	}
-	public int healthnumber(){
-		return Healthnumber;
-	}
-	public void checkHealth(){
-		if(Healthnumber == 0){
-			Healthnumber = 6;
-		}
-	}
-
-
 }

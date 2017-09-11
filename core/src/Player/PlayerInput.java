@@ -20,24 +20,24 @@ public class PlayerInput
 	
 	public void update()
 	{
-		if(!Ddis && Gdx.input.isKeyPressed(Input.Keys.D))
+		if(!Ddis && Gdx.input.isKeyPressed(Input.Keys.D)&& !player.inContact.isEmpty())
 		{
-			player.getBody().applyForceToCenter(new Vector2(1, 0),  true); 
+			player.getBody().applyForceToCenter(new Vector2(10, 0),  true); 
 		}
 		
-		if(!Adis && Gdx.input.isKeyPressed(Input.Keys.A))
+		if(!Adis && Gdx.input.isKeyPressed(Input.Keys.A) && !player.inContact.isEmpty())
 		{
-			player.getBody().applyForceToCenter(new Vector2(-1, 0),  true); 
+			player.getBody().applyForceToCenter(new Vector2(-10, 0),  true); 
 		}
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.W))
+		if(Gdx.input.isKeyJustPressed(Input.Keys.W)&& !player.inContact.isEmpty())
 		{
-			player.getBody().applyForceToCenter(new Vector2(0, 1),  true); 
+			player.getBody().applyForceToCenter(new Vector2(0, 430),  true); 
 		}
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.S))
+		if(Gdx.input.isKeyPressed(Input.Keys.S)&& !player.inContact.isEmpty())
 		{
-			player.getBody().applyForceToCenter(new Vector2(0, -1),  true); 
+			player.getBody().applyForceToCenter(new Vector2(0, -10),  true); 
 		}
 	}
 }

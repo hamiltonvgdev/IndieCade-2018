@@ -16,9 +16,12 @@ public class PortalTile extends Tile
 	String Destination;
 	int cost;
 	
+	boolean paid;
+	
 	public PortalTile(GameScreen gs, float x, float y) 
 	{
 		super(gs, x, y);
+		paid = false;
 	}
 
 	public PortalTile setDestination(String name, String cost)
@@ -32,25 +35,32 @@ public class PortalTile extends Tile
 	{
 		if(collide)
 		{	
-			gs.getGD().write(gs);
-			
-			GameScreen Dest = new GameScreen(gs.core, gs.getGD(), Destination);
-			TiledMapTileLayer Layer = null;
-			
-			for(MapLayer layer: Dest.getLevel().getMap().getLayers())
+			if(!paid)
 			{
-				if(layer.getName().contains(gs.getLevel().getId()))
+				player.health(-cost);
+				paid = true;
+			}else
+			{
+				gs.getGD().write(gs);
+				
+				GameScreen Dest = new GameScreen(gs.core, gs.getGD(), Destination);
+				TiledMapTileLayer Layer = null;
+				
+				for(MapLayer layer: Dest.getLevel().getMap().getLayers())
 				{
-					Layer = (TiledMapTileLayer) layer;
-					break;
+					if(layer.getName().contains(gs.getLevel().getId()))
+					{
+						Layer = (TiledMapTileLayer) layer;
+						break;
+					}
 				}
+				
+				Dest.getPlayer().setPosition(
+						Float.parseFloat(Layer.getProperties().get("x").toString()) / Config.PPM, 
+						Float.parseFloat(Layer.getProperties().get("y").toString()) / Config.PPM);
+				
+				gs.core.setScreen(new TransitionScreen(gs.core, Dest));
 			}
-			
-			Dest.getPlayer().setPosition(
-					Float.parseFloat(Layer.getProperties().get("x").toString()) / Config.PPM, 
-					Float.parseFloat(Layer.getProperties().get("y").toString()) / Config.PPM);
-			
-			gs.core.setScreen(new TransitionScreen(gs.core, Dest));
 		}
 	}
 }

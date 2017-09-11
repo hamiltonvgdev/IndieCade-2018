@@ -89,7 +89,6 @@ public class Thing implements Comparable<Thing>
 		body.setLinearVelocity(0, 0);
 		body.setAwake(false);
 		body.getFixtureList().get(0).setFilterData(f);
-		
 	}
 	
 	public void collideWith(Thing thing)
@@ -109,11 +108,10 @@ public class Thing implements Comparable<Thing>
 	
 	public void setPosition(float x, float y)
 	{
-		body.setTransform(x - body.getPosition().x, y - body.getPosition().y, 0);
+		body.setTransform(x, y , 0);
 		this.x = x;
 		this.y = y;
 		play.setPosition(x, y);
-		
 	}
 
 	@Override
