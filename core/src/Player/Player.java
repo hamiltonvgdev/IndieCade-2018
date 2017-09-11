@@ -1,11 +1,14 @@
 package Player;
 
+import java.util.ArrayList;
+
 import Game.Config;
 import Mob.Mob;
 import Screen.GameScreen;
+import Screen.TransitionScreen;
+import Tile.Tile;
 import Weapon.Weapon;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -19,6 +22,7 @@ public class Player extends Mob
 	PlayerInput input;
 	
 	//Collision
+	public ArrayList<Tile> inContact;
 	
 	//Testing
 	Weapon weapon;
@@ -41,11 +45,15 @@ public class Player extends Mob
 		
 		play.setAnimation(weapon.getIdleAnimation());
 		play.addListener(new PlayerSpriterHandler(this));
+		
+		health = gs.getGD().playerHealth;
 	}
 	
 	@Override
 	public void initHitbox()
 	{
+		inContact = new ArrayList<Tile>();
+		
 		bdef = new BodyDef();
 		bdef.type = BodyType.DynamicBody;
 		bdef.position.set(x, y);
@@ -89,8 +97,11 @@ public class Player extends Mob
 		
 		x = body.getPosition().x * Config.PPM;
 		y = body.getPosition().y * Config.PPM;
-		
-		input.update();
+				
+		if(health > 0)
+		{
+			input.update();
+		}
 		
 		play.setPosition(x, y);
 		
@@ -104,21 +115,25 @@ public class Player extends Mob
 		weapon.render(batch);
 	}
 	
-	public void move()
+	public void Die()
 	{
-		
+		gs.core.setScreen(new TransitionScreen(gs.core, gs));
+		setPosition(Float.parseFloat(gs.getLevel().getMap().getProperties().get("Revive").toString().split("-")[0]) / Config.PPM,
+				Float.parseFloat(gs.getLevel().getMap().getProperties().get("Revive").toString().split("-")[1]) / Config.PPM);
+		body.setLinearVelocity(0, -1);
+		inContact.clear();
+		health = gs.getGD().playerHealth;
+		gs.getLevel().reset = true;
 	}
 	
 	@Override
-	public void move(Vector2 movveVec){}
+	public void move(Vector2 moveVec){}
+	@Override
+	public void die(){}
 //	@Override 
 //	public void setPosition(float x, float y){}
 	
 	//Return Statements
 	public PlayerInput getInput() {return input;}
 	public Weapon getWeapon() {return weapon;}
-	public void reset(){
-		x = 0;
-		y = 0;
-	}
 }

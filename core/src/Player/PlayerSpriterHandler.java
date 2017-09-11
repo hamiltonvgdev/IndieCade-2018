@@ -20,6 +20,11 @@ public class PlayerSpriterHandler implements PlayerListener
 	@Override
 	public void animationFinished(Animation animation) 
 	{
+		if(player.getPlay().getAnimation().name.equals("Death"))
+		{
+			player.Die();
+		}
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.P))
 		{
 			player.getPlay().setAnimation(player.getWeapon().getPAnimation());
@@ -49,22 +54,28 @@ public class PlayerSpriterHandler implements PlayerListener
 	@Override
 	public void preProcess(Play play) 
 	{
-		if(play.getAnimation().name.contains("Idle") ||
-				play.getAnimation().name.contains("Jump"))
+		if(player.getHealth() > 0)
 		{
-			if(Gdx.input.isKeyPressed(Input.Keys.P))
+			if(play.getAnimation().name.contains("Idle") ||
+					play.getAnimation().name.contains("Jump"))
 			{
-				player.getPlay().setAnimation(player.getWeapon().getPAnimation());
-			}else if(Gdx.input.isKeyPressed(Input.Keys.O))
-			{
-				player.getPlay().setAnimation(player.getWeapon().getOAnimation());
-			}else if(Gdx.input.isKeyPressed(Input.Keys.L))
-			{
-				player.getPlay().setAnimation(player.getWeapon().getLAnimation());
-			}else if(Gdx.input.isKeyPressed(Input.Keys.K))
-			{
-				player.getPlay().setAnimation(player.getWeapon().getKAnimation());
+				if(Gdx.input.isKeyPressed(Input.Keys.P))
+				{
+					player.getPlay().setAnimation(player.getWeapon().getPAnimation());
+				}else if(Gdx.input.isKeyPressed(Input.Keys.O))
+				{
+					player.getPlay().setAnimation(player.getWeapon().getOAnimation());
+				}else if(Gdx.input.isKeyPressed(Input.Keys.L))
+				{
+					player.getPlay().setAnimation(player.getWeapon().getLAnimation());
+				}else if(Gdx.input.isKeyPressed(Input.Keys.K))
+				{
+					player.getPlay().setAnimation(player.getWeapon().getKAnimation());
+				}
 			}
+		}else if(!player.getPlay().getAnimation().name.equals("Death"))
+		{
+			player.getPlay().setAnimation("Death");
 		}
 	}
 

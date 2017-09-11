@@ -17,20 +17,17 @@ public class HUD{
 	
 		batch = new SpriteBatch();
 	}
-	public void update(){
+	public void update(float delta){
+		health.update(delta);
+		
 		if(Gdx.input.isKeyJustPressed(Keys.B)){
-			health.minusHealth();
+			gs.getPlayer().health(-1);;
 		}
-		health.checkHealth();
-		health.healthnumber();
 	}
 	public void render()
 	{
 		batch.begin();
 		health.render(batch);
 		batch.end();
-	}
-	public int healthnumber(){
-		return health.healthnumber();
 	}
 }

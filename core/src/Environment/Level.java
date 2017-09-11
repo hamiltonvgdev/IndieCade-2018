@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Level 
 {
 	GameScreen gs;
+	public boolean reset;
 	
 	ArrayList<Thing> Things;
 	ArrayList<Thing> toShow;
@@ -46,7 +47,7 @@ public class Level
 		toDie = new ArrayList<Thing>();
 		tmx = new TmxMapLoader();
 		
-		
+		reset = false;
 		
 		for(int i = 0; i < Things.size(); i ++)
 		{
@@ -126,7 +127,13 @@ public class Level
 			t.update(delta);
 		}
 		toShow.removeAll(toDie);
+		
 		toDie.clear();
+		
+		if(reset)
+		{
+			reset();
+		}
 	}
 	
 	public void render(SpriteBatch batch)
@@ -148,6 +155,13 @@ public class Level
 			t.move(moveVec);
 		}
 		gs.getCamera().translate(moveVec);
+	}
+	
+	public void reset()
+	{
+		toShow.clear();
+		toShow.addAll(Things);
+		reset = false;
 	}
 	
 	public ArrayList<Thing> getAlive() {return toShow;}

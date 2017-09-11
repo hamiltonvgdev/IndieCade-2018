@@ -38,7 +38,7 @@ public class GameScreen extends ModScreen
 				Config.GAME_HEIGHT / Config.PPM);
 		renderer = new SpriterAnimationEngine(Camera.combined);
 		
-		world = new World(new Vector2(0, 0), true);
+		world = new World(new Vector2(0, -9.81F), true);
 		b2dr = new Box2DDebugRenderer();
 
 		level = new Level(this);
@@ -62,11 +62,7 @@ public class GameScreen extends ModScreen
 		
 		Camera.update();
 		B2Dcam.update();
-		hud.update();
-		System.out.println(hud.healthnumber());
-		if(hud.healthnumber() == 0){
-			player.reset();
-		}
+		hud.update(delta);
 	}
 
 	@Override
@@ -86,5 +82,6 @@ public class GameScreen extends ModScreen
 	public OrthographicCamera getB2Dcam() {return B2Dcam;}
 	public OrthographicCamera getCamera() {return Camera;}
 	public SpriterAnimationEngine getRenderer() {return renderer;}
+	public HUD getHud() {return hud;}
 	
 }

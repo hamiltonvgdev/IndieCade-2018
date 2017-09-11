@@ -16,6 +16,8 @@ public class Tile extends Thing
 {
 	boolean collide;
 	
+	int inContactIndex;
+	
 	
 	public Tile(GameScreen gs, float x, float y)
 	{
@@ -36,7 +38,10 @@ public class Tile extends Thing
 		
 		fdef = new FixtureDef();
 		fdef.shape = shape;
+		fdef.friction = 0.35F;
 		fdef.filter.categoryBits = Config.BIT_TILE;
+		
+		inContactIndex = -1;
 	}
 	
 	@Override
@@ -63,7 +68,13 @@ public class Tile extends Thing
 	@Override
 	public void unCollideWith(Thing thing)
 	{
-		
+		if(thing.getID().split("-")[0].equals(Config.ENTITY_Z))
+		{
+			uncollideWithEnt((Mob) thing);
+		}else if(thing.getID().split("-")[0].equals(Config.PLAYER_Z))
+		{
+			uncollideWithPlayer((Player) thing);
+		}
 	}
 	
 	public void collideWithEnt(Mob ent)
@@ -78,7 +89,20 @@ public class Tile extends Thing
 	{
 		if(collide)
 		{
-			
+			player.inContact.add(this);
+		}
+	}
+	
+	public void uncollideWithEnt(Mob ent)
+	{
+		
+	}
+	
+	public void uncollideWithPlayer(Player player)
+	{
+		if(collide)
+		{
+			player.inContact.remove(this);
 		}
 	}
 }
