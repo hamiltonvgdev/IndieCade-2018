@@ -262,4 +262,6 @@ public abstract class Drawer<R> {
 	 * @param object the object to draw.
 	 */
 	public abstract void draw(Timeline.Key.Object object);
+	
+	public Loader<R> getLoader() {return loader;}
 }

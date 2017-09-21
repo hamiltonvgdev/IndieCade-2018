@@ -33,12 +33,13 @@ public class Tile extends Thing
 		
 		bdef = new BodyDef();
 		bdef.position.set(x, y);
-		bdef.type = BodyType.KinematicBody;
+		bdef.type = BodyType.StaticBody;
 		body = gs.getWorld().createBody(bdef);
 		
 		fdef = new FixtureDef();
 		fdef.shape = shape;
 		fdef.friction = 0.4F;
+		fdef.restitution = 0;
 		fdef.filter.categoryBits = Config.BIT_TILE;
 		
 		inContactIndex = -1;

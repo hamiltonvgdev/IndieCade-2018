@@ -1,4 +1,4 @@
-package PauseButton;
+package PauseMenu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

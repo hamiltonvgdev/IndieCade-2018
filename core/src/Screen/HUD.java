@@ -8,15 +8,17 @@ import Environment.Thing;
 import Player.Health;
 
 public class HUD{
+	//Traveling between Gamescreen is strictly not allowed
+	//Wait until Daniel Completes pause menu for further modification
 	GameScreen gs;
 	Health health;
 	SpriteBatch batch;
-	PauseButton.pausebutton pausebutton;
+	PauseMenu.pausebutton pausebutton;
 	boolean pause;
 	public HUD(GameScreen gs){
 		this.gs = gs;
 		health = new Health(this.gs);
-		pausebutton = new PauseButton.pausebutton(this.gs);
+		pausebutton = new PauseMenu.pausebutton(this.gs);
 		batch = new SpriteBatch();
 		pause = false;
 	}

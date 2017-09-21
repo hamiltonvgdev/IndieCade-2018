@@ -1,5 +1,8 @@
 package Game;
 
+import java.awt.GraphicsEnvironment;
+
+
 public class Config 
 {
 	//Math Constants
@@ -7,8 +10,13 @@ public class Config
 	
 	
 	//Game Variables
-	public static final int GAME_WIDTH = 1280;
-	public static final int GAME_HEIGHT = 720;
+	public static final float screenScale = 2F;
+	public static final float GAME_WIDTH = (int) (GraphicsEnvironment.
+			getLocalGraphicsEnvironment().getDefaultScreenDevice().
+			getDisplayMode().getWidth() / screenScale);
+	public static final float GAME_HEIGHT = (int) (GraphicsEnvironment.
+			getLocalGraphicsEnvironment().getDefaultScreenDevice().
+			getDisplayMode().getHeight() / screenScale);
 	public static final String GAME_TITLE = "Jump and Shoot Man";
 	
 	//Menu Button Variables

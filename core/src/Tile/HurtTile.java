@@ -30,6 +30,8 @@ public class HurtTile extends Tile
 	
 	public void collideWithPlayer(Player player)
 	{
+		super.collideWithPlayer(player);
+		
 		if(collide)
 		{
 			player.health(-dmg);
