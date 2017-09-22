@@ -1,14 +1,16 @@
 package Screen;
 
+import Game.Config;
+import PauseMenu.PausingState;
+import PauseMenu.HudButton;
+import Player.Health;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-
-import Environment.Thing;
-import PauseMenu.PausingState;
-import Player.Health;
 
 public class HUD{
 	//Traveling between Gamescreen is strictly not allowed
@@ -16,14 +18,14 @@ public class HUD{
 	GameScreen gs;
 	Health health;
 	SpriteBatch batch;
-	PauseMenu.pausebutton pausebutton;
+	HudButton pausebutton;
 	boolean pause;
 	PausingState pausing;
 	OrthographicCamera cam;
 	public HUD(GameScreen gs){
 		this.gs = gs;
 		health = new Health(this.gs);
-		pausebutton = new PauseMenu.pausebutton(this.gs);
+		pausebutton = new HudButton(this.gs, this, 0);
 		batch = new SpriteBatch();
 		pause = false;
 		pausing = new PausingState(this.gs);
@@ -39,17 +41,8 @@ public class HUD{
 		if(Gdx.input.isKeyJustPressed(Keys.B)){
 			gs.getPlayer().health(-1);
 		}
-		if(Gdx.input.isKeyJustPressed(Keys.M)&& pause == false){
-			pause = true;
-		}
-		else if(Gdx.input.isKeyJustPressed(Keys.M)&& pause == true){
-			pause = false;
-		}
-		System.out.print(input.x);
-		if(pausebutton.pausebutton.getBoundingRectangle().contains(input.x, input.y)&& pause == false) {
-			pause = true;
-		}
 		
+		pausebutton.update(delta);
 	}
 	public void render()
 	{
@@ -59,5 +52,11 @@ public class HUD{
 		pausebutton.render(batch);
 		
 		batch.end();
+	}
+	
+	public void pause()
+	{
+		gs.pause();
+		pause = true;
 	}
 }
