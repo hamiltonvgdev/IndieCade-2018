@@ -7,21 +7,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 import Environment.Thing;
-import PauseButton.PausingState;
+import PauseMenu.PausingState;
 import Player.Health;
 
 public class HUD{
+	//Traveling between Gamescreen is strictly not allowed
+	//Wait until Daniel Completes pause menu for further modification
 	GameScreen gs;
 	Health health;
 	SpriteBatch batch;
-	PauseButton.pausebutton pausebutton;
+	PauseMenu.pausebutton pausebutton;
 	boolean pause;
 	PausingState pausing;
 	OrthographicCamera cam;
 	public HUD(GameScreen gs){
 		this.gs = gs;
 		health = new Health(this.gs);
-		pausebutton = new PauseButton.pausebutton(this.gs);
+		pausebutton = new PauseMenu.pausebutton(this.gs);
 		batch = new SpriteBatch();
 		pause = false;
 		pausing = new PausingState(this.gs);

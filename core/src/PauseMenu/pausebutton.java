@@ -1,4 +1,4 @@
-package PauseButton;
+package PauseMenu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import Environment.Thing;
+import Game.Config;
 import Screen.GameScreen;
 
 public class pausebutton extends Thing{
-	public int scale = 50;
+	public int scale = 15;
 	private Texture texture;
 	public Sprite pausebutton;
 	public pausebutton(GameScreen gs) {
@@ -25,6 +26,9 @@ public class pausebutton extends Thing{
 	}
 	public void render(SpriteBatch batch){
 		super.render(batch);
-		batch.draw(pausebutton, 1230, 670,scale,scale);
+		batch.draw(pausebutton,
+				(Config.GAME_WIDTH) - texture.getWidth() / scale * 6 / Config.screenScale , 
+				(Config.GAME_HEIGHT) - texture.getHeight() / scale * 6 / Config.screenScale,
+				Config.GAME_HEIGHT / scale , Config.GAME_HEIGHT / scale);
 	}
 }

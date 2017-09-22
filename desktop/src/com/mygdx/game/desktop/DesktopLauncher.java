@@ -11,8 +11,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.resizable = true;
 		config.title = Config.GAME_TITLE;
-		config.width =  Config.GAME_WIDTH;
-		config.height = Config.GAME_HEIGHT;
+		config.width = (int) Config.GAME_WIDTH;
+		config.height = (int) Config.GAME_HEIGHT;
 		config.foregroundFPS = 60;
 		new LwjglApplication(new Core(), config);
 	}

@@ -1,6 +1,8 @@
 package Game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import Player.Player;
 import Screen.GameScreen;
@@ -15,10 +17,12 @@ public class GameData implements Serializable
 	
 	//Player stats;
 	public float playerHealth;
+	public ArrayList<Boolean> WeaponUnlock;
 	
 	public GameData()
 	{
 		playerHealth = 10;
+		WeaponUnlock = new ArrayList<Boolean>();
 	}
 	
 	public void init()
@@ -31,6 +35,7 @@ public class GameData implements Serializable
 	public void write(GameScreen gs)
 	{
 		playerHealth = gs.getPlayer().getHealth();
+		WeaponUnlock = gs.getPlayer().getInventory().Unlocked;
 	}
 	
 	public boolean ready()

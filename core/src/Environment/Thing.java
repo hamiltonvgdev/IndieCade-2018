@@ -113,6 +113,16 @@ public class Thing implements Comparable<Thing>
 		this.y = y;
 		play.setPosition(x, y);
 	}
+	
+	public void pause()
+	{
+		
+	}
+	
+	public void resume()
+	{
+		
+	}
 
 	@Override
 	public int compareTo(Thing t) 

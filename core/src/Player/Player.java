@@ -2,6 +2,7 @@ package Player;
 
 import java.util.ArrayList;
 
+import Environment.Thing;
 import Game.Config;
 import Mob.Mob;
 import Screen.GameScreen;
@@ -9,6 +10,8 @@ import Screen.TransitionScreen;
 import Tile.Tile;
 import Weapon.Weapon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -23,8 +26,15 @@ public class Player extends Mob
 	
 	//Collision
 	public ArrayList<Tile> inContact;
+	public final float hoverConstant = 20;
 	
-	//Testing
+	//Combat
+	float maxSpeed;
+	
+	//Combat Support
+	Inventory inventory;
+	
+	//Testingq
 	Weapon weapon;
 	
 	
@@ -34,19 +44,21 @@ public class Player extends Mob
 		
 		input = new PlayerInput(this);
 
-		play = gs.getRenderer().getPlayer("Test", "test/derp/derp.scml");
-		draw = gs.getRenderer().getDrawer("Test", "test/derp/derp.scml");
+		play = gs.getRenderer().getPlayer("Player", "Player Animation/Character.scml");
+		draw = gs.getRenderer().getDrawer("Player", "Player Animation/Character.scml");
 		
-		play.setScale(3);
+		play.setScale(0.1F);
 		
 		initHitbox();
 		
-		weapon = new Weapon("Starter Scythe", this);
+		weapon = new Weapon("", this);
+		inventory = new Inventory(gs.getGD(), this);
 		
 		play.setAnimation(weapon.getIdleAnimation());
 		play.addListener(new PlayerSpriterHandler(this));
 		
 		health = gs.getGD().playerHealth;
+		maxSpeed = 4F;
 	}
 	
 	@Override
@@ -58,6 +70,7 @@ public class Player extends Mob
 		bdef.type = BodyType.DynamicBody;
 		bdef.position.set(x, y);
 		body = gs.getWorld().createBody(bdef);
+		
 
 		shape = new PolygonShape();
 		
@@ -72,6 +85,7 @@ public class Player extends Mob
 		
 		fdef = new FixtureDef();
 		fdef.shape = shape;
+		fdef.friction = 2;
 		fdef.filter.categoryBits = Config.BIT_PLAYER;
 		fdef.filter.maskBits = Config.BIT_TILE;
 	}
@@ -82,6 +96,12 @@ public class Player extends Mob
 	{
 		this.id = Config.PLAYER_Z + "-" + id;
 		return this;
+	}
+	
+	public void setWeapon(Weapon weapon)
+	{
+		this.weapon = weapon;
+		play.setAnimation(weapon.getIdleAnimation());
 	}
 	
 	public void update(float delta)
@@ -96,7 +116,7 @@ public class Player extends Mob
 		getGS().getCamera().position.set(x, y , 0);
 		
 		x = body.getPosition().x * Config.PPM;
-		y = body.getPosition().y * Config.PPM;
+		y = (body.getPosition().y) * Config.PPM + 32;
 				
 		if(health > 0)
 		{
@@ -106,6 +126,11 @@ public class Player extends Mob
 		play.setPosition(x, y);
 		
 		weapon.update(delta);
+		
+		if(!inContact.isEmpty() && body.getLinearVelocity().y == 0)
+		{
+			body.applyForceToCenter(0, gs.getWorld().getGravity().y + hoverConstant, true);
+		}
 	}
 	
 	public void render(SpriteBatch batch)
@@ -136,9 +161,5 @@ public class Player extends Mob
 	//Return Statements
 	public PlayerInput getInput() {return input;}
 	public Weapon getWeapon() {return weapon;}
-
-	public void pause()
-	{
-		
-	}
+	public Inventory getInventory() {return inventory;}
 }

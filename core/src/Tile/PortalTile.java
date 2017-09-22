@@ -16,12 +16,9 @@ public class PortalTile extends Tile
 	String Destination;
 	int cost;
 	
-	boolean paid;
-	
 	public PortalTile(GameScreen gs, float x, float y) 
 	{
 		super(gs, x, y);
-		paid = false;
 	}
 
 	public PortalTile setDestination(String name, String cost)
@@ -33,14 +30,14 @@ public class PortalTile extends Tile
 	
 	public void collideWithPlayer(Player player)
 	{
-		if(collide)
+		super.collideWithPlayer(player);
+		
+		if(collide && !player.getPlay().getAnimation().name.equals("Death"))
 		{	
-			if(!paid)
+			if(player.getHealth() > cost)
 			{
 				player.health(-cost);
-				paid = true;
-			}else
-			{
+				
 				gs.getGD().write(gs);
 				
 				GameScreen Dest = new GameScreen(gs.core, gs.getGD(), Destination);
@@ -48,6 +45,7 @@ public class PortalTile extends Tile
 				
 				for(MapLayer layer: Dest.getLevel().getMap().getLayers())
 				{
+					System.out.println(layer.getName());
 					if(layer.getName().contains(gs.getLevel().getId()))
 					{
 						Layer = (TiledMapTileLayer) layer;
@@ -59,7 +57,7 @@ public class PortalTile extends Tile
 						Float.parseFloat(Layer.getProperties().get("x").toString()) / Config.PPM, 
 						Float.parseFloat(Layer.getProperties().get("y").toString()) / Config.PPM);
 				
-				gs.core.setScreen(new TransitionScreen(gs.core, Dest));
+				gs.core.setScreen(new TransitionScreen(gs.core, Dest.setHUD(gs.getHud())));
 			}
 		}
 	}

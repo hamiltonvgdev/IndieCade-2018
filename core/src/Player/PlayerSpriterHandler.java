@@ -42,8 +42,14 @@ public class PlayerSpriterHandler implements PlayerListener
 			player.getPlay().setAnimation(player.getWeapon().getKAnimation());
 			player.getWeapon().kMove();
 		}else
-		{
-			player.getPlay().setAnimation(player.getWeapon().getIdleAnimation());
+		{	
+			if(player.getBody().getLinearVelocity().x > 0.0001)
+			{
+				player.getPlay().setAnimation("Walk");
+			}else
+			{
+				player.getPlay().setAnimation(player.getWeapon().getIdleAnimation());
+			}
 		}
 		
 		player.getWeapon().Hitted.clear();
@@ -97,20 +103,28 @@ public class PlayerSpriterHandler implements PlayerListener
 		}
 		
 		if(play.getAnimation().name.contains("Idle") || 
-				play.getAnimation().name.contains("Jump"))
+				play.getAnimation().name.contains("Jump")|| 
+				play.getAnimation().name.contains("Walk"))
 		{
-			if(player.getBody().getLinearVelocity().y != 0)
+			if(Math.abs(player.getBody().getLinearVelocity().y) > 0.01)
 			{
 				if(player.getBody().getLinearVelocity().y > 0)
 				{
 					play.setAnimation("Rise Jump");
-				}else if(player.getBody().getLinearVelocity().y < 0)
+				}else if(player.getBody().getLinearVelocity().y < 0 && 
+						Math.abs(player.getBody().getLinearVelocity().y) > 0.25)
 				{
 					play.setAnimation("Fall Jump");
 				}
 			}else
 			{
-				player.getPlay().setAnimation(player.getWeapon().getIdleAnimation());
+				if(player.getBody().getLinearVelocity().x != 0)
+				{
+					player.getPlay().setAnimation("Walk");
+				}else
+				{
+					player.getPlay().setAnimation(player.getWeapon().getIdleAnimation());
+				}
 			}
 		}
 	}
