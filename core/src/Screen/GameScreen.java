@@ -96,7 +96,7 @@ public class GameScreen extends ModScreen
 	{
 		super.render(delta);
 
-		//core.batch.setProjectionMatrix(Camera.combined);
+//		core.batch.setProjectionMatrix(Camera.combined);
 		
 		if(!paused)
 		{
