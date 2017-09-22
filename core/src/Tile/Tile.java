@@ -33,7 +33,7 @@ public class Tile extends Thing
 		
 		bdef = new BodyDef();
 		bdef.position.set(x, y);
-		bdef.type = BodyType.StaticBody;
+		bdef.type = BodyType.KinematicBody;
 		body = gs.getWorld().createBody(bdef);
 		
 		fdef = new FixtureDef();
