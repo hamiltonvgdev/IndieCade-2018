@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Environment.Thing;
 import Game.Config;
+import Game.Core;
 import Player.Player;
 import Screen.GameScreen;
 
@@ -51,12 +52,31 @@ public class Weapon
 		Hitted = new ArrayList<Thing>();
 	}
 	
+	public void init(Core core)
+	{
+		core.wl.Weapons.put(name, this);
+		core.wl.WeaponNames.add(name);
+		core.wl.Unlocked.add(false);
+	}
+	
+	public void unlock(Core core)
+	{
+		int index = core.wl.WeaponNames.indexOf(name);
+		core.wl.Unlocked.set(index, true);
+	}
+	
 	public void equip()
 	{
-		player.getPlay().setAnimation(idle);
+		player.getWeapon().unequip();
+		player.setWeapon(this);
 		hilt = player.getPlay().getBone("Hilt");
 		blade = player.getPlay().getBone("Blade");
 		equiped = true;
+	}
+	
+	public void unequip()
+	{
+		equiped = false;
 	}
 	
 	public void update(float delta)

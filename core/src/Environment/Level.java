@@ -9,6 +9,8 @@ import Player.Player;
 import Screen.GameScreen;
 import Tile.*;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -18,11 +20,13 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Level 
 {
 	GameScreen gs;
 	public boolean reset;
+	boolean paused;
 	
 	ArrayList<Thing> Things;
 	ArrayList<Thing> toShow;
@@ -54,6 +58,8 @@ public class Level
 			Things.get(i).setID(i);
 			toShow.add(Things.get(i));
 		}
+		
+		paused = false;
 		
 //		test = new Test(gs);
 	}
@@ -145,7 +151,6 @@ public class Level
 		{
 			t.render(batch);
 		}
-		
 	}
 	
 	public void move(Vector2 moveVec)
@@ -162,6 +167,25 @@ public class Level
 		toShow.clear();
 		toShow.addAll(Things);
 		reset = false;
+	}
+	
+	public void pause()
+	{
+		for(Thing t: Things)
+		{
+			t.pause();
+		}
+		paused = true;
+	}
+	
+	public void resume()
+	{
+		for(Thing t: Things)
+		{
+			t.resume();
+		}
+		
+		paused = false;
 	}
 	
 	public ArrayList<Thing> getAlive() {return toShow;}

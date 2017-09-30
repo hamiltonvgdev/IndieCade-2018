@@ -1,98 +1,97 @@
 package Util;
 
 import Game.Config;
-import Renders.SpriteSheetAnimation;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.blueacorn.spriter.LibGdxDrawer;
+import com.blueacorn.spriter.LibGdxLoader;
+import com.brashmonkey.spriter.Data;
+import com.brashmonkey.spriter.Play;
+import com.brashmonkey.spriter.PlayTweener;
+import com.brashmonkey.spriter.SCMLReader;
 
-public class Button 
-{	
-	final float THRESHOLD = 80;
+public class Button
+{
+	Play play;
+	LibGdxDrawer draw;
+	SpriteBatch batch;
 	
 	float x, y, width, height;
-	SpriteSheetAnimation sprite;
+	float scale;
 	
-	Quad hitbox;
-	boolean clicked;
-	boolean hovered;
 	public boolean confirmed;
+	boolean hovered;
 	
-	long tick;
-	
-	public Button(float x, float y, float width, float height)
+	public Button(float x, float y, float width, float height, float scale) 
 	{
-		this.x = x - width / 2;
-		this.y = y - height /2;
-		this.width = width;
-		this.height = height;
+		this.x = x;
+		this.y = y;
+		this.width = width * scale;
+		this.height = height * scale;
 		
-		hovered = false;
-		clicked = false;
+		this.scale = scale;
+		
 		confirmed = false;
+		hovered = false;
 		
-		hitbox = new Quad(x, y, width, height);
-		
-		tick = System.currentTimeMillis();
+		batch = new SpriteBatch();
 	}
 	
-	public Button setSprite(SpriteSheetAnimation sprite)
+	public Button setSprite(String ref, ShapeRenderer renderer)
 	{
-		this.sprite = sprite;
+		FileHandle handle = Gdx.files.internal(ref);
+		Data data = new SCMLReader(handle.read()).getData();
+		
+		LibGdxLoader loader = new LibGdxLoader(data);
+		loader.load(handle.file());
+		
+		play = new Play(data.getEntity(0));
+		play.scale(scale);
+		
+		draw = new LibGdxDrawer(loader, batch, renderer);
+		
 		return this;
 	}
 	
 	public void update(float delta)
 	{
-		hitbox.update(x + width / 2, y + height / 2, width, height);
-		if(hitbox.check(Gdx.input.getX(), Config.GAME_HEIGHT - Gdx.input.getY()))
+		play.setPosition(x, y);
+		play.update();
+		
+		if(x - width / 2 <= Gdx.input.getX() && x + width / 2 >= Gdx.input.getX() && 
+				y - height / 2 <= Gdx.input.getY() && y + height / 2 >= Gdx.input.getY())
 		{
 			hovered = true;
 			
-			if(Gdx.input.isTouched())
+			if(Gdx.input.justTouched())
 			{
-				clicked = true;
-			}else
-			{
-				clicked = false;
-			}
+				confirmed = true;
+			} 
 		}else
 		{
 			hovered = false;
-			clicked = false;
-		}
-		
-		if(clicked)
-		{
-			if(System.currentTimeMillis() - tick >= THRESHOLD)
-			{
-				confirmed = true;
-			}
-		}else
-		{
-			tick = System.currentTimeMillis();
 		}
 	}
 	
-	public void render(SpriteBatch batch)
+	public void render()
 	{
-		if(hovered)
+		
+		if(hovered && !play.getAnimation().name.equals("Selected"))
 		{
-			sprite.changeState(1);
-		}else
+			play.setAnimation("Selected");
+		}else if (!hovered && !play.getAnimation().name.equals("Idle"))
 		{
-			sprite.changeState(0);
+			play.setAnimation("Idle");
 		}
 		
-		sprite.render(x, y, width, height, 1, 1, width / 2, height / 2, 0, batch);
-		
-		hitbox.render(batch);
+		draw.draw(play);
 	}
 	
 	public void dispose()
 	{
-		clicked = false;
-		hovered = false;
-		confirmed = false;
+		
 	}
 }

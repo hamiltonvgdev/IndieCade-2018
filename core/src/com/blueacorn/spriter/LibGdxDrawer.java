@@ -73,4 +73,7 @@ public class LibGdxDrawer extends Drawer<Sprite>{
 		
 		batch.end();
 	}
+	
+	public SpriteBatch getBatch() {return batch;}
+	public ShapeRenderer getShapeRenderer() {return renderer;}
 }
