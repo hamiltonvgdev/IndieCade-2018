@@ -5,6 +5,7 @@ import Environment.Level;
 import Game.Config;
 import Game.Core;
 import Game.GameData;
+import HUD.HUD;
 import Player.Player;
 import Renders.SpriterAnimationEngine;
 
@@ -37,6 +38,8 @@ public class GameScreen extends ModScreen
 	{
 		super(core);
 		this.gd = gd;
+		
+		core.wl.setUnlock(gd.WeaponUnlock);
 		
 		Camera = new OrthographicCamera(Config.GAME_WIDTH , Config.GAME_HEIGHT);
 		B2Dcam = new OrthographicCamera(Config.GAME_WIDTH / Config.PPM, 
@@ -101,7 +104,7 @@ public class GameScreen extends ModScreen
 		if(!paused)
 		{
 			level.render(core.batch);
-//			b2dr.render(world, B2Dcam.combined);
+			b2dr.render(world, B2Dcam.combined);
 		}
 
 		hud.render();

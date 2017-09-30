@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Environment.Thing;
 import Game.Config;
-import Player.Inventory;
+import Game.Core;
 import Player.Player;
 import Screen.GameScreen;
 
@@ -52,17 +52,17 @@ public class Weapon
 		Hitted = new ArrayList<Thing>();
 	}
 	
-	public void init(Inventory inventory)
+	public void init(Core core)
 	{
-		inventory.Weapons.put(name, this);
-		inventory.Names.add(name);
-		inventory.Unlocked.add(false);
+		core.wl.Weapons.put(name, this);
+		core.wl.WeaponNames.add(name);
+		core.wl.Unlocked.add(false);
 	}
 	
-	public void unlock(Inventory inventory)
+	public void unlock(Core core)
 	{
-		int index = inventory.Names.indexOf(name);
-		inventory.Unlocked.set(index, true);
+		int index = core.wl.WeaponNames.indexOf(name);
+		core.wl.Unlocked.set(index, true);
 	}
 	
 	public void equip()

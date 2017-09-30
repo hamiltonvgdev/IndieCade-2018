@@ -26,13 +26,12 @@ public class Player extends Mob
 	
 	//Collision
 	public ArrayList<Tile> inContact;
-	public final float hoverConstant = 20;
+	
 	
 	//Combat
 	float maxSpeed;
 	
 	//Combat Support
-	Inventory inventory;
 	
 	//Testingq
 	Weapon weapon;
@@ -52,7 +51,6 @@ public class Player extends Mob
 		initHitbox();
 		
 		weapon = new Weapon("", this);
-		inventory = new Inventory(gs.getGD(), this);
 		
 		play.setAnimation(weapon.getIdleAnimation());
 		play.addListener(new PlayerSpriterHandler(this));
@@ -85,7 +83,7 @@ public class Player extends Mob
 		
 		fdef = new FixtureDef();
 		fdef.shape = shape;
-		fdef.friction = 2;
+		fdef.friction = 0.4F;
 		fdef.filter.categoryBits = Config.BIT_PLAYER;
 		fdef.filter.maskBits = Config.BIT_TILE;
 	}
@@ -126,11 +124,6 @@ public class Player extends Mob
 		play.setPosition(x, y);
 		
 		weapon.update(delta);
-		
-		if(!inContact.isEmpty() && body.getLinearVelocity().y == 0)
-		{
-			body.applyForceToCenter(0, gs.getWorld().getGravity().y + hoverConstant, true);
-		}
 	}
 	
 	public void render(SpriteBatch batch)
@@ -151,6 +144,25 @@ public class Player extends Mob
 		gs.getLevel().reset = true;
 	}
 	
+	public boolean isGrounded()
+	{
+		boolean grounded = false;
+		
+		for(Tile t: inContact)
+		{	
+			if(t.getY() < y)
+			{
+				if(Math.abs(x - t.getX() * Config.PPM) < 22)
+				{
+					grounded = true;
+					break;
+				}
+			}
+		}
+		
+		return grounded;
+	}
+	
 	@Override
 	public void move(Vector2 moveVec){}
 	@Override
@@ -161,5 +173,4 @@ public class Player extends Mob
 	//Return Statements
 	public PlayerInput getInput() {return input;}
 	public Weapon getWeapon() {return weapon;}
-	public Inventory getInventory() {return inventory;}
 }

@@ -1,23 +1,18 @@
 package Game;
 
 
-import Renders.SpriterAnimationEngine;
 import Screen.GameScreen;
-import Screen.MenuScreen;
 import Screen.SplashScreen;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.blueacorn.spriter.LibGdxDrawer;
-import com.brashmonkey.spriter.Drawer;
 
 public class Core extends Game
 {		
 	public SpriteBatch batch;
 	
-
+	public WeaponList wl;
+	public EnemyList el;
 	
 	@Override
 	public void create() 
@@ -28,7 +23,10 @@ public class Core extends Game
 //				setMusic("Audio/title_theme.wav"));
 		setScreen(new GameScreen(this, new GameData(), "SpeedTest"));
 		
+		
 		Loadevas.init();
+		wl.init();
+		el.init();
 	}
 	
 	@Override
