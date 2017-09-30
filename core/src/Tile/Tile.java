@@ -6,11 +6,12 @@ import Mob.Mob;
 import Player.Player;
 import Screen.GameScreen;
 
-import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Tile extends Thing
 {
@@ -18,14 +19,25 @@ public class Tile extends Thing
 	
 	int inContactIndex;
 	
+	ChainShape shape;
 	
 	public Tile(GameScreen gs, float x, float y)
 	{
 		super(gs);
 		collide = true;
 		
-		shape = new PolygonShape();
-		shape.setAsBox(0.5F, 0.5F);
+//		shape = new PolygonShape();
+//		shape.setAsBox(0.5F, 0.5F);
+
+		//Do some logic, get the coordinates. Starbucks tmrw!
+		shape = new ChainShape();
+		Vector2[] v = new Vector2[5];
+		v[0] = new Vector2(-32 / 2 / Config.PPM, -32 / 2 / Config.PPM);
+		v[1] = new Vector2(-32 / 2 / Config.PPM, 32 / 2 / Config.PPM);
+		v[2] = new Vector2(32 / 2 / Config.PPM, 32 / 2 / Config.PPM);
+		v[3] = new Vector2(32 / 2 / Config.PPM, -32 / 2 / Config.PPM);
+		v[4] = new Vector2(-32 / 2 / Config.PPM, -32 / 2 / Config.PPM);
+		shape.createChain(v);
 		
 		this.x = x;
 		this.y = y;

@@ -20,9 +20,9 @@ public class MenuScreen extends ModScreen
 	{
 		super(core);
 		
-		play = new MenuButton(Config.GAME_WIDTH / 2
+		play = new MenuButton(core, Config.GAME_WIDTH / 2
 				, Config.GAME_HEIGHT / 2, 1.5F).setPhrase("PLAY");
-		exit = new MenuButton(Config.GAME_WIDTH / 2
+		exit = new MenuButton(core, Config.GAME_WIDTH / 2
 				, Config.GAME_HEIGHT / 2 - Config.MENU_BUTTON_HEIGHT, 1F).setPhrase("EXIT");
 	}
 	
@@ -57,8 +57,8 @@ public class MenuScreen extends ModScreen
 	{
 		super.render(delta);
 		
-		play.render(core.batch);
-		exit.render(core.batch);
+		play.render();
+		exit.render();
 	}
 	
 	@Override

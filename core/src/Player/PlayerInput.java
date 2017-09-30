@@ -32,7 +32,8 @@ public class PlayerInput
 			player.getBody().applyForceToCenter(new Vector2(-10, 0),  true); 
 		}
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.W)&& !player.inContact.isEmpty())
+		if(Gdx.input.isKeyJustPressed(Input.Keys.W)&& !player.inContact.isEmpty() && 
+				player.isGrounded())
 		{
 			player.getBody().applyForceToCenter(new Vector2(0, 430),  true); 
 		}

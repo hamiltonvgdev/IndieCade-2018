@@ -35,7 +35,7 @@ public class GameData implements Serializable
 	public void write(GameScreen gs)
 	{
 		playerHealth = gs.getPlayer().getHealth();
-		WeaponUnlock = gs.getPlayer().getInventory().Unlocked;
+		WeaponUnlock = gs.core.wl.Unlocked;
 	}
 	
 	public boolean ready()

@@ -1,15 +1,17 @@
-package PauseMenu;
+package HUD;
+
+import Game.WeaponList;
+import Screen.GameScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import Player.Inventory;
-import Screen.GameScreen;
-
 public class InventoryState 
 {
-	public InventoryState(GameScreen gs, Inventory inventory)
+	WeaponList wl;
+	
+	public InventoryState(GameScreen gs)
 	{
-		
+		wl = gs.core.wl;
 	}
 	
 	public void update()

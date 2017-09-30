@@ -31,11 +31,11 @@ public class SaveScreen extends ModScreen
 	{
 		super(core);
 		
-		Save1 = new MenuButton(Config.GAME_WIDTH / 6, 
+		Save1 = new MenuButton(core, Config.GAME_WIDTH / 6, 
 				Config.GAME_HEIGHT / 20 * 9, 1.5F);
-		Save2 = new MenuButton(Config.GAME_WIDTH / 6 * 3, 
+		Save2 = new MenuButton(core, Config.GAME_WIDTH / 6 * 3, 
 				Config.GAME_HEIGHT / 20 * 9, 1.5F);
-		Save3 = new MenuButton(Config.GAME_WIDTH / 6 * 5, 
+		Save3 = new MenuButton(core, Config.GAME_WIDTH / 6 * 5, 
 				Config.GAME_HEIGHT / 20 * 9, 1.5F);
 	}
 
@@ -58,7 +58,7 @@ public class SaveScreen extends ModScreen
 		if(save1)
 		{
 			Save1.setPhrase("Load Save 1");
-			DelSave1 = new MenuButton(Config.GAME_WIDTH / 6, 
+			DelSave1 = new MenuButton(core, Config.GAME_WIDTH / 6, 
 					Config.GAME_HEIGHT / 7, 1.25F).
 					setPhrase("Delete Save 1");
 		}else
@@ -69,7 +69,7 @@ public class SaveScreen extends ModScreen
 		if(save2)
 		{
 			Save2.setPhrase("Load Save 2");
-			DelSave2 = new MenuButton(Config.GAME_WIDTH / 6 * 3, 
+			DelSave2 = new MenuButton(core, Config.GAME_WIDTH / 6 * 3, 
 					Config.GAME_HEIGHT / 7, 1.25F).
 					setPhrase("Delete Save 2");
 		}else
@@ -80,7 +80,7 @@ public class SaveScreen extends ModScreen
 		if(save3)
 		{
 			Save3.setPhrase("Load Save 3");
-			DelSave3 = new MenuButton(Config.GAME_WIDTH / 6 * 5, 
+			DelSave3 = new MenuButton(core, Config.GAME_WIDTH / 6 * 5, 
 					Config.GAME_HEIGHT / 7, 1.25F).
 					setPhrase("Delete Save 3");
 		}else
@@ -145,7 +145,7 @@ public class SaveScreen extends ModScreen
 				Loadevas.save(1);
 				music.stop();
 			}
-
+			
 			if(Loadevas.gd.ready())
 			{
 				core.setScreen(new TransitionScreen(core,
@@ -207,23 +207,23 @@ public class SaveScreen extends ModScreen
 	public void render(float delta) 
 	{
 		super.render(delta);
-		Save1.render(core.batch);
-		Save2.render(core.batch);
-		Save3.render(core.batch);
+		Save1.render();
+		Save2.render();
+		Save3.render();
 		
 		if(save1)
 		{
-			DelSave1.render(core.batch);
+			DelSave1.render();
 		}
 		
 		if(save2)
 		{
-			DelSave2.render(core.batch);
+			DelSave2.render();
 		}
 		
 		if(save3)
 		{
-			DelSave3.render(core.batch);
+			DelSave3.render();
 		}
 	}
 
