@@ -13,7 +13,7 @@ public class InventoryButton extends HudButton
 	@Override
 	public void click()
 	{
-		System.out.println("Inventory Open!");
+		hud.pause("Inventory");
 	}
 
 }

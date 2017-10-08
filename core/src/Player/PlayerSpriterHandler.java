@@ -48,7 +48,7 @@ public class PlayerSpriterHandler implements PlayerListener
 				player.getPlay().setAnimation("Walk");
 			}else
 			{
-				player.getPlay().setAnimation(player.getWeapon().getIdleAnimation());
+				player.getPlay().setAnimation(player.getWeapon().getStillAnimation());
 			}
 		}
 		
@@ -66,8 +66,9 @@ public class PlayerSpriterHandler implements PlayerListener
 	{
 		if(player.getHealth() > 0)
 		{
-			if(play.getAnimation().name.contains("Idle") ||
-					play.getAnimation().name.contains("Jump"))
+			if(play.getAnimation().name.contains("Still") ||
+					play.getAnimation().name.contains("Jump")||
+					play.getAnimation().name.contains("Walk"))
 			{
 				if(Gdx.input.isKeyPressed(Input.Keys.P))
 				{
@@ -102,7 +103,7 @@ public class PlayerSpriterHandler implements PlayerListener
 			play.flipX();
 		}
 		
-		if(play.getAnimation().name.contains("Idle") || 
+		if(play.getAnimation().name.contains("Still") || 
 				play.getAnimation().name.contains("Jump")|| 
 				play.getAnimation().name.contains("Walk"))
 		{
@@ -123,7 +124,7 @@ public class PlayerSpriterHandler implements PlayerListener
 					player.getPlay().setAnimation("Walk");
 				}else
 				{
-					player.getPlay().setAnimation(player.getWeapon().getIdleAnimation());
+					player.getPlay().setAnimation(player.getWeapon().getStillAnimation());
 				}
 			}
 		}

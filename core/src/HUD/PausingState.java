@@ -21,9 +21,9 @@ public class PausingState extends Thing{
 	public PausingState(GameScreen gs) {
 		super(gs);
 		// TODO Auto-generated constructor stub
-		resumeTexture = new Texture(Gdx.files.internal("pauseButton/resume.png"));
+		resumeTexture = new Texture(Gdx.files.internal("Hud/Pause/resume.png"));
 		resumeSprite = new Sprite(resumeTexture);
-		exitTexture = new Texture(Gdx.files.internal("pauseButton/exit.png"));
+		exitTexture = new Texture(Gdx.files.internal("Hud/Pause/resume.png"));
 		exitSprite = new Sprite(exitTexture);
 		batch = new SpriteBatch();
 	}
@@ -32,13 +32,9 @@ public class PausingState extends Thing{
 		super.update(delta);
 		
 	}
-	public void render(SpriteBatch batch,boolean pause){
+	public void render(SpriteBatch batch){
 		this.batch = batch;
-		if(pause == true){
-			this.batch.draw(resumeSprite, 600,360);
-			this.batch.draw(exitSprite, 600,240);
-		}
-	
-
+		this.batch.draw(resumeSprite, 600,360);
+		this.batch.draw(exitSprite, 600,240);
 	}
 }

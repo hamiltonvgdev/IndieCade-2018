@@ -21,13 +21,17 @@ public class PlayerInput
 	public void update()
 	{	
 		if(!Ddis && Gdx.input.isKeyPressed(Input.Keys.D) && !player.inContact.isEmpty()
-				&& player.getBody().getLinearVelocity().x < player.maxSpeed)
+				&& player.getBody().getLinearVelocity().x < player.maxSpeed
+				&& (player.getPlay().getAnimation().name.contains("Walk") || 
+						player.getPlay().getAnimation().name.contains("Still")))
 		{
 			player.getBody().applyForceToCenter(new Vector2(10, 0),  true); 
 		}
 		
 		if(!Adis && Gdx.input.isKeyPressed(Input.Keys.A) && !player.inContact.isEmpty()
-				&& player.getBody().getLinearVelocity().x > -player.maxSpeed)
+				&& player.getBody().getLinearVelocity().x > -player.maxSpeed
+				&& (player.getPlay().getAnimation().name.contains("Walk") || 
+						player.getPlay().getAnimation().name.contains("Still")))
 		{
 			player.getBody().applyForceToCenter(new Vector2(-10, 0),  true); 
 		}

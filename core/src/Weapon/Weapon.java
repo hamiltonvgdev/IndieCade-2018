@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Environment.Thing;
 import Game.Config;
 import Game.Core;
+import Game.WeaponList;
 import Player.Player;
 import Screen.GameScreen;
 
@@ -43,8 +44,8 @@ public class Weapon
 		this.name = name;
 		equiped = false;
 		
-		idle = name + " Idle";
-		p = name + " P";
+		idle = name + "Still";
+		p = name + "SwordCombo3";
 		o = name + " O";
 		l = name + " L";
 		k = name + " K";
@@ -52,11 +53,11 @@ public class Weapon
 		Hitted = new ArrayList<Thing>();
 	}
 	
-	public void init(Core core)
+	public void init(WeaponList wl)
 	{
-		core.wl.Weapons.put(name, this);
-		core.wl.WeaponNames.add(name);
-		core.wl.Unlocked.add(false);
+		wl.Weapons.put(name, this);
+		wl.WeaponNames.add(name);
+		wl.Unlocked.add(false);
 	}
 	
 	public void unlock(Core core)
@@ -139,7 +140,7 @@ public class Weapon
 	//Return Statements
 	public Bone getBlade() {return blade;}
 	public Bone getHilt() {return hilt;}
-	public String getIdleAnimation() {return idle;}
+	public String getStillAnimation() {return idle;}
 	public String getPAnimation() {return p;}
 	public String getOAnimation() {return o;}
 	public String getLAnimation() {return l;}

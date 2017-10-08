@@ -52,7 +52,7 @@ public class Player extends Mob
 		
 		weapon = new Weapon("", this);
 		
-		play.setAnimation(weapon.getIdleAnimation());
+		play.setAnimation(weapon.getStillAnimation());
 		play.addListener(new PlayerSpriterHandler(this));
 		
 		health = gs.getGD().playerHealth;
@@ -74,10 +74,10 @@ public class Player extends Mob
 		
 		shape.setAsBox(
 				play.getBoundingRectangle(play.
-						getBone("Hitbox")).size.width * 0.1F /
+						getBone("Torso")).size.width * 0.1F /
 						Config.PPM * play.getScale(), 
 				play.getBoundingRectangle(play.
-						getBone("Hitbox")).size.height * 0.1F / 
+						getBone("Torso")).size.height * 0.1F / 
 						Config.PPM * play.getScale());
 		
 		
@@ -99,7 +99,7 @@ public class Player extends Mob
 	public void setWeapon(Weapon weapon)
 	{
 		this.weapon = weapon;
-		play.setAnimation(weapon.getIdleAnimation());
+		play.setAnimation(weapon.getStillAnimation());
 	}
 	
 	public void update(float delta)
