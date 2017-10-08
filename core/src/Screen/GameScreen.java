@@ -58,7 +58,7 @@ public class GameScreen extends ModScreen
 		
 		world.setContactListener(new CollisionHandler(level));
 		
-		hud = new HUD(this);
+		hud = new HUD(this,core);
 		
 		paused = false;
 	}

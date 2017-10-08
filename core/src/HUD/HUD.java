@@ -1,6 +1,7 @@
 package HUD;
 
 import Game.Config;
+import Game.Core;
 import Player.Health;
 import Screen.GameScreen;
 import Util.Button;
@@ -27,9 +28,10 @@ public class HUD{
 	boolean inventory;
 	
 	OrthographicCamera cam;
-	
-	public HUD(GameScreen gs)
+	Core core;
+	public HUD(GameScreen gs, Core core)
 	{
+		core = this.core;
 		this.gs = gs;
 		batch = new SpriteBatch();
 		
@@ -56,6 +58,8 @@ public class HUD{
 		pausebutton.update(delta);
 		invbutton.update(delta);
 		inventorying.update();
+		
+		pausing.update(delta);
 		
 		//Testing
 		if(Gdx.input.isKeyJustPressed(Keys.B)){
