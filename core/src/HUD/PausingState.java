@@ -42,7 +42,7 @@ public class PausingState extends Thing{
 		Exit = new Texture(Gdx.files.internal("Hud/Pause/resume.png"));
 		ExitS = new Sprite(Exit);
 		batch = new SpriteBatch();
-		pausingstate = new Texture(Gdx.files.internal("pauseButton/detail_pause (1).png"));
+		pausingstate = new Texture(Gdx.files.internal("Hud/Pause/detail_pause (1).png"));
 		pausing = new Sprite(pausingstate);
 		pausingbackground = new Texture(Gdx.files.internal("Black_Screen.png"));
 		pausingback = new Sprite(pausingbackground);
@@ -51,12 +51,12 @@ public class PausingState extends Thing{
 		pausing.setX((Config.GAME_WIDTH-Config.GAME_HEIGHT* 1.25F)/2);
 		pausing.setY((-Config.GAME_HEIGHT* .175F));
 		//resume/exit
-		Resume = new Texture(Gdx.files.internal("pauseButton/pasue_optains_br.png"));
+		Resume = new Texture(Gdx.files.internal("Hud/Pause/pasue_optains_br.png"));
 		ResumeS = new Sprite(Resume);
 		ResumeS.setSize(Config.GAME_HEIGHT * 1.25F-25,Config.GAME_HEIGHT * 1.25F-25);
 		ResumeS.setX((Config.GAME_WIDTH-Config.GAME_HEIGHT* 1.2F)/2);
 		ResumeS.setY((-Config.GAME_HEIGHT* .01F));
-		Exit = new Texture(Gdx.files.internal("pauseButton/pasue_optains_br.png"));
+		Exit = new Texture(Gdx.files.internal("Hud/Pause/pasue_optains_br.png"));
 		ExitS = new Sprite(Exit);
 		ExitS.setSize(Config.GAME_HEIGHT * 1.25F-25,Config.GAME_HEIGHT * 1.25F-25);
 		ExitS.setX((Config.GAME_WIDTH-Config.GAME_HEIGHT* 1.2F)/2);
