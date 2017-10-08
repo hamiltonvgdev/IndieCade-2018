@@ -1,6 +1,7 @@
 package HUD;
 
 import Game.Config;
+import Game.Core;
 import Player.Health;
 import Screen.GameScreen;
 import Util.Button;
@@ -15,7 +16,7 @@ public class HUD{
 	//Traveling between Gamescreen is strictly not allowed
 	GameScreen gs;
 	SpriteBatch batch;
-	boolean pause;
+	static boolean pause;
 	
 	Health health;
 	
@@ -26,9 +27,10 @@ public class HUD{
 	InventoryState inventorying;
 	
 	OrthographicCamera cam;
-	
-	public HUD(GameScreen gs)
+	Core core;
+	public HUD(GameScreen gs, Core core)
 	{
+		core = this.core;
 		this.gs = gs;
 		batch = new SpriteBatch();
 		
@@ -39,7 +41,7 @@ public class HUD{
 		invbutton = (InventoryButton) new InventoryButton(this, 1).
 				setSprite("test/pausebutton.png");
 		pause = false;
-		pausing = new PausingState(this.gs);
+		pausing = new PausingState(this.gs,this.core);
 		
 		cam = new OrthographicCamera();
 		cam.setToOrtho(true, 1280, 720);
@@ -51,6 +53,8 @@ public class HUD{
 
 		pausebutton.update(delta);
 		invbutton.update(delta);
+		
+		pausing.update(delta);
 		
 		//Testing
 		if(Gdx.input.isKeyJustPressed(Keys.B)){
