@@ -1,6 +1,7 @@
 package HUD;
 
 import Game.Config;
+import Game.Core;
 import Player.Health;
 import Screen.GameScreen;
 import Util.Button;
@@ -15,20 +16,22 @@ public class HUD{
 	//Traveling between Gamescreen is strictly not allowed
 	GameScreen gs;
 	SpriteBatch batch;
-	boolean pause;
 	
 	Health health;
 	
 	PauseButton pausebutton;
 	PausingState pausing;
+	boolean pause;
 	
 	InventoryButton invbutton;
 	InventoryState inventorying;
+	boolean inventory;
 	
 	OrthographicCamera cam;
-	
-	public HUD(GameScreen gs)
+	Core core;
+	public HUD(GameScreen gs, Core core)
 	{
+		core = this.core;
 		this.gs = gs;
 		batch = new SpriteBatch();
 		
@@ -36,10 +39,13 @@ public class HUD{
 		
 		pausebutton = (PauseButton) new PauseButton(this, 0).
 				setSprite("test/pausebutton.png");
-		invbutton = (InventoryButton) new InventoryButton(this, 1).
-				setSprite("test/pausebutton.png");
 		pause = false;
 		pausing = new PausingState(this.gs);
+
+		invbutton = (InventoryButton) new InventoryButton(this, 1).
+				setSprite("Hud/Inventory/Hud Button.png");
+		inventorying = new InventoryState(gs);
+		inventory = false;
 		
 		cam = new OrthographicCamera();
 		cam.setToOrtho(true, 1280, 720);
@@ -51,6 +57,9 @@ public class HUD{
 
 		pausebutton.update(delta);
 		invbutton.update(delta);
+		inventorying.update();
+		
+		pausing.update(delta);
 		
 		//Testing
 		if(Gdx.input.isKeyJustPressed(Keys.B)){
@@ -66,14 +75,29 @@ public class HUD{
 		pausebutton.render(batch);
 		invbutton.render(batch);
 		
-		pausing.render(batch,pause);
+		if(pause)
+		{
+			pausing.render(batch);
+		}
+		
+		if(inventory)
+		{
+			inventorying.render(batch);
+		}
 		
 		batch.end();
 	}
 	
-	public void pause()
+	public void pause(String id)
 	{
 		gs.pause();
-		pause = true;
+		
+		if(id.equals("Pause"))
+		{
+			pause = true;
+		}else if(id.equals("Inventory"))
+		{
+			inventory = true;
+		}
 	}
 }

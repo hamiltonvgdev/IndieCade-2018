@@ -11,17 +11,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HudButton
 {
-	public int scale = 15;
+	public float scale = 1.25F;
 	private Texture texture;
 	public Sprite sprite;
 	
+	float x, y;
 	int index;
 	HUD hud;
 	
 	public HudButton(HUD hud, int index) 
 	{
 		// TODO Auto-generated constructor stub
-		this.index = index;
+		this.index = index + 1;
 		this.hud = hud;
 	}
 	
@@ -29,11 +30,15 @@ public class HudButton
 	{
 		texture = new Texture(Gdx.files.internal(ref));
 		sprite = new Sprite(texture);
-		sprite.setX((Config.GAME_WIDTH) - 
-				texture.getWidth() / scale * 6 / Config.screenScale
-				- index * sprite.getWidth() / (scale / 3));
-		sprite.setY((Config.GAME_HEIGHT) - 
-				texture.getHeight() / scale * 6 / Config.screenScale);
+		sprite.setScale(scale, scale);
+		x = (Config.GAME_WIDTH) - (sprite.getWidth() + (index - 1) * 10) * (index);
+		y = (Config.GAME_HEIGHT) - sprite.getHeight();
+		
+		float xOffset = sprite.getWidth() * (1 - scale) / 2;
+		float yOffset = sprite.getHeight() * (1 - scale) / 2;
+		
+		sprite.setX(x + xOffset);
+		sprite.setY(y + yOffset);
 		return this;
 	}
 	
@@ -46,15 +51,10 @@ public class HudButton
 			click();
 		}
 	}
+	
 	public void render(SpriteBatch batch)
 	{
-		batch.draw(sprite,
-				(Config.GAME_WIDTH) - 
-					texture.getWidth() / scale * 6 / Config.screenScale 
-					- index * sprite.getWidth() / (scale / 3), 
-				(Config.GAME_HEIGHT) - 
-					texture.getHeight() / scale * 6 / Config.screenScale,
-				Config.GAME_HEIGHT / scale , Config.GAME_HEIGHT / scale);
+		sprite.draw(batch);
 	}
 	
 	public void click(){}
