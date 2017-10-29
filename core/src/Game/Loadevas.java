@@ -25,6 +25,8 @@ public class Loadevas
 			e.printStackTrace();
 			Gdx.app.exit();
 		}
+		
+		System.out.println("derp");
 	}
 	
 	public static void load(int id)

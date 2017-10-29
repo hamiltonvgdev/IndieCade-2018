@@ -19,23 +19,11 @@ public class WeaponList
 		WeaponNames = new ArrayList<String>();
 		
 		initWeapons();
-		initNames();
 	}
 	
 	private static void initWeapons()
 	{
-		
-	}
-	
-	private static void initNames()
-	{
-		Object[] names =Weapons.keySet().toArray();
-		
-		
-		for(int i = 0; i < names.length; i ++)
-		{
-			WeaponNames.add(names[i].toString());
-		}
+		//Inits Skeleton of Weapons
 	}
 	
 	public static ArrayList<String> getNames()

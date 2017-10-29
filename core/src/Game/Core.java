@@ -1,8 +1,8 @@
 package Game;
 
 
+import FinalBoss.BossBody;
 import Screen.GameScreen;
-import Screen.SplashScreen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,19 +14,27 @@ public class Core extends Game
 	public WeaponList wl;
 	public EnemyList el;
 	
+	public GameData gd;
+	public int id = 0;;
+	
+	public BossBody boss;
+	
 	@Override
 	public void create() 
 	{	
 		batch = new SpriteBatch();
+		wl.init();
+		el = new EnemyList();
+		boss = new BossBody(this);
+//		boss.start();
 //		setScreen(new SplashScreen(this, "Logo Animation", 
 //				"Logo SplashScreen/Parts/Logo Animation.scml").scale(0.3F).
 //				setMusic("Audio/title_theme.wav"));
-		setScreen(new GameScreen(this, new GameData(), "SpeedTest"));
+		gd= new GameData();
+		setScreen(new GameScreen(this, gd, "SpeedTest"));
 		
 		
 		Loadevas.init();
-		wl.init();
-		el.init();
 	}
 	
 	@Override

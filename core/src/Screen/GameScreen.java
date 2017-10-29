@@ -50,7 +50,6 @@ public class GameScreen extends ModScreen
 		b2dr = new Box2DDebugRenderer();
 
 		level = new Level(this);
-		//level.loadMap(id);
 		player = new Player(this);
 
 		level.loadMap(id, this.player);
@@ -61,6 +60,8 @@ public class GameScreen extends ModScreen
 		hud = new HUD(this,core);
 		
 		paused = false;
+		core.boss.setGS(this);
+		core.boss.start();
 	}
 	
 	public GameScreen setHUD(HUD hud)
@@ -82,16 +83,6 @@ public class GameScreen extends ModScreen
 		Camera.update();
 		B2Dcam.update();
 		hud.update(delta);
-		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.T))
-		{
-			pause();
-		}
-		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.G))
-		{
-			resume();
-		}
 	}
 	
 	@Override
@@ -101,11 +92,9 @@ public class GameScreen extends ModScreen
 
 //		core.batch.setProjectionMatrix(Camera.combined);
 		
-		if(!paused)
-		{
-			level.render(core.batch);
-			b2dr.render(world, B2Dcam.combined);
-		}
+		
+		level.render(core.batch);
+		b2dr.render(world, B2Dcam.combined);
 
 		hud.render();
 	} 
