@@ -27,7 +27,6 @@ public class HUD{
 	InventoryState inventorying;
 	boolean inventory;
 	
-	OrthographicCamera cam;
 	Core core;
 	public HUD(GameScreen gs, Core core)
 	{
@@ -46,9 +45,6 @@ public class HUD{
 				setSprite("Hud/Inventory/Hud Button.png");
 		inventorying = new InventoryState(gs);
 		inventory = false;
-		
-		cam = new OrthographicCamera();
-		cam.setToOrtho(true, 1280, 720);
 	}
 	
 	public void update(float delta)
@@ -68,7 +64,7 @@ public class HUD{
 	}
 	
 	public void render()
-	{
+	{	
 		batch.begin();
 		health.render(batch);
 		
@@ -88,16 +84,30 @@ public class HUD{
 		batch.end();
 	}
 	
-	public void pause(String id)
+	public void pause(String id, boolean state)
 	{
-		gs.pause();
+		if(state)
+		{
+			gs.pause();
+		}else
+		{
+			gs.resume();
+		}
 		
 		if(id.equals("Pause"))
 		{
-			pause = true;
+			pause = state;
+			if(pause)
+			{
+				inventory = false;
+			}
 		}else if(id.equals("Inventory"))
 		{
-			inventory = true;
+			inventory = state;
+			if(inventory)
+			{
+				pause = false;
+			}
 		}
 	}
 }

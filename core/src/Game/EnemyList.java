@@ -1,15 +1,25 @@
 package Game;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import Mob.Mob;
+import Mob.Enemy;
+import Mob.Test;
 
 public class EnemyList 
 {
-	public static HashMap<String, Mob> Enemies;
+	public static HashMap<String, Enemy> Entities;
 	
-	public static void init()
+	public EnemyList()
 	{
-		Enemies = new HashMap<String, Mob>();
+		Entities = new HashMap<String, Enemy>();
+		
+		initEntities();
+	}
+	
+	private void initEntities()
+	{
+		//Creates Skeleton of Entity
+		Enemy derp = new Test().init(this, "Test");
 	}
 }

@@ -3,16 +3,18 @@ package Environment;
 import java.util.ArrayList;
 
 import Game.Config;
-import Mob.Test;
+import Mob.Enemy;
 import Player.Health;
 import Player.Player;
 import Screen.GameScreen;
-import Tile.*;
+import Tile.HurtTile;
+import Tile.PortalTile;
+import Tile.Tile;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -20,7 +22,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Level 
 {
@@ -87,7 +88,19 @@ public class Level
 		//Creates Tile Body
 		for(MapLayer layer: map.getLayers())
 		{
-			createTiles((TiledMapTileLayer) layer);
+			try
+			{
+				createTiles((TiledMapTileLayer) layer);
+			}catch(Exception e){}
+		}
+		
+		if(map.getLayers().get("Enemies") != null)
+		{
+			for(MapObject mob : map.getLayers().get("Enemies").getObjects())
+			{
+				Things.add(gs.core.el.Entities.get(mob.getProperties().get("Name")).
+						create(gs, gs.getPlayer(), mob.getProperties()));
+			}
 		}
 
 //		addThing(test);
@@ -200,6 +213,8 @@ public class Level
 	
 	public Tile decodeTile(TiledMapTileLayer layer, float x, float y)
 	{	
+		//Translates String name to Tile Layer
+		
 		if(layer.getName().contains("Normal"))
 		{
 			return new Tile(gs, x, y);

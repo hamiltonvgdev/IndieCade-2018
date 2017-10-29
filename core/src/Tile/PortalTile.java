@@ -3,6 +3,7 @@ package Tile;
 import java.util.ArrayList;
 
 import Game.Config;
+import Game.Loadevas;
 import Player.Player;
 import Screen.GameScreen;
 import Screen.TransitionScreen;
@@ -34,10 +35,10 @@ public class PortalTile extends Tile
 		
 		if(collide && !player.getPlay().getAnimation().name.equals("Death"))
 		{	
-			if(player.getHealth() > cost)
+			player.health(-cost);
+			
+			if(player.getHealth() > 0)
 			{
-				player.health(-cost);
-				
 				gs.getGD().write(gs);
 				
 				GameScreen Dest = new GameScreen(gs.core, gs.getGD(), Destination);
@@ -45,7 +46,6 @@ public class PortalTile extends Tile
 				
 				for(MapLayer layer: Dest.getLevel().getMap().getLayers())
 				{
-					System.out.println(layer.getName());
 					if(layer.getName().contains(gs.getLevel().getId()))
 					{
 						Layer = (TiledMapTileLayer) layer;
@@ -58,6 +58,11 @@ public class PortalTile extends Tile
 						Float.parseFloat(Layer.getProperties().get("y").toString()) / Config.PPM);
 				
 				gs.core.setScreen(new TransitionScreen(gs.core, Dest.setHUD(gs.getHud())));
+				
+				if(gs.core.id != 0)
+				{
+					Loadevas.save(gs.core.id);
+				}
 			}
 		}
 	}

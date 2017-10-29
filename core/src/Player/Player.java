@@ -56,7 +56,8 @@ public class Player extends Mob
 		play.addListener(new PlayerSpriterHandler(this));
 		
 		health = gs.getGD().playerHealth;
-		maxSpeed = 4F;
+//		maxSpeed = 4F;
+		maxSpeed = 20F;
 	}
 	
 	@Override

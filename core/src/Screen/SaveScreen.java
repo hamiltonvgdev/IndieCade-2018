@@ -137,11 +137,12 @@ public class SaveScreen extends ModScreen
 			if(save1)
 			{
 				Loadevas.load(1);
+				core.id = 1;
 			}else
 			{
 				Loadevas.gd.init();
-				Loadevas.gd.name = JOptionPane.
-						showInputDialog("Please Enter Your Character's Name");
+//				Loadevas.gd.name = JOptionPane.
+//						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(1);
 				music.stop();
 			}
@@ -160,11 +161,12 @@ public class SaveScreen extends ModScreen
 			if(save2)
 			{
 				Loadevas.load(2);
+				core.id = 2;
 			}else
 			{
 				Loadevas.gd.init();
-				Loadevas.gd.name = JOptionPane.
-						showInputDialog("Please Enter Your Character's Name");
+//				Loadevas.gd.name = JOptionPane.
+//						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(2);
 				music.stop();
 			}
@@ -183,11 +185,12 @@ public class SaveScreen extends ModScreen
 			if(save3)
 			{
 				Loadevas.load(3);
+				core.id = 3;
 			}else
 			{
 				Loadevas.gd.init();
-				Loadevas.gd.name = JOptionPane.
-						showInputDialog("Please Enter Your Character's Name");
+//				Loadevas.gd.name = JOptionPane.
+//						showInputDialog("Please Enter Your Character's Name");
 				Loadevas.save(3);
 				music.stop();
 			}

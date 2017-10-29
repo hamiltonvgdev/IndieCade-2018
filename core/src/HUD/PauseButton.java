@@ -13,7 +13,7 @@ public class PauseButton extends HudButton
 	@Override
 	public void click()
 	{
-		hud.pause("Pause");
+		hud.pause("Pause", true);
 	}
 
 }

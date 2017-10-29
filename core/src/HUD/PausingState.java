@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.brashmonkey.spriter.Rectangle;
 
 import Environment.Thing;
 import Game.Config;
@@ -18,13 +19,16 @@ import Screen.GameScreen;
 import Screen.MenuScreen;
 
 public class PausingState extends Thing{
+	
 	// pausing stuff
 	Texture pausingstate;
 	Sprite pausing;
 	Texture pausingbackground;
 	Sprite pausingback;
+	
 	//current batch
 	SpriteBatch batch;
+	
 	//resume/exit
 	Texture Resume;
 	Sprite ResumeS;
@@ -33,34 +37,35 @@ public class PausingState extends Thing{
 	OrthographicCamera cam;
 	Core core;
 	MenuScreen menu;
+	
+	//Misc
+	final int offset = -25;
+	
 	public PausingState(GameScreen gs) {
 		super(gs);
 		this.core = gs.core;
 		// TODO Auto-generated constructor stub
-		Resume = new Texture(Gdx.files.internal("Hud/Pause/resume.png"));
-		ResumeS = new Sprite(Resume);
-		Exit = new Texture(Gdx.files.internal("Hud/Pause/resume.png"));
-		ExitS = new Sprite(Exit);
 		batch = new SpriteBatch();
-		pausingstate = new Texture(Gdx.files.internal("Hud/Pause/detail_pause (1).png"));
+		pausingstate = new Texture(Gdx.files.internal("Hud/Pause/detail_pause.png"));
 		pausing = new Sprite(pausingstate);
 		pausingbackground = new Texture(Gdx.files.internal("Black_Screen.png"));
 		pausingback = new Sprite(pausingbackground);
-		pausingback.setAlpha((float) 0.2);
-		pausing.setSize(Config.GAME_HEIGHT * 1.25F, Config.GAME_HEIGHT * 1.25F);
-		pausing.setX((Config.GAME_WIDTH-Config.GAME_HEIGHT* 1.25F)/2);
-		pausing.setY((-Config.GAME_HEIGHT* .175F));
+		pausingback.setAlpha((float) 0.5);
+		pausingback.setScale(100);
+		pausing.setScale(5.25F);
+		pausing.setX((Config.GAME_WIDTH) / 2 + offset);
+		pausing.setY((Config.GAME_HEIGHT) / 2 + offset * 2F);
 		//resume/exit
-		Resume = new Texture(Gdx.files.internal("Hud/Pause/pasue_optains_br.png"));
+		Resume = new Texture(Gdx.files.internal("Hud/Pause/pasue_optains_resume.png"));
 		ResumeS = new Sprite(Resume);
-		ResumeS.setSize(Config.GAME_HEIGHT * 1.25F-25,Config.GAME_HEIGHT * 1.25F-25);
-		ResumeS.setX((Config.GAME_WIDTH-Config.GAME_HEIGHT* 1.2F)/2);
-		ResumeS.setY((-Config.GAME_HEIGHT* .01F));
-		Exit = new Texture(Gdx.files.internal("Hud/Pause/pasue_optains_br.png"));
+		ResumeS.setScale(2F);
+		ResumeS.setX((Config.GAME_WIDTH) / 2 + offset);
+		ResumeS.setY((Config.GAME_HEIGHT) / 2 - offset);
+		Exit = new Texture(Gdx.files.internal("Hud/Pause/pasue_optains_exit.png"));
 		ExitS = new Sprite(Exit);
-		ExitS.setSize(Config.GAME_HEIGHT * 1.25F-25,Config.GAME_HEIGHT * 1.25F-25);
-		ExitS.setX((Config.GAME_WIDTH-Config.GAME_HEIGHT* 1.2F)/2);
-		ExitS.setY((-Config.GAME_HEIGHT* .25F));
+		ExitS.setScale(2F);
+		ExitS.setX((Config.GAME_WIDTH) / 2 + offset);
+		ExitS.setY((Config.GAME_HEIGHT) / 2 + offset * 4F);
 		//camera setting
 		cam = new OrthographicCamera();
 		cam.setToOrtho(true,Config.GAME_WIDTH,Config.GAME_HEIGHT);
@@ -70,16 +75,15 @@ public class PausingState extends Thing{
 	public void update(float delta) {
 		// TODO Auto-generated method stub
 		super.update(delta);
-		int x = Gdx.input.getX();
-		int y = Gdx.input.getY();
-		Vector3 input = new Vector3(x, y, 0);
-		cam.unproject(input);
+//		cam.unproject(input);
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-			if(ResumeS.getBoundingRectangle().contains(input.x,input.y)){
-				gs.getHud().pause("Pause");
+			if(ResumeS.getBoundingRectangle().contains(Gdx.input.getX(),
+					Config.GAME_HEIGHT - Gdx.input.getY())){
+				gs.getHud().pause("Pause", false);
 			}
-			if(ExitS.getBoundingRectangle().contains(input.x,input.y)){
-
+			if(ExitS.getBoundingRectangle().contains(Gdx.input.getX(),
+					Config.GAME_HEIGHT - Gdx.input.getY())){
+				gs.core.setScreen(new MenuScreen(gs.core));
 			}
 		}
 	}

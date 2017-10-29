@@ -22,6 +22,7 @@ public class Thing implements Comparable<Thing>
 	//AI and id
 	AI ai;
 	protected String id;
+	protected String name;
 	
 	//Combat
 	protected float health, maxHealth;
