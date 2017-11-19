@@ -11,8 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HudButton
 {
-	public float scale = 1.25F;
-	private Texture texture;
+	public float scale = 1.5F;
+	protected Texture texture;
 	public Sprite sprite;
 	
 	float x, y;

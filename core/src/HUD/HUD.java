@@ -37,7 +37,7 @@ public class HUD{
 		health = new Health(this.gs);
 		
 		pausebutton = (PauseButton) new PauseButton(this, 0).
-				setSprite("test/pausebutton.png");
+				setSprite("Hud/Pause/Hud Button.png");
 		pause = false;
 		pausing = new PausingState(this.gs);
 

@@ -26,12 +26,12 @@ public class Core extends Game
 		wl.init();
 		el = new EnemyList();
 		boss = new BossBody(this);
-//		boss.start();
 //		setScreen(new SplashScreen(this, "Logo Animation", 
 //				"Logo SplashScreen/Parts/Logo Animation.scml").scale(0.3F).
 //				setMusic("Audio/title_theme.wav"));
 		gd= new GameData();
 		setScreen(new GameScreen(this, gd, "SpeedTest"));
+		boss.start();
 		
 		
 		Loadevas.init();

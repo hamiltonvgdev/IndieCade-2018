@@ -61,7 +61,6 @@ public class GameScreen extends ModScreen
 		
 		paused = false;
 		core.boss.setGS(this);
-		core.boss.start();
 	}
 	
 	public GameScreen setHUD(HUD hud)
@@ -111,6 +110,13 @@ public class GameScreen extends ModScreen
 	{
 		level.resume();
 		paused = false;
+	}
+	
+	@Override
+	public void dispose()
+	{
+		super.dispose();
+		core.boss.suspend();
 	}
 	
 	public World getWorld() {return world;}
