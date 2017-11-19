@@ -2,9 +2,8 @@ package Game;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Random;
 
-import Player.Player;
 import Screen.GameScreen;
 
 public class GameData implements Serializable
@@ -23,27 +22,40 @@ public class GameData implements Serializable
 	public ArrayList<double[]> binput;
 	public ArrayList<Double> boutput;
 	
+	Random gen;
+	
 	
 	public GameData()
 	{
+		gen = new Random();
 		playerHealth = 10;
 		WeaponUnlock = new ArrayList<Boolean>();
 		binput = new ArrayList<double[]>();
 		boutput = new ArrayList<Double>();
 		
-		double[] derp = new double[9];
-		derp[0] = 1;
-		derp[1] = 1;
-		derp[2] = 1;
-		derp[3] = 1;
-		derp[4] = 1;
-		derp[5] = 1;
-		derp[6] = 1;
-		derp[7] = 1;
-		derp[8] = 1;
-		
-		binput.add(derp);
-		boutput.add((double) 10);
+		for(int i = 0; i < 1; i ++)
+		{
+			double[] derp = new double[9];
+			derp[0] = gen.nextInt();
+			derp[1] = gen.nextInt();
+			derp[2] = gen.nextInt();
+			derp[3] = gen.nextInt();
+			derp[4] = gen.nextInt();
+			derp[5] = gen.nextInt();
+			derp[6] = gen.nextInt();
+			derp[7] = gen.nextInt();
+			derp[8] = gen.nextInt();
+			binput.add(derp);
+			boutput.add(derp[1] + 
+					derp[2] + 
+					derp[3] + 
+					derp[4] + 
+					derp[5] + 
+					derp[6] + 
+					derp[7] + 
+					derp[8] + 
+					derp[0]);
+		}
 	}
 	
 	public void init()

@@ -30,7 +30,23 @@ public class BossBody extends Thread
 		running = true;
 		if(n != null)
 		{
-			n.update();
+			boolean herp = true;
+			
+			n.Update();
+			
+			double[] derp = new double[9];
+			
+			derp[0] = 1;
+			derp[1] = 1;
+			derp[2] = 1;
+			derp[3] = 1;
+			derp[4] = 1;
+			derp[5] = 1;
+			derp[6] = 1;
+			derp[7] = 1;
+			derp[8] = 1;
+			
+			System.out.println(n.calculate(derp));
 		}
 	}
 	
