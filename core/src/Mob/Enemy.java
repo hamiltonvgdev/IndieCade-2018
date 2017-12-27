@@ -4,15 +4,20 @@ import Game.Config;
 import Game.EnemyList;
 import Player.Player;
 import Screen.GameScreen;
+import Util.M;
 
 import com.badlogic.gdx.maps.MapProperties;
 
 public class Enemy extends Mob
 {
+	//constants 
+	float between = 100;//what value set as distance
+	
 	Player player;
+	float distance;
 	
 	public Enemy() 
-	{
+	{		
 		super(null);
 	}
 	
@@ -42,5 +47,14 @@ public class Enemy extends Mob
 		initHitbox();
 		
 		return this;
+	}
+	public void follow(float x, float y){
+		distance = M.distance(x, y, this.x, this.y);
+		float deltaX = 0;
+		if(distance<=between && y==this.y){
+			deltaX = x-this.x;
+		}
+		this.x = this.x+deltaX;
+		
 	}
 }

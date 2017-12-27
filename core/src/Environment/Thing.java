@@ -2,9 +2,12 @@ package Environment;
 
 import Entities.AI;
 import Game.Config;
+import Mob.Enemy;
+import Player.Player;
 import Screen.GameScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -23,6 +26,9 @@ public class Thing implements Comparable<Thing>
 	AI ai;
 	protected String id;
 	protected String name;
+	
+	//enemy
+	Enemy enemy;
 	
 	//Combat
 	protected float health, maxHealth;
@@ -45,6 +51,11 @@ public class Thing implements Comparable<Thing>
 		this.gs = gs;
 		health = 1;
 	}
+	public Thing setEnemy(Player player, MapProperties props){
+		enemy = new Enemy();
+		enemy.setEnemy(player, props);
+		return this;
+	}
 	
 	public Thing setAI(AI ai)
 	{
@@ -62,6 +73,7 @@ public class Thing implements Comparable<Thing>
 	{
 		if(play != null)
 		{
+			setEnemy(gs.getPlayer(),player.Entity().get);
 			play.update();
 		}
 		
